@@ -29,7 +29,6 @@ const FormField: React.FC<FormFieldProps> = ({
           value={value}
           name={name}
           onChange={onChange}
-          onClick={onClick}
           type={typeInput}
           autoComplete="off"
         />
@@ -37,7 +36,13 @@ const FormField: React.FC<FormFieldProps> = ({
           {label}
         </Text>
         {children && (
-          <ButtonCircle strokeWidth={strokeWidth}>{children}</ButtonCircle>
+          <ButtonCircle
+            onClick={onClick}
+            type="button"
+            strokeWidth={strokeWidth}
+          >
+            {children}
+          </ButtonCircle>
         )}
       </Label>
     </FormFieldWrapper>

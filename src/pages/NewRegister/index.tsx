@@ -40,7 +40,7 @@ function NewRegister() {
     password: 'pao',
   };
   const history = useHistory();
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(3);
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
 
   const { handleChange, values } = useForm(valuesInitials);

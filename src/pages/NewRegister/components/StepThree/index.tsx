@@ -1,7 +1,10 @@
 import React from 'react';
+import { MdYoutubeSearchedFor } from 'react-icons/md';
 
 import Button from '../../../../components/Button';
 import FormField from '../../../../components/FormField';
+
+import { apiViaCep } from '../../../../services/api';
 
 import {
   Container,
@@ -19,6 +22,22 @@ const StepThree: React.FC<StepThreeProps> = ({
   handleStep,
   values,
 }) => {
+  function handleCep() {
+    apiViaCep
+      .get(`/${values.cep.replace('-', '')}/json`)
+      .then(({ data }) => {
+        if (data.erro) {
+          alert('Confirme o campo de cep, algo está incorreto');
+          return null;
+        }
+
+        console.log(data);
+      })
+      .catch(({ response }) => {
+        console.log(response);
+      });
+  }
+
   return (
     <Container>
       <Title>Endereço</Title>
@@ -30,7 +49,11 @@ const StepThree: React.FC<StepThreeProps> = ({
             name="cep"
             value={values.cep}
             onChange={handleChange}
-          />
+            onClick={handleCep}
+            stroke="0.5"
+          >
+            <MdYoutubeSearchedFor />
+          </FormField>
         </CEPContainer>
         <TwoFields>
           <FormField
