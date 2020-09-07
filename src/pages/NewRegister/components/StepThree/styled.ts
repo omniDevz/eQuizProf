@@ -23,12 +23,12 @@ export const Form = styled.form`
 `;
 
 export const CEPContainer = styled.div`
-  width: 52%;
+  width: 64%;
 `;
 
 export const TwoFields = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr 1.5fr;
   column-gap: 12px;
 `;
 

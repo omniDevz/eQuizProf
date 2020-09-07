@@ -9,8 +9,18 @@ export interface StepThreeProps {
     neighborhood: string;
     address: string;
     numberAddress: string;
-  };
-  handleChange: FunctionComponentElement;
+  }
+
+  setValues: {
+    setCep: React.Dispatch<React.SetStateAction<string>>;
+    setCountry: React.Dispatch<React.SetStateAction<string>>;
+    setState: React.Dispatch<React.SetStateAction<string>>;
+    setCity: React.Dispatch<React.SetStateAction<string>>;
+    setNeighborhood: React.Dispatch<React.SetStateAction<string>>;
+    setAddress: React.Dispatch<React.SetStateAction<string>>;
+    setNumberAddress: React.Dispatch<React.SetStateAction<string>>;
+  }
+
   handleStep: function(
     1 | 2 | 3 | 4 | 5,
     1 | 2 | 3 | 4 | 5

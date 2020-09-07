@@ -29,8 +29,8 @@ function NewRegister() {
     countryCode: '+55',
     ddd: '016',
     number: '912341234',
-    cep: '12345-123',
-    country: 'Brasil',
+    cep: '14870260',
+    country: '',
     state: 'SP',
     city: 'Bebedouro',
     neighborhood: 'N sei',
@@ -39,6 +39,14 @@ function NewRegister() {
     username: 'marlizon',
     password: 'pao',
   };
+  const [cep, setCep] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
+  const [state, setState] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [neighborhood, setNeighborhood] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [numberAddress, setNumberAddress] = useState<string>('');
+
   const history = useHistory();
   const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(3);
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
@@ -134,9 +142,25 @@ function NewRegister() {
           values={values}
         />
         <StepThree
-          handleChange={handleChange}
           handleStep={handleStep}
-          values={values}
+          values={{
+            cep,
+            country,
+            state,
+            city,
+            neighborhood,
+            address,
+            numberAddress,
+          }}
+          setValues={{
+            setCep,
+            setCountry,
+            setState,
+            setCity,
+            setNeighborhood,
+            setAddress,
+            setNumberAddress,
+          }}
         />
         <StepFor
           handleChange={handleChange}

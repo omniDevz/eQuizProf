@@ -18,11 +18,23 @@ import {
 import { StepThreeProps } from './interface';
 
 const StepThree: React.FC<StepThreeProps> = ({
-  handleChange,
   handleStep,
   values,
+  setValues,
 }) => {
+  function validationEmptyValue(value: string, id: string) {
+    if (value !== '') return true;
+
+    document.getElementById(id)?.focus();
+    return false;
+  }
+
   function handleCep() {
+    if (values.cep.length < 8) {
+      alert('Informe o CEP corretamente');
+      return null;
+    }
+
     apiViaCep
       .get(`/${values.cep.replace('-', '')}/json`)
       .then(({ data }) => {
@@ -31,10 +43,25 @@ const StepThree: React.FC<StepThreeProps> = ({
           return null;
         }
 
-        console.log(data);
+        const { uf, localidade, bairro, logradouro } = data;
+
+        setValues.setCountry('Brasil');
+        setValues.setState(uf);
+        if (!validationEmptyValue(uf, 'id_state')) return null;
+
+        setValues.setCity(localidade);
+        if (!validationEmptyValue(localidade, 'id_city')) return null;
+
+        setValues.setNeighborhood(bairro);
+        if (!validationEmptyValue(bairro, 'id_neighborhood')) return null;
+
+        setValues.setAddress(logradouro);
+        if (!validationEmptyValue(logradouro, 'id_address')) return null;
+
+        document.getElementById('id_numberAddress')?.focus();
       })
       .catch(({ response }) => {
-        console.log(response);
+        console.error(response);
       });
   }
 
@@ -48,7 +75,9 @@ const StepThree: React.FC<StepThreeProps> = ({
             label="CEP"
             name="cep"
             value={values.cep}
-            onChange={handleChange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValues.setCep(e.target.value)
+            }
             onClick={handleCep}
             stroke="0.5"
           >
@@ -60,39 +89,51 @@ const StepThree: React.FC<StepThreeProps> = ({
             label="País"
             name="country"
             value={values.country}
-            onChange={handleChange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setValues.setCountry(e.target.value);
+            }}
           />
           <FormField
             label="UF"
             name="state"
             value={values.state}
-            onChange={handleChange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setValues.setState(e.target.value);
+            }}
           />
         </TwoFields>
         <FormField
           label="Cidade"
           name="city"
           value={values.city}
-          onChange={handleChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setValues.setCity(e.target.value)
+          }
         />
         <FormField
           label="Bairro"
           name="neighborhood"
           value={values.neighborhood}
-          onChange={handleChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setValues.setNeighborhood(e.target.value)
+          }
         />
         <TwoFields>
           <FormField
             label="Endereço"
             name="address"
             value={values.address}
-            onChange={handleChange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValues.setAddress(e.target.value)
+            }
           />
           <FormField
             label="Nº"
             name="numberAddress"
             value={values.numberAddress}
-            onChange={handleChange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValues.setNumberAddress(e.target.value)
+            }
           />
         </TwoFields>
       </Form>
