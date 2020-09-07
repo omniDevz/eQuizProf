@@ -1,0 +1,176 @@
+import styled, { css } from 'styled-components';
+
+import { InputProps, TextProps, ButtonCircleProps } from './interface';
+
+export const FormFieldWrapper = styled.div`
+  width: 100%;
+
+  textarea {
+    min-height: 150px;
+  }
+`;
+
+export const Label = styled.label`
+  position: relative;
+  width: 100%;
+`;
+
+export const Text = styled.label<TextProps>`
+  color: ${(props) => props.theme.colors.tertiaryOpacity64};
+
+  height: 2.2rem;
+  position: absolute;
+  top: 50%;
+  left: 0.6rem;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+
+  transform-origin: 0% 0%;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 600;
+
+  padding: 1.4rem 2.6rem;
+  border-radius: 1.2rem;
+
+  transition: 240ms ease-in-out;
+
+  ${({ type }) =>
+    type === 'date' &&
+    css`
+      background: ${(props) => props.theme.colors.secondary};
+    `}
+
+  ${({ hasLabel }) =>
+    !hasLabel &&
+    css`
+      display: none;
+    `}
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+    background: ${(props) => props.theme.colors.secondary};
+    border: 3px solid ${(props) => props.theme.colors.primary};
+    border-radius: 2rem;
+    transform: scaleX(0);
+    transition: 360ms ease-in-out;
+  }
+`;
+
+export const Input = styled.input<InputProps>`
+  background: transparent;
+  color: ${(props) => props.theme.colors.tertiary};
+  display: block;
+  width: 100%;
+  height: 5.2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  box-shadow: var(--box-shadow);
+
+  outline: 0;
+  border: 2.5px solid ${(props) => props.theme.colors.primary};
+  border-radius: 32px;
+
+  padding: 1.2rem 2.4rem;
+
+  resize: none;
+
+  &:focus {
+    padding-top: 1.6rem;
+    padding-bottom: 0.8rem;
+
+    + ${Text} {
+      color: ${(props) => props.theme.colors.tertiary};
+      z-index: 1;
+      left: 1.6rem;
+      top: 0;
+      font-weight: normal;
+      transform: scale(0.8) translateY(-1.5rem);
+
+      &:before {
+        transform: scaleX(1);
+      }
+    }
+  }
+  ${({ hasValue }) =>
+    hasValue &&
+    css`
+      padding-top: 1.6rem;
+      padding-bottom: 0.8rem;
+
+      + ${Text} {
+        color: ${(props) => props.theme.colors.tertiary};
+        z-index: 1;
+        left: 1.6rem;
+        top: 0;
+        font-weight: normal;
+        transform: scale(0.8) translateY(-1.5rem);
+
+        &:before {
+          transform: scaleX(1);
+        }
+      }
+    `};
+
+  ${({ hasChildren }) =>
+    hasChildren &&
+    css`
+      padding-right: 8rem;
+    `};
+`;
+
+export const ButtonCircle = styled.button<ButtonCircleProps>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 32px;
+  width: auto;
+  padding: 0.8em;
+  padding-right: 2.4rem;
+  background: ${(props) => props.theme.colors.primary};
+  box-shadow: var(--box-shadow);
+  transition: all 260ms ease-in-out;
+
+  svg,
+  img {
+    width: 37px;
+    height: 37px;
+    color: ${(props) => props.theme.colors.secondary};
+    border-radius: 32px;
+    border: 3px solid ${(props) => props.theme.colors.secondary};
+    background: ${(props) => props.theme.colors.primary};
+    stroke-width: ${({ strokeWidth }) => strokeWidth};
+    transition: all 260ms ease-in-out;
+    padding: 1px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:focus-within,
+  &:hover {
+    padding-right: 0.8em;
+    padding-left: 2.4rem;
+
+    svg,
+    img {
+      transform: rotate(360deg);
+    }
+  }
+`;

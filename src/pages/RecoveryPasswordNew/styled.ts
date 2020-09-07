@@ -1,0 +1,39 @@
+import styled from 'styled-components';
+
+import { FormFieldWrapper } from '../../components/FormField/styled';
+
+export const Title = styled.h2`
+  padding: 2rem 24px 8px;
+  font-size: 4.6rem;
+  width: 100%;
+`;
+
+export const Description = styled.p`
+  padding: 0 24px;
+  font-size: 1.8rem;
+  width: 100%;
+`;
+
+export const Form = styled.form`
+  padding: 7.2rem 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > button:last-child {
+    margin-top: 2.4rem;
+    margin-bottom: 16px;
+  }
+`;
+
+export const FieldsWrapper = styled.fieldset`
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${FormFieldWrapper}:first-of-type {
+    margin-bottom: 2.4rem;
+  }
+`;
