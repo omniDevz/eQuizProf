@@ -39,7 +39,10 @@ function Landing() {
             </Link>
           </Button>
 
-          <Link to="/login" title="Não possui cadastro? Faça o agora mesmo">
+          <Link
+            to="/newRegister"
+            title="Não possui cadastro? Faça o agora mesmo"
+          >
             Não possui cadastro? <b>Faça agora mesmo</b>
           </Link>
         </Article>

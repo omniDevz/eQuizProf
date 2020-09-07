@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdYoutubeSearchedFor } from 'react-icons/md';
 
 import Button from '../../../../components/Button';
 import FormField from '../../../../components/FormField';
+import Select from '../../../../components/Select';
 
-import { apiViaCep } from '../../../../services/api';
+import { apiLocations, apiViaCep } from '../../../../services/api';
 
 import {
   Container,
@@ -15,13 +16,22 @@ import {
   ButtonsWrapper,
 } from './styled';
 
-import { StepThreeProps } from './interface';
+import { StepThreeProps, AllCountriesProps, OptionsSelect } from './interface';
 
 const StepThree: React.FC<StepThreeProps> = ({
   handleStep,
   values,
   setValues,
 }) => {
+  const [countries, setCountries] = useState<OptionsSelect>({
+    options: [
+      {
+        label: 'Brasil',
+        value: 'Brasil',
+      },
+    ],
+  });
+
   function validationEmptyValue(value: string, id: string) {
     if (value !== '') return true;
 
@@ -65,6 +75,28 @@ const StepThree: React.FC<StepThreeProps> = ({
       });
   }
 
+  useEffect(() => {
+    apiLocations
+      .get('')
+      .then(({ data }) => {
+        const optionsCountries = data.map((country: AllCountriesProps) => {
+          const optionsNameCountryInPortugueseBr = {
+            value: country.translations.br,
+            label: country.translations.br,
+          };
+
+          return optionsNameCountryInPortugueseBr;
+        });
+
+        setCountries({
+          options: optionsCountries,
+        });
+      })
+      .catch(({ response }) => {
+        console.error(response);
+      });
+  }, []);
+
   return (
     <Container>
       <Title>Endereço</Title>
@@ -85,14 +117,21 @@ const StepThree: React.FC<StepThreeProps> = ({
           </FormField>
         </CEPContainer>
         <TwoFields>
-          <FormField
+          <Select
+            name="country"
+            text="País"
+            onChange={setValues.setCountry}
+            value={values.country}
+            options={countries.options}
+          />
+          {/* <FormField
             label="País"
             name="country"
             value={values.country}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setValues.setCountry(e.target.value);
             }}
-          />
+          /> */}
           <FormField
             label="UF"
             name="state"

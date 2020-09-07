@@ -26,3 +26,18 @@ export interface StepThreeProps {
     1 | 2 | 3 | 4 | 5
   );
 }
+
+export interface AllCountriesProps {
+  translations: {
+    br: string;
+  }
+}
+
+export interface OptionSelect {
+    value: string;
+    label: string;
+}
+
+export interface OptionsSelect {
+  options: OptionSelect[]
+}
