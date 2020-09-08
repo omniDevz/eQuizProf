@@ -6,6 +6,10 @@ export const apiViaCep = axios.create({
   baseURL: config.URL_API_VIACEP,
 });
 
+export const apiCountries = axios.create({
+  baseURL: config.URL_API_COUNTRIES,
+});
+
 export const apiLocations = axios.create({
   baseURL: config.URL_API_LOCATIONS,
 });

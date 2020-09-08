@@ -5,7 +5,11 @@ import Button from '../../../../components/Button';
 import FormField from '../../../../components/FormField';
 import Select from '../../../../components/Select';
 
-import { apiLocations, apiViaCep } from '../../../../services/api';
+import {
+  apiCountries,
+  apiViaCep,
+  apiLocations,
+} from '../../../../services/api';
 
 import {
   Container,
@@ -16,7 +20,13 @@ import {
   ButtonsWrapper,
 } from './styled';
 
-import { StepThreeProps, AllCountriesProps, OptionsSelect } from './interface';
+import {
+  StepThreeProps,
+  AllCountriesProps,
+  AllStatiesProps,
+  AllCitiesProps,
+  OptionsSelect,
+} from './interface';
 
 const StepThree: React.FC<StepThreeProps> = ({
   handleStep,
@@ -24,10 +34,23 @@ const StepThree: React.FC<StepThreeProps> = ({
   setValues,
 }) => {
   const [countries, setCountries] = useState<OptionsSelect>({
+    options: [],
+  });
+
+  const [staties, setStaties] = useState<OptionsSelect>({
     options: [
       {
-        label: 'Brasil',
-        value: 'Brasil',
+        label: '',
+        value: '',
+      },
+    ],
+  });
+
+  const [cities, setCities] = useState<OptionsSelect>({
+    options: [
+      {
+        label: '',
+        value: '',
       },
     ],
   });
@@ -56,6 +79,7 @@ const StepThree: React.FC<StepThreeProps> = ({
         const { uf, localidade, bairro, logradouro } = data;
 
         setValues.setCountry('Brasil');
+
         setValues.setState(uf);
         if (!validationEmptyValue(uf, 'id_state')) return null;
 
@@ -76,7 +100,7 @@ const StepThree: React.FC<StepThreeProps> = ({
   }
 
   useEffect(() => {
-    apiLocations
+    apiCountries
       .get('')
       .then(({ data }) => {
         const optionsCountries = data.map((country: AllCountriesProps) => {
@@ -84,10 +108,8 @@ const StepThree: React.FC<StepThreeProps> = ({
             value: country.translations.br,
             label: country.translations.br,
           };
-
           return optionsNameCountryInPortugueseBr;
         });
-
         setCountries({
           options: optionsCountries,
         });
@@ -96,6 +118,54 @@ const StepThree: React.FC<StepThreeProps> = ({
         console.error(response);
       });
   }, []);
+
+  useEffect(() => {
+    if (values.country !== 'Brasil') return;
+
+    apiLocations
+      .get('/estados')
+      .then(({ data }) => {
+        const optionsStaties = data.map((state: AllStatiesProps) => {
+          const optionsNameStaties = {
+            value: state.sigla,
+            label: state.sigla,
+          };
+
+          return optionsNameStaties;
+        });
+
+        setStaties({
+          options: optionsStaties,
+        });
+      })
+      .catch(({ response }) => {
+        console.error(response);
+      });
+  }, [values.country]);
+
+  useEffect(() => {
+    if (values.country !== 'Brasil') return;
+
+    apiLocations
+      .get(`/estados/${values.state}/municipios`)
+      .then(({ data }) => {
+        const optionsCities = data.map((city: AllCitiesProps) => {
+          const optionsNameCity = {
+            value: city.nome,
+            label: city.nome,
+          };
+
+          return optionsNameCity;
+        });
+
+        setCities({
+          options: optionsCities,
+        });
+      })
+      .catch(({ response }) => {
+        console.error(response);
+      });
+  }, [values.state, values.country]);
 
   return (
     <Container>
@@ -119,36 +189,48 @@ const StepThree: React.FC<StepThreeProps> = ({
         <TwoFields>
           <Select
             name="country"
-            text="País"
-            onChange={setValues.setCountry}
+            label="País"
+            onChange={(e: any) => setValues.setCountry(e.value)}
             value={values.country}
             options={countries.options}
           />
-          {/* <FormField
-            label="País"
-            name="country"
-            value={values.country}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setValues.setCountry(e.target.value);
-            }}
-          /> */}
-          <FormField
-            label="UF"
-            name="state"
-            value={values.state}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setValues.setState(e.target.value);
-            }}
-          />
+          {values.country === 'Brasil' ? (
+            <Select
+              name="state"
+              label="UF"
+              onChange={(e: any) => setValues.setState(e.value)}
+              value={values.state}
+              options={staties.options}
+            />
+          ) : (
+            <FormField
+              label="UF"
+              name="state"
+              value={values.state}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setValues.setState(e.target.value)
+              }
+            />
+          )}
         </TwoFields>
-        <FormField
-          label="Cidade"
-          name="city"
-          value={values.city}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setValues.setCity(e.target.value)
-          }
-        />
+        {values.country === 'Brasil' ? (
+          <Select
+            name="city"
+            label="Cidade"
+            onChange={(e: any) => setValues.setCity(e.value)}
+            value={values.city}
+            options={cities.options}
+          />
+        ) : (
+          <FormField
+            label="Cidade"
+            name="city"
+            value={values.city}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValues.setCity(e.target.value)
+            }
+          />
+        )}
         <FormField
           label="Bairro"
           name="neighborhood"

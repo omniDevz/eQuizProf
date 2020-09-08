@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import { Input } from '../../../../components/FormField/styled';
+import { SelectStyled } from '../../../../components/Select/styled';
+
 export const Container = styled.article`
   justify-content: space-between;
   flex: 1;
@@ -30,6 +33,14 @@ export const TwoFields = styled.div`
   display: grid;
   grid-template-columns: 3fr 1.5fr;
   column-gap: 12px;
+
+  > div:nth-child(2) {
+    ${SelectStyled} .react-select__control,
+    ${Input} {
+      padding-left: 1.42rem;
+      padding-right: 1.42rem;
+    }
+  }
 `;
 
 export const ButtonsWrapper = styled.div`

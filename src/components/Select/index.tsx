@@ -8,24 +8,26 @@ const Select: React.FC<SelectProps> = ({
   options,
   value,
   name,
-  text,
+  label,
   onChange,
 }) => {
   const fieldId = `id_${name}`;
   const hasValue = value !== '';
+  const valueSelected = options.find((option) => option.value === value);
 
   return (
     <SelectWrapper hasValue={hasValue}>
       <SelectStyled
-        id={fieldId}
+        inputId={fieldId}
         name={name}
         className="react-select-container"
         classNamePrefix="react-select"
         options={options}
         placeholder=""
+        value={valueSelected}
         onChange={onChange}
       />
-      <Text htmlFor={fieldId}>{text}</Text>
+      <Text htmlFor={fieldId}>{label}</Text>
     </SelectWrapper>
   );
 };

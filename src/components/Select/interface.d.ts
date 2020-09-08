@@ -3,7 +3,7 @@ export interface SelectProps {
     value: string;
     label: string;
   }[];
-  text: string;
+  label: string;
   name: string;
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;

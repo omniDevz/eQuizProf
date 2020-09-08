@@ -105,7 +105,7 @@ function NewRegister() {
 
   function addNewStudent() {
     api
-      .post('professor', {
+      .post('/professor', {
         pessoa: {},
       })
       .then(() => {

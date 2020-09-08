@@ -33,6 +33,14 @@ export interface AllCountriesProps {
   }
 }
 
+export interface AllStatiesProps {
+  sigla: string;
+}
+
+export interface AllCitiesProps {
+  nome: string;
+}
+
 export interface OptionSelect {
     value: string;
     label: string;
