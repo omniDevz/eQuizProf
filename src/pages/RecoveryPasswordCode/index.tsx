@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FiCheck } from 'react-icons/fi';
 
 import FormField from '../../components/FormField';
@@ -7,7 +8,6 @@ import PageDefault from '../../components/PageDefault';
 import useForm from '../../hooks/useForm';
 
 import { Title, Description, Form, FieldsWrapper, LinkLogin } from './styled';
-import { Link } from 'react-router-dom';
 
 function RecoveryPasswordCode() {
   const valuesInitials = {

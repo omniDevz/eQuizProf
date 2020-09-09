@@ -69,6 +69,11 @@ function NewRegister() {
           document.getElementById('id_cpf')?.focus();
           return false;
         }
+        if (values.cpf.length !== 11) {
+          alert('Informe seu CPF corretamente');
+          document.getElementById('id_cpf')?.focus();
+          return false;
+        }
         if (values.dateOfBirth === '') {
           alert('Preencha a data de aniversário');
           document.getElementById('id_dateOfBirth')?.focus();
@@ -81,6 +86,78 @@ function NewRegister() {
         if (values.email === '') {
           alert('Preencha o e-mail');
           document.getElementById('id_email')?.focus();
+          return false;
+        }
+        break;
+      case 2:
+        const anyFieldHasValueInFone = Boolean(
+          values.countryCode.length + values.ddd.length + values.number.length
+        );
+
+        if (!anyFieldHasValueInFone) return true;
+
+        if (values.countryCode === '') {
+          alert('Preencha o código de discagem');
+          document.getElementById('id_countryCode')?.focus();
+          return false;
+        }
+        if (values.ddd === '') {
+          alert('Preencha o DDD');
+          document.getElementById('id_ddd')?.focus();
+          return false;
+        }
+        if (values.number === '') {
+          alert('Preencha o número de telefone');
+          document.getElementById('id_number')?.focus();
+          return false;
+        }
+        break;
+      case 3:
+        const anyFieldContainValueInAddress = Boolean(
+          cep.length +
+            country.length +
+            state.length +
+            city.length +
+            neighborhood.length +
+            address.length +
+            numberAddress.length
+        );
+
+        if (!anyFieldContainValueInAddress) return true;
+
+        if (cep === '') {
+          alert('Preencha o CEP');
+          document.getElementById('id_cep')?.focus();
+          return false;
+        }
+        if (country === '') {
+          alert('Preencha o país');
+          document.getElementById('id_country')?.focus();
+          return false;
+        }
+        if (state === '') {
+          alert('Preencha o estado');
+          document.getElementById('id_state')?.focus();
+          return false;
+        }
+        if (city === '') {
+          alert('Preencha a cidade');
+          document.getElementById('id_city')?.focus();
+          return false;
+        }
+        if (neighborhood === '') {
+          alert('Preencha o bairro');
+          document.getElementById('id_neighborhood')?.focus();
+          return false;
+        }
+        if (address === '') {
+          alert('Preencha o endereço');
+          document.getElementById('id_address')?.focus();
+          return false;
+        }
+        if (numberAddress === '') {
+          alert('Preencha o número do endereço');
+          document.getElementById('id_numberAddress')?.focus();
           return false;
         }
         break;
