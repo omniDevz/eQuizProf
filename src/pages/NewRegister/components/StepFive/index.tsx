@@ -45,7 +45,7 @@ const StepFive: React.FC<StepFiveProps> = ({
         <Button onClick={handleConfirmRegister} color="primary">
           Finalizar
         </Button>
-        <Button onClick={() => handleStep(3, 2)} color="primary-outline">
+        <Button onClick={() => handleStep(5, 4)} color="primary-outline">
           Voltar
         </Button>
       </ButtonsWrapper>

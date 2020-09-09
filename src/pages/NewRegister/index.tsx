@@ -19,25 +19,18 @@ import api from '../../services/api';
 
 function NewRegister() {
   const valuesInitials = {
-    firstName: 'Marlito',
-    lastName: 'Thomszito',
-    cpf: '123.123.123-45',
-    dateOfBirth: '1999-12-15',
-    email: 'leo@leo.com',
-    genre: 'F',
+    firstName: '',
+    lastName: '',
+    cpf: '',
+    dateOfBirth: '',
+    email: '',
+    genre: 'M',
     typeFone: 'C',
-    countryCode: '+55',
-    ddd: '016',
-    number: '912341234',
-    cep: '14870260',
-    country: '',
-    state: 'SP',
-    city: 'Bebedouro',
-    neighborhood: 'N sei',
-    address: 'Av. João Bernardo da Fonseca',
-    numberAddress: '868',
-    username: 'marlizon',
-    password: 'pao',
+    countryCode: '',
+    ddd: '',
+    number: '',
+    username: '',
+    password: '',
   };
   const [cep, setCep] = useState<string>('');
   const [country, setCountry] = useState<string>('');
@@ -48,7 +41,7 @@ function NewRegister() {
   const [numberAddress, setNumberAddress] = useState<string>('');
 
   const history = useHistory();
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(3);
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -58,18 +51,32 @@ function NewRegister() {
       case 1:
         if (values.firstName === '') {
           alert('Preencha o primeiro nome');
+          document.getElementById('id_firstName')?.focus();
+          return false;
+        }
+        if (values.firstName.length <= 2) {
+          alert('Primeiro nome deve conter no mínimo três caracteres');
+          document.getElementById('id_firstName')?.focus();
           return false;
         }
         if (values.lastName === '') {
           alert('Preencha o sobrenome');
+          document.getElementById('id_lastName')?.focus();
           return false;
         }
         if (values.cpf === '') {
           alert('Preencha a CPF');
+          document.getElementById('id_cpf')?.focus();
+          return false;
+        }
+        if (values.cpf.length !== 14) {
+          alert('Quantidade de caracteres inválido no cpf');
+          document.getElementById('id_cpf')?.focus();
           return false;
         }
         if (values.dateOfBirth === '') {
           alert('Preencha a data de aniversário');
+          document.getElementById('id_dateOfBirth')?.focus();
           return false;
         }
         if (values.genre === '') {
@@ -78,16 +85,19 @@ function NewRegister() {
         }
         if (values.email === '') {
           alert('Preencha o e-mail');
+          document.getElementById('id_email')?.focus();
           return false;
         }
         break;
       case 4:
         if (values.username === '') {
           alert('Preencha o nome de usuário');
+          document.getElementById('id_username')?.focus();
           return false;
         }
         if (values.password === '') {
           alert('Preencha a senha do usuário');
+          document.getElementById('id_password')?.focus();
           return false;
         }
         break;
@@ -103,12 +113,43 @@ function NewRegister() {
     return null;
   }
 
-  function addNewStudent() {
+  function addNewTeacher() {
     api
       .post('/professor', {
-        pessoa: {},
+        administrador: {
+          pessoa: {
+            nome: values.firstName,
+            sobrenome: values.lastname,
+            cpf: values.cpf,
+            dataNascimento: values.dateOfBirth,
+            sexo: values.genre,
+            numero: numberAddress,
+            usuario: values.username,
+            senha: values.password,
+            telefone: {
+              CodigoDiscagem: values.countryCode.replace('+', ''),
+              Ddd: values.ddd.slice(),
+              NumeroTelefone: values.number,
+              TipoTelefone: values.typeFone,
+            },
+            endereco: {
+              Cep: cep,
+              Logradouro: address,
+              Bairro: neighborhood,
+              Cidade: city,
+              Estado: state,
+              Pais: country,
+            },
+            email: values.email,
+          },
+        },
       })
-      .then(() => {
+      .then((response) => {
+        if (response.status === 409) {
+          alert(response.data);
+          return;
+        }
+
         setRegisterConfirm(true);
 
         setTimeout(() => {
@@ -124,8 +165,7 @@ function NewRegister() {
   }
 
   function handleConfirmRegister() {
-    setRegisterConfirm(true);
-    addNewStudent();
+    addNewTeacher();
   }
 
   return (
@@ -176,8 +216,8 @@ function NewRegister() {
         <Lottie
           options={{
             animationData: lottieAccept,
+            autoplay: true,
           }}
-          isPaused={!registerConfirm}
         />
       </ConfirmContainer>
     </PageDefault>
