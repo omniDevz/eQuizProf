@@ -13,6 +13,18 @@ export const FormFieldWrapper = styled.div`
 export const Label = styled.label`
   position: relative;
   width: 100%;
+
+  background: transparent;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 5.2rem;
+  box-shadow: var(--box-shadow);
+
+  border: 2.5px solid ${(props) => props.theme.colors.primary};
+  border-radius: 32px;
+
+  padding: 0 1.4rem;
 `;
 
 export const Text = styled.label<TextProps>`
@@ -67,27 +79,18 @@ export const Text = styled.label<TextProps>`
 `;
 
 export const Input = styled.input<InputProps>`
-  background: transparent;
   color: ${(props) => props.theme.colors.tertiary};
-  display: block;
-  width: 100%;
-  height: 5.2rem;
   font-size: 2rem;
   font-weight: 600;
-  box-shadow: var(--box-shadow);
 
   outline: 0;
-  border: 2.5px solid ${(props) => props.theme.colors.primary};
-  border-radius: 32px;
-
-  padding: 1.2rem 2.4rem;
+  width: 100%;
+  background: transparent;
+  border: none;
 
   resize: none;
 
   &:focus {
-    padding-top: 1.6rem;
-    padding-bottom: 0.8rem;
-
     + ${Text} {
       color: ${(props) => props.theme.colors.tertiary};
       z-index: 1;
@@ -104,9 +107,6 @@ export const Input = styled.input<InputProps>`
   ${({ hasValue }) =>
     hasValue &&
     css`
-      padding-top: 1.6rem;
-      padding-bottom: 0.8rem;
-
       + ${Text} {
         color: ${(props) => props.theme.colors.tertiary};
         z-index: 1;
@@ -126,6 +126,13 @@ export const Input = styled.input<InputProps>`
     css`
       padding-right: 8rem;
     `};
+`;
+
+export const Prefix = styled.label`
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.tertiaryOpacity64};
 `;
 
 export const ButtonCircle = styled.button<ButtonCircleProps>`

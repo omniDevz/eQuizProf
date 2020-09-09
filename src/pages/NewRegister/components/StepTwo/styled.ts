@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
   FormFieldWrapper,
-  Input,
+  Label,
   Text,
 } from '../../../../components/FormField/styled';
 
@@ -40,9 +40,8 @@ export const ThreeColumns = styled.div`
   ${FormFieldWrapper} {
     &:nth-child(2),
     &:nth-child(1) {
-      ${Input} {
-        padding: 1.2rem;
-        text-align: center;
+      ${Label} {
+        padding: 0.8rem;
       }
 
       ${Text} {

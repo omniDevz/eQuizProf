@@ -26,7 +26,7 @@ function NewRegister() {
     email: '',
     genre: 'M',
     typeFone: 'C',
-    countryCode: '',
+    countryCode: '55',
     ddd: '',
     number: '',
     username: '',
@@ -41,7 +41,7 @@ function NewRegister() {
   const [numberAddress, setNumberAddress] = useState<string>('');
 
   const history = useHistory();
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(2);
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -91,7 +91,7 @@ function NewRegister() {
         break;
       case 2:
         const anyFieldHasValueInFone = Boolean(
-          values.countryCode.length + values.ddd.length + values.number.length
+          values.ddd.length + values.number.length
         );
 
         if (!anyFieldHasValueInFone) return true;
@@ -199,7 +199,7 @@ function NewRegister() {
             usuario: values.username,
             senha: values.password,
             telefone: {
-              CodigoDiscagem: values.countryCode.replace('+', ''),
+              CodigoDiscagem: values.countryCode,
               Ddd: values.ddd.slice(-2),
               NumeroTelefone: values.number,
               TipoTelefone: values.typeFone,

@@ -49,6 +49,7 @@ const StepTwo: React.FC<StepTwoProps> = ({
               name="countryCode"
               value={values.countryCode}
               onChange={handleChange}
+              prefix="+"
             />
             <FormField
               label=""
