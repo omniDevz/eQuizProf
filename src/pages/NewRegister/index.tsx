@@ -69,11 +69,6 @@ function NewRegister() {
           document.getElementById('id_cpf')?.focus();
           return false;
         }
-        if (values.cpf.length !== 14) {
-          alert('Quantidade de caracteres inválido no cpf');
-          document.getElementById('id_cpf')?.focus();
-          return false;
-        }
         if (values.dateOfBirth === '') {
           alert('Preencha a data de aniversário');
           document.getElementById('id_dateOfBirth')?.focus();
@@ -128,7 +123,7 @@ function NewRegister() {
             senha: values.password,
             telefone: {
               CodigoDiscagem: values.countryCode.replace('+', ''),
-              Ddd: values.ddd.slice(),
+              Ddd: values.ddd.slice(-2),
               NumeroTelefone: values.number,
               TipoTelefone: values.typeFone,
             },
