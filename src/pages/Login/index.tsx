@@ -23,7 +23,7 @@ function Login() {
 
   function loginStudant() {
     api
-      .post('/aluno/validarLoginAluno', {
+      .post('/professor/validarLoginProfessor', {
         usuario: values.username,
         senha: values.password,
       })
@@ -31,7 +31,7 @@ function Login() {
         const { data } = response;
         console.log(data);
 
-        history.push('/student/home');
+        history.push('/teacher/home');
       })
       .catch(({ response }) => {
         const { data } = response;
