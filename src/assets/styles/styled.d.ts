@@ -8,6 +8,7 @@ declare module 'styled-components' {
       secondary: string;
       tertiary: string;
 
+      box: string;
       tertiaryOpacity64: string;
     };
   }

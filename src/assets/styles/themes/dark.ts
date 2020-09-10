@@ -6,6 +6,7 @@ export default {
     secondary: '#2A2A2A',
     tertiary: '#FFFDFD',
 
+    box: '#212121',
     tertiaryOpacity64: 'rgba(255,253,253, .64)',
   },
 };
