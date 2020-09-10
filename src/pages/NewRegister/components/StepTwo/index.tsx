@@ -57,6 +57,7 @@ const StepTwo: React.FC<StepTwoProps> = ({
               value={values.ddd}
               onChange={handleChange}
               type="number"
+              prefix="0"
             />
             <FormField
               label="Número"

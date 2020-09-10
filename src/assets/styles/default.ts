@@ -66,5 +66,12 @@ div, section, article, footer, #root {
   align-items: center;
 }
 
+.react-toast-notifications__toast {
+  flex-direction: row;
+
+  div {
+    display: block;
+  }
+}
 
 `;

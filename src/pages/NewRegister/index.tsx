@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Lottie from 'lottie-react-web';
 import { useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
 
 import PageDefault from '../../components/PageDefault';
 import StepOne from './components/StepOne';
@@ -45,46 +46,71 @@ function NewRegister() {
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
 
   const { handleChange, values } = useForm(valuesInitials);
+  const { addToast } = useToasts();
 
   function validationStep(stepValidation: number) {
     switch (stepValidation) {
       case 1:
         if (values.firstName === '') {
-          alert('Preencha o primeiro nome');
+          addToast('Preencha o primeiro nome', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_firstName')?.focus();
           return false;
         }
         if (values.firstName.length <= 2) {
-          alert('Primeiro nome deve conter no mínimo três caracteres');
+          addToast('Primeiro nome deve conter no mínimo três caracteres', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_firstName')?.focus();
           return false;
         }
         if (values.lastName === '') {
-          alert('Preencha o sobrenome');
+          addToast('Preencha o sobrenome', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_lastName')?.focus();
           return false;
         }
         if (values.cpf === '') {
-          alert('Preencha a CPF');
+          addToast('Preencha o CPF', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_cpf')?.focus();
           return false;
         }
         if (values.cpf.length !== 11) {
-          alert('Informe seu CPF corretamente');
+          addToast('Informe seu CPF corretamente', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_cpf')?.focus();
           return false;
         }
         if (values.dateOfBirth === '') {
-          alert('Preencha a data de aniversário');
+          addToast('Preencha a data de aniversário', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_dateOfBirth')?.focus();
           return false;
         }
         if (values.genre === '') {
-          alert('Selecione seu genêro sexual');
+          addToast('Selecione seu genêro sexual', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           return false;
         }
         if (values.email === '') {
-          alert('Preencha o e-mail');
+          addToast('Preencha o e-mail', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_email')?.focus();
           return false;
         }
@@ -97,17 +123,26 @@ function NewRegister() {
         if (!anyFieldHasValueInFone) return true;
 
         if (values.countryCode === '') {
-          alert('Preencha o código de discagem');
+          addToast('Preencha p código de discagem', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_countryCode')?.focus();
           return false;
         }
         if (values.ddd === '') {
-          alert('Preencha o DDD');
+          addToast('Preencha o DDD', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_ddd')?.focus();
           return false;
         }
         if (values.number === '') {
-          alert('Preencha o número de telefone');
+          addToast('Preencha o número de telefone', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_number')?.focus();
           return false;
         }
@@ -126,49 +161,76 @@ function NewRegister() {
         if (!anyFieldContainValueInAddress) return true;
 
         if (cep === '') {
-          alert('Preencha o CEP');
+          addToast('Preencha o CEP', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_cep')?.focus();
           return false;
         }
         if (country === '') {
-          alert('Preencha o país');
+          addToast('Preencha o país', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_country')?.focus();
           return false;
         }
         if (state === '') {
-          alert('Preencha o estado');
+          addToast('Preencha o estado', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_state')?.focus();
           return false;
         }
         if (city === '') {
-          alert('Preencha a cidade');
+          addToast('Preencha a cidade', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_city')?.focus();
           return false;
         }
         if (neighborhood === '') {
-          alert('Preencha o bairro');
+          addToast('Preencha o bairro', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_neighborhood')?.focus();
           return false;
         }
         if (address === '') {
-          alert('Preencha o endereço');
+          addToast('Preencha o endereço', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_address')?.focus();
           return false;
         }
         if (numberAddress === '') {
-          alert('Preencha o número do endereço');
+          addToast('Preencha o número de endereço', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_numberAddress')?.focus();
           return false;
         }
         break;
       case 4:
         if (values.username === '') {
-          alert('Preencha o nome de usuário');
+          addToast('Preencha o nome de usuário', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_username')?.focus();
           return false;
         }
         if (values.password === '') {
-          alert('Preencha a senha do usuário');
+          addToast('Preencha a senha do usuário', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           document.getElementById('id_password')?.focus();
           return false;
         }
@@ -216,9 +278,12 @@ function NewRegister() {
           },
         },
       })
-      .then((response) => {
-        if (response.status === 409) {
-          alert(response.data);
+      .then(({ status, data }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
           return;
         }
 
@@ -232,7 +297,10 @@ function NewRegister() {
       })
       .catch(({ response }) => {
         const { data } = response;
-        alert(data);
+        addToast(data, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
       });
   }
 
