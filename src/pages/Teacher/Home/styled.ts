@@ -36,20 +36,15 @@ export const ContainerRow = styled(Container)`
   flex-direction: column;
   align-items: flex-start;
   row-gap: 0.8rem;
+  margin-bottom: 2rem;
+  padding: 2.4rem 1.2rem;
 `;
 
 export const SubTitle = styled.p`
   font-size: 2.4rem;
   font-weight: 600;
   text-shadow: var(--text-shadow);
+  padding: 0 1.2rem;
 `;
 
-export const Circle = styled.span`
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 1rem;
-  background: ${({ theme }) => theme.colors.primary};
-`;
-
-export const Graph = styled.div``;
+export const Graph = styled.canvas``;
