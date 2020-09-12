@@ -35,7 +35,7 @@ const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn }) => {
                 <LinkItem to="/teacher/quizzes" title="Quizzes" />
                 <LinkItem to="/teacher/books" title="Livros" />
                 <LinkItem to="/teacher/live" title="Live" />
-                <LinkItem to="/teacher/clan" title="Turmas" />
+                <LinkItem to="/teacher/classes" title="Turmas" />
                 <LinkItem to="/teacher/account" title="Perfil" />
               </>
             ) : (

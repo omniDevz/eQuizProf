@@ -9,6 +9,7 @@ import RecoveryPasswordCode from './RecoveryPasswordCode';
 import RecoveryPasswordNew from './RecoveryPasswordNew';
 
 import TeacherHome from './Teacher/Home';
+import TeacherClasses from './Teacher/Classes';
 
 import NotFound from './NotFound';
 
@@ -26,6 +27,10 @@ function Routes() {
         <Route path="/recoveryPasswordNew" component={RecoveryPasswordNew} />
 
         <Route path={`/${subdomainTeacher}/home`} component={TeacherHome} />
+        <Route
+          path={`/${subdomainTeacher}/classes`}
+          component={TeacherClasses}
+        />
 
         <Route component={NotFound} />
       </Switch>
