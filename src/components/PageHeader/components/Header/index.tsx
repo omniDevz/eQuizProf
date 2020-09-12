@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiArrowLeft, FiLogOut } from 'react-icons/fi';
 
 import logoImg from '../../../../assets/images/FavIcon.svg';
 
@@ -8,14 +8,38 @@ import { HeaderContainer, Logo, Button } from './styled';
 
 import { HeaderProps } from './interface';
 
-const Header: React.FC<HeaderProps> = ({ isMenuIcon, title, onClick }) => {
+const Header: React.FC<HeaderProps> = ({
+  isMenuIcon,
+  title,
+  onClick,
+  teacher,
+  type,
+}) => {
   return (
     <HeaderContainer>
-      <Link to="/" title="Ir para Home">
-        <Button>
-          <Logo src={logoImg} alt="Logo English Quiz" />
-        </Button>
-      </Link>
+      {teacher ? (
+        type === 'back' ? (
+          <Button>
+            <FiArrowLeft />
+          </Button>
+        ) : type === 'exit' ? (
+          <Button>
+            <FiLogOut />
+          </Button>
+        ) : (
+          <Link to="/teacher/home" title="Ir para Home">
+            <Button>
+              <Logo src={logoImg} alt="Logo English Quiz" />
+            </Button>
+          </Link>
+        )
+      ) : (
+        <Link to="/" title="Ir para Home">
+          <Button>
+            <Logo src={logoImg} alt="Logo English Quiz" />
+          </Button>
+        </Link>
+      )}
 
       <Button title={title} onClick={onClick}>
         {isMenuIcon ? <FiMenu /> : <FiX />}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { FiCoffee, FiUsers } from 'react-icons/fi';
 import Chart from 'chart.js';
 
-import PageDefault from '../../../components/PageDefault';
+import PageDefaultProf from '../../../components/PageDefaultProf';
 
 import {
   Container,
@@ -78,7 +78,7 @@ function Home() {
   }, []);
 
   return (
-    <PageDefault>
+    <PageDefaultProf type="icon">
       <Container>
         <Content>
           <Number>0,000</Number>
@@ -99,7 +99,7 @@ function Home() {
         <SubTitle>Último quiz realizado</SubTitle>
         <Graph id="studantsChart"></Graph>
       </ContainerRow>
-    </PageDefault>
+    </PageDefaultProf>
   );
 }
 
