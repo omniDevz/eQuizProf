@@ -20,22 +20,9 @@ export const ListClass = styled.ul`
   position: relative;
   padding: 0 24px;
   overflow-y: auto;
-  max-height: 38vh;
+  max-height: 40vh;
+  margin-bottom: 1.6rem;
   flex: 1;
-
-  &:after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 4rem;
-    background: linear-gradient(
-      180deg,
-      rgba(42, 42, 42, 0) 59.11%,
-      #2a2a2a 76.05%
-    );
-  }
 `;
 
 export const ItemClass = styled.li`

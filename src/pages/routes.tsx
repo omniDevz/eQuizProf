@@ -10,6 +10,8 @@ import RecoveryPasswordNew from './RecoveryPasswordNew';
 
 import TeacherHome from './Teacher/Home';
 import TeacherClasses from './Teacher/Classes';
+import TeacherClassesNew from './Teacher/ClassesNew';
+import TeacherClassesUpdate from './Teacher/ClassesUpdate';
 
 import NotFound from './NotFound';
 
@@ -30,6 +32,14 @@ function Routes() {
         <Route
           path={`/${subdomainTeacher}/classes`}
           component={TeacherClasses}
+        />
+        <Route
+          path={`/${subdomainTeacher}/classesNew`}
+          component={TeacherClassesNew}
+        />
+        <Route
+          path={`/${subdomainTeacher}/classesUpdate`}
+          component={TeacherClassesUpdate}
         />
 
         <Route component={NotFound} />

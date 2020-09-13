@@ -10,10 +10,11 @@ import { PageDefaultProfProps } from './interface';
 const PageDefaultProf: React.FC<PageDefaultProfProps> = ({
   children,
   type,
+  text,
 }) => {
   return (
     <>
-      <PageHeader teacherOn={true} type={type} />
+      <PageHeader teacherOn={true} type={type} text={text} />
       <Main>{children}</Main>
       <Footer />
     </>

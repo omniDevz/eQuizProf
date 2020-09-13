@@ -23,3 +23,7 @@ export const Logo = styled.img`
   width: 6rem;
   height: 6rem;
 `;
+
+export const Text = styled.h6`
+  font-size: 2.4rem;
+`;

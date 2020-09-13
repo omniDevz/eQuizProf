@@ -4,7 +4,7 @@ import { FiMenu, FiX, FiArrowLeft, FiLogOut } from 'react-icons/fi';
 
 import logoImg from '../../../../assets/images/FavIcon.svg';
 
-import { HeaderContainer, Logo, Button } from './styled';
+import { HeaderContainer, Logo, Button, Text } from './styled';
 
 import { HeaderProps } from './interface';
 
@@ -14,7 +14,10 @@ const Header: React.FC<HeaderProps> = ({
   onClick,
   teacher,
   type,
+  text,
 }) => {
+  const hasText = Boolean(text);
+
   return (
     <HeaderContainer>
       {teacher ? (
@@ -40,6 +43,8 @@ const Header: React.FC<HeaderProps> = ({
           </Button>
         </Link>
       )}
+
+      {teacher && hasText && <Text>{text}</Text>}
 
       <Button title={title} onClick={onClick}>
         {isMenuIcon ? <FiMenu /> : <FiX />}

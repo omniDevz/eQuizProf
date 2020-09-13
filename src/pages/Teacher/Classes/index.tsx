@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FiUsers } from 'react-icons/fi';
 import { MdYoutubeSearchedFor } from 'react-icons/md';
 
@@ -99,7 +100,9 @@ const Classes: React.FC = () => {
           ))}
       </ListClass>
       <ButtonWrapper>
-        <Button color="primary">Nova Turma</Button>
+        <Button color="primary">
+          <Link to="/teacher/classesNew">Nova Turma</Link>
+        </Button>
       </ButtonWrapper>
     </PageDefaultProf>
   );

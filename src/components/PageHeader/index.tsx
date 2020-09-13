@@ -7,7 +7,7 @@ import { HeaderWrapper, Navigation, Menu, LinkList } from './styled';
 
 import { HeaderProps } from './interface';
 
-const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn }) => {
+const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn, text }) => {
   const howType = type === undefined ? 'icon' : type;
   const hasTeacherOn = Boolean(teacherOn);
 
@@ -53,6 +53,7 @@ const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn }) => {
         onClick={handleToggleMenu}
         teacher={hasTeacherOn}
         type={howType}
+        text={text}
       />
     </HeaderWrapper>
   );
