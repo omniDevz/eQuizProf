@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import FormField from '../../../components/FormField';
-
 export const Title = styled.h3`
   padding: 3.2rem 24px 0;
   font-size: 4rem;

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import PageDefaultProf from '../../../components/PageDefaultProf';
-import Button from '../../../components/Button';
-import FormField from '../../../components/FormField';
-import useForm from '../../../hooks/useForm';
+import PageDefaultProf from '../../../../../components/PageDefaultProf';
+import Button from '../../../../../components/Button';
+import FormField from '../../../../../components/FormField';
+import useForm from '../../../../../hooks/useForm';
 
 import { Form, ButtonsWrapper } from './styled';
 

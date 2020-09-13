@@ -137,9 +137,9 @@ export const Prefix = styled.label`
 
 export const ButtonCircle = styled.button<ButtonCircleProps>`
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  top: -2.5px;
+  bottom: -2.5px;
+  right: -2.5px;
   display: flex;
   justify-content: center;
   align-items: center;
