@@ -6,6 +6,8 @@ export const CollapseHeader = styled.div`
   flex-direction: row;
   width: 100%;
   padding-bottom: 0;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
 
   svg {
     width: 2.8rem;
@@ -32,7 +34,7 @@ export const CollapseBody = styled.div`
 
 export const CollapseWrapper = styled.div<CollapseToggleProps>`
   width: 100%;
-  padding: 12px 24px;
+  padding: 1.2rem;
   box-shadow: var(--box-shadow);
   background: ${(props) => props.theme.colors.secondary};
   border-radius: 3.2rem;

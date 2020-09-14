@@ -40,11 +40,10 @@ export const Text = styled.label<TextProps>`
   align-items: center;
 
   transform-origin: 0% 0%;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-style: normal;
-  font-weight: 600;
 
-  padding: 1.4rem 2.6rem;
+  padding: 1.4rem 1.2rem;
   border-radius: 1.2rem;
 
   transition: 240ms ease-in-out;
@@ -110,7 +109,7 @@ export const Input = styled.input<InputProps>`
       + ${Text} {
         color: ${(props) => props.theme.colors.tertiary};
         z-index: 1;
-        left: 1.6rem;
+        left: 0;
         top: 0;
         font-weight: normal;
         transform: scale(0.8) translateY(-1.5rem);

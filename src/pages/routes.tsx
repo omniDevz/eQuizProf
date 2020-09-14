@@ -9,6 +9,7 @@ import RecoveryPasswordCode from './RecoveryPasswordCode';
 import RecoveryPasswordNew from './RecoveryPasswordNew';
 
 import TeacherHome from './Teacher/Home';
+import TeacherAccount from './Teacher/Account';
 import TeacherClasses from './Teacher/Classes';
 import TeacherClassesNew from './Teacher/Classes/pages/New';
 import TeacherClassesDetail from './Teacher/Classes/pages/Detail';
@@ -30,6 +31,11 @@ function Routes() {
         <Route path="/recoveryPasswordNew" component={RecoveryPasswordNew} />
 
         <Route path={`/${subdomainTeacher}/home`} component={TeacherHome} />
+
+        <Route
+          path={`/${subdomainTeacher}/account`}
+          component={TeacherAccount}
+        />
 
         <Route
           path={`/${subdomainTeacher}/classes/new`}

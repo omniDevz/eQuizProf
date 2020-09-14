@@ -13,7 +13,6 @@ export const Label = styled.label`
   padding: 0.8rem 1.2rem;
   border-radius: 32px;
   opacity: 0.48;
-  font-weight: 600;
   transition: all 240ms ease-in-out;
   cursor: pointer;
 

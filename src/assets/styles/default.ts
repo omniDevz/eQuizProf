@@ -74,4 +74,8 @@ div, section, article, footer, #root {
   }
 }
 
+fieldset {
+  border: none;
+}
+
 `;
