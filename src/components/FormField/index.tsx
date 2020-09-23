@@ -7,6 +7,7 @@ import {
   Input,
   Text,
   Prefix,
+  Textarea,
   ButtonCircle,
 } from './styled';
 
@@ -25,23 +26,37 @@ const FormField: React.FC<FormFieldProps> = ({
   const hasValue = value !== '';
   const hasLabel = Boolean(label.length);
   const typeInput = type !== undefined ? type : 'text';
+  const isTextarea = type === 'textarea';
   const strokeWidth = stroke !== undefined ? stroke : '2.4px';
   const hasPrefix = prefix !== undefined;
 
   return (
     <FormFieldWrapper>
-      <Label htmlFor={fieldId}>
+      <Label htmlFor={fieldId} type={typeInput}>
         {hasPrefix && <Prefix htmlFor={fieldId}>{prefix}</Prefix>}
-        <Input
-          id={fieldId}
-          hasValue={hasValue}
-          hasChildren={Boolean(children)}
-          value={value}
-          name={name}
-          onChange={onChange}
-          type={typeInput}
-          autoComplete="off"
-        />
+        {isTextarea ? (
+          <Textarea
+            id={fieldId}
+            hasValue={hasValue}
+            hasChildren={Boolean(children)}
+            value={value}
+            name={name}
+            onChange={onChange}
+            autoComplete="off"
+          />
+        ) : (
+          <Input
+            id={fieldId}
+            hasValue={hasValue}
+            hasChildren={Boolean(children)}
+            value={value}
+            name={name}
+            onChange={onChange}
+            type={typeInput}
+            autoComplete="off"
+          />
+        )}
+
         <Text hasLabel={hasLabel} type={typeInput} htmlFor={fieldId}>
           {label}
         </Text>

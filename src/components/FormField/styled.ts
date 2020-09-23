@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components';
 
-import { InputProps, TextProps, ButtonCircleProps } from './interface';
+import {
+  InputProps,
+  TextProps,
+  LabelProps,
+  ButtonCircleProps,
+} from './interface';
 
 export const FormFieldWrapper = styled.div`
   width: 100%;
-
-  textarea {
-    min-height: 150px;
-  }
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<LabelProps>`
   position: relative;
   width: 100%;
 
@@ -25,6 +26,15 @@ export const Label = styled.label`
   border-radius: 32px;
 
   padding: 0 1.4rem;
+
+  ${(props) =>
+    props.type === 'textarea'
+      ? css`
+          height: 8rem;
+        `
+      : css`
+          height: 4.2rem;
+        `}
 `;
 
 export const Text = styled.label<TextProps>`
@@ -78,6 +88,56 @@ export const Text = styled.label<TextProps>`
 `;
 
 export const Input = styled.input<InputProps>`
+  color: ${(props) => props.theme.colors.tertiary};
+  font-size: 2rem;
+  font-weight: 600;
+
+  outline: 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+
+  resize: none;
+
+  &:focus {
+    + ${Text} {
+      color: ${(props) => props.theme.colors.tertiary};
+      z-index: 1;
+      left: 1.6rem;
+      top: 0;
+      font-weight: normal;
+      transform: scale(0.8) translateY(-1.5rem);
+
+      &:before {
+        transform: scaleX(1);
+      }
+    }
+  }
+  ${({ hasValue }) =>
+    hasValue &&
+    css`
+      + ${Text} {
+        color: ${(props) => props.theme.colors.tertiary};
+        z-index: 1;
+        left: 0;
+        top: 0;
+        font-weight: normal;
+        transform: scale(0.8) translateY(-1.5rem);
+
+        &:before {
+          transform: scaleX(1);
+        }
+      }
+    `};
+
+  ${({ hasChildren }) =>
+    hasChildren &&
+    css`
+      padding-right: 8rem;
+    `};
+`;
+
+export const Textarea = styled.textarea<InputProps>`
   color: ${(props) => props.theme.colors.tertiary};
   font-size: 2rem;
   font-weight: 600;
