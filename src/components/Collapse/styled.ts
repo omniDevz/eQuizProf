@@ -5,9 +5,8 @@ import { CollapseToggleProps } from './interface';
 export const CollapseHeader = styled.div`
   flex-direction: row;
   width: 100%;
-  padding-bottom: 0;
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
+  padding: 1.2rem 2rem;
+  cursor: pointer;
 
   svg {
     width: 2.8rem;
@@ -27,6 +26,7 @@ export const Text = styled.p`
 `;
 
 export const CollapseBody = styled.div`
+  padding: 0;
   max-height: 0px;
   overflow: hidden;
   transition: all 400ms ease-in-out;
@@ -34,7 +34,6 @@ export const CollapseBody = styled.div`
 
 export const CollapseWrapper = styled.div<CollapseToggleProps>`
   width: 100%;
-  padding: 1.2rem;
   box-shadow: var(--box-shadow);
   background: ${(props) => props.theme.colors.secondary};
   border-radius: 3.2rem;
@@ -54,6 +53,8 @@ export const CollapseWrapper = styled.div<CollapseToggleProps>`
       ${CollapseBody} {
         max-height: 100vh;
         overflow: auto;
+        padding: 0 1.2rem;
+        padding-top: 0;
       }
     `}
 `;

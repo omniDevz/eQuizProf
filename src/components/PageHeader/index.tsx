@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouteMatch } from 'react-router-dom';
 
 import Header from './components/Header';
 import LinkItem from './components/LinkItem';
@@ -7,9 +8,48 @@ import { HeaderWrapper, Navigation, Menu, LinkList } from './styled';
 
 import { HeaderProps } from './interface';
 
+const links = [
+  {
+    route: 'newRegister',
+    title: 'Cadastrar',
+    logout: true,
+  },
+  {
+    route: 'login',
+    title: 'Entrar',
+    logout: true,
+  },
+  {
+    route: 'home',
+    title: 'Home',
+  },
+  {
+    route: 'quizzes',
+    title: 'Quizzes',
+  },
+  {
+    route: 'books',
+    title: 'Livros',
+  },
+  {
+    route: 'live',
+    title: 'Live',
+  },
+  {
+    route: 'classes',
+    title: 'Turmas',
+  },
+  {
+    route: 'account',
+    title: 'Perfil',
+  },
+];
+
 const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn, text }) => {
   const howType = type === undefined ? 'icon' : type;
   const hasTeacherOn = Boolean(teacherOn);
+  const { url } = useRouteMatch();
+  const routeActive = url.replace('/teacher/', '');
 
   function handleToggleMenu() {
     const menu = document.getElementById('menu');
@@ -29,21 +69,21 @@ const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn, text }) => {
 
         <Navigation>
           <LinkList>
-            {hasTeacherOn ? (
-              <>
-                <LinkItem to="/teacher/home" title="Home" />
-                <LinkItem to="/teacher/quizzes" title="Quizzes" />
-                <LinkItem to="/teacher/books" title="Livros" />
-                <LinkItem to="/teacher/live" title="Live" />
-                <LinkItem to="/teacher/classes" title="Turmas" />
-                <LinkItem to="/teacher/account" title="Perfil" />
-              </>
-            ) : (
-              <>
-                <LinkItem to="/newRegister" title="Cadastrar" />
-                <LinkItem to="/login" title="Entrar" />
-              </>
-            )}
+            {links
+              .filter(
+                ({ route, logout }) =>
+                  route !== routeActive && Boolean(logout) === !hasTeacherOn
+              )
+              .map((link) => {
+                const logged = Boolean(link?.logout) ? '' : '/teacher';
+                return (
+                  <LinkItem
+                    key={link.route}
+                    to={`${logged}/${link.route}`}
+                    title={link.title}
+                  />
+                );
+              })}
           </LinkList>
         </Navigation>
       </Menu>
