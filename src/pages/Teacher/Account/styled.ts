@@ -4,6 +4,7 @@ import { CollapseBody } from '../../../components/Collapse/styled';
 import { FormFieldWrapper } from '../../../components/FormField/styled';
 import { RadioButtonWrapper } from '../../../components/RadioButton/styled';
 import { SelectWrapper } from '../../../components/Select/styled';
+import { ButtonStyled } from '../../../components/Button/styled';
 
 export const Title = styled.h2`
   font-size: 3.2rem;
@@ -25,10 +26,14 @@ export const Fieldset = styled.fieldset`
   }
 
   ${CollapseBody} > {
-    ${FormFieldWrapper}, ${SelectWrapper} {
+    ${FormFieldWrapper}, ${SelectWrapper}, ${ButtonStyled} {
       &:first-child {
         margin-top: 1.6rem;
       }
+    }
+
+    ${ButtonStyled} {
+      margin-bottom: 1.6rem;
     }
   }
 `;

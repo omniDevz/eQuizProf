@@ -41,6 +41,10 @@ const Account: React.FC = () => {
     countryCode: '',
     ddd: '',
     number: '',
+    username: '',
+    password: '',
+    passwordNew: '',
+    passwordNewConfirm: '',
   };
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -375,8 +379,44 @@ const Account: React.FC = () => {
             </TwoColumns>
           </Collapse>
         </Fieldset>
+        <Fieldset>
+          <Collapse label="Usuário">
+            <FormField
+              label="Usuário"
+              name="username"
+              value={values.username}
+              onChange={handleChange}
+            />
+            <Button color="primary-outline">Alterar usuário</Button>
+          </Collapse>
+        </Fieldset>
+        <Fieldset>
+          <Collapse label="Nova senha">
+            <FormField
+              label="Senha atual"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              type="password"
+            />
+            <FormField
+              label="Nova senha"
+              name="passwordNew"
+              value={values.passwordNew}
+              onChange={handleChange}
+              type="password"
+            />
+            <FormField
+              label="Confirmar senha"
+              name="passwordNewConfirm"
+              value={values.passwordNewConfirm}
+              onChange={handleChange}
+              type="password"
+            />
+            <Button color="primary-outline">Alterar senha</Button>
+          </Collapse>
+        </Fieldset>
         <ButtonsWrapper>
-          <Button color="primary-outline">Dados de acesso</Button>
           <Button color="primary">Salvar</Button>
         </ButtonsWrapper>
       </Form>
