@@ -46,7 +46,7 @@ function Routes() {
         />
 
         <Route
-          path={`/${subdomainTeacher}/live/streaming`}
+          path={`/${subdomainTeacher}/live/streaming/:streamingId`}
           component={TeacherLiveStreaming}
         />
         <Route path={`/${subdomainTeacher}/live`} component={TeacherLive} />

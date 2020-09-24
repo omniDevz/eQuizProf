@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
 
 import FormField from '../../../components/FormField';
 import PageDefaultProf from '../../../components/PageDefaultProf';
@@ -7,6 +9,7 @@ import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
 
 import { Title, Description, FormFieldWrapper, ButtonWrapper } from './styled';
+import api from '../../../services/api';
 
 const Live: React.FC = () => {
   const valuesInitials = {
@@ -15,6 +18,37 @@ const Live: React.FC = () => {
   };
 
   const { handleChange, values } = useForm(valuesInitials);
+  const { addToast } = useToasts();
+  const history = useHistory();
+
+  function handleInitStream() {
+    api
+      .post('/notificacaoTransmissao', {
+        Descricao: values.description,
+        Link: values.link,
+        ProfessorId: 1,
+        UltimoUsuarioAlteracao: 0,
+      })
+      .then(({ status, data }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Live iniciada com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+        history.push(`/teacher/live/streaming/${data}`);
+      })
+      .catch(({ response }) => {
+        const { data } = response;
+        console.error(data);
+      });
+  }
 
   return (
     <PageDefaultProf type="back" text="Live">
@@ -37,7 +71,7 @@ const Live: React.FC = () => {
         />
       </FormFieldWrapper>
       <ButtonWrapper>
-        <Button color="primary-outline" to="/teacher/live/streaming">
+        <Button color="primary-outline" onClick={handleInitStream}>
           Começar
         </Button>
       </ButtonWrapper>

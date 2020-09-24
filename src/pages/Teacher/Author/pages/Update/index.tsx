@@ -57,7 +57,7 @@ const AuthorUpdate: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/authorized/author');
+        history.push('/teacher/author');
       })
       .catch(({ response }) => {
         const { data } = response;
@@ -84,7 +84,7 @@ const AuthorUpdate: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/authorized/author');
+        history.push('/teacher/author');
       })
       .catch(({ response }) => {
         const { data } = response;

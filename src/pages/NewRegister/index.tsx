@@ -42,7 +42,7 @@ function NewRegister() {
   const [numberAddress, setNumberAddress] = useState<string>('');
 
   const history = useHistory();
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(2);
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -254,7 +254,7 @@ function NewRegister() {
           pessoa: {
             nome: values.firstName,
             sobrenome: values.lastname,
-            cpf: values.cpf,
+            cpf: values.cpf.replace('.', '').replace('-', ''),
             dataNascimento: values.dateOfBirth,
             sexo: values.genre,
             numero: numberAddress,
@@ -267,7 +267,7 @@ function NewRegister() {
               TipoTelefone: values.typeFone,
             },
             endereco: {
-              Cep: cep,
+              Cep: cep.replace('-', ''),
               Logradouro: address,
               Bairro: neighborhood,
               Cidade: city,
@@ -297,6 +297,7 @@ function NewRegister() {
       })
       .catch(({ response }) => {
         const { data } = response;
+        console.error(data);
         addToast(data, {
           appearance: 'error',
           autoDismiss: true,
