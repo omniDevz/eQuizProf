@@ -89,9 +89,10 @@ export const Text = styled.label<TextProps>`
 
 export const Input = styled.input<InputProps>`
   color: ${(props) => props.theme.colors.tertiary};
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 500;
 
+  padding-top: 0;
   outline: 0;
   width: 100%;
   background: transparent;
@@ -107,6 +108,7 @@ export const Input = styled.input<InputProps>`
       top: 0;
       font-weight: normal;
       transform: scale(0.8) translateY(-1.5rem);
+      padding-top: 0.8rem;
 
       &:before {
         transform: scaleX(1);
@@ -123,6 +125,7 @@ export const Input = styled.input<InputProps>`
         top: 0;
         font-weight: normal;
         transform: scale(0.8) translateY(-1.5rem);
+        padding-top: 0.8rem;
 
         &:before {
           transform: scaleX(1);

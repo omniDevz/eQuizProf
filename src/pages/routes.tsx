@@ -19,6 +19,10 @@ import TeacherClassesUpdate from './Teacher/Classes/pages/Update';
 import TeacherLive from './Teacher/Live';
 import TeacherLiveStreaming from './Teacher/Live/pages/Streaming';
 
+import TeacherAuthorUpdate from './Teacher/Author/pages/Update';
+import TeacherAuthorNew from './Teacher/Author/pages/New';
+import TeacherAuthor from './Teacher/Author';
+
 import NotFound from './NotFound';
 
 function Routes() {
@@ -46,6 +50,16 @@ function Routes() {
           component={TeacherLiveStreaming}
         />
         <Route path={`/${subdomainTeacher}/live`} component={TeacherLive} />
+
+        <Route
+          path={`/${subdomainTeacher}/author/update/:authorId`}
+          component={TeacherAuthorUpdate}
+        />
+        <Route
+          path={`/${subdomainTeacher}/author/new`}
+          component={TeacherAuthorNew}
+        />
+        <Route path={`/${subdomainTeacher}/author`} component={TeacherAuthor} />
 
         <Route
           path={`/${subdomainTeacher}/classes/new`}

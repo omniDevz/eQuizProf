@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiMenu, FiX, FiArrowLeft, FiLogOut } from 'react-icons/fi';
 
 import logoImg from '../../../../assets/images/FavIcon.svg';
@@ -17,12 +17,17 @@ const Header: React.FC<HeaderProps> = ({
   text,
 }) => {
   const hasText = Boolean(text);
+  const history = useHistory();
+
+  function handleBackNavigation() {
+    history.goBack();
+  }
 
   return (
     <HeaderContainer>
       {teacher ? (
         type === 'back' ? (
-          <Button>
+          <Button onClick={handleBackNavigation}>
             <FiArrowLeft />
           </Button>
         ) : type === 'exit' ? (

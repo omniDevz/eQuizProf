@@ -417,6 +417,7 @@ const Account: React.FC = () => {
           </Collapse>
         </Fieldset>
         <ButtonsWrapper>
+          <Button color="primary-outline">Excluir</Button>
           <Button color="primary">Salvar</Button>
         </ButtonsWrapper>
       </Form>
