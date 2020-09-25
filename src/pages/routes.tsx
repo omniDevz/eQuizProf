@@ -19,6 +19,10 @@ import TeacherClassesUpdate from './Teacher/Classes/pages/Update';
 import TeacherLive from './Teacher/Live';
 import TeacherLiveStreaming from './Teacher/Live/pages/Streaming';
 
+import TeacherBookUpdate from './Teacher/Book/pages/Update';
+import TeacherBookNew from './Teacher/Book/pages/New';
+import TeacherBook from './Teacher/Book';
+
 import TeacherAuthorUpdate from './Teacher/Author/pages/Update';
 import TeacherAuthorNew from './Teacher/Author/pages/New';
 import TeacherAuthor from './Teacher/Author';
@@ -52,6 +56,16 @@ function Routes() {
         <Route path={`/${subdomainTeacher}/live`} component={TeacherLive} />
 
         <Route
+          path={`/${subdomainTeacher}/book/update/:bookId`}
+          component={TeacherBookUpdate}
+        />
+        <Route
+          path={`/${subdomainTeacher}/book/new`}
+          component={TeacherBookNew}
+        />
+        <Route path={`/${subdomainTeacher}/book`} component={TeacherBook} />
+
+        <Route
           path={`/${subdomainTeacher}/author/update/:authorId`}
           component={TeacherAuthorUpdate}
         />
@@ -62,12 +76,12 @@ function Routes() {
         <Route path={`/${subdomainTeacher}/author`} component={TeacherAuthor} />
 
         <Route
-          path={`/${subdomainTeacher}/classes/new`}
-          component={TeacherClassesNew}
-        />
-        <Route
           path={`/${subdomainTeacher}/classes/update/:idClass`}
           component={TeacherClassesUpdate}
+        />
+        <Route
+          path={`/${subdomainTeacher}/classes/new`}
+          component={TeacherClassesNew}
         />
         <Route
           path={`/${subdomainTeacher}/classes/:idClass`}

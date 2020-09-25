@@ -50,7 +50,7 @@ export const Text = styled.label<TextProps>`
   align-items: center;
 
   transform-origin: 0% 0%;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-style: normal;
 
   padding: 1.4rem 1.2rem;
