@@ -3,7 +3,7 @@ import { FiEdit, FiTrash } from 'react-icons/fi';
 
 import logoSVG from '../../../../../assets/images/icons/iconTime.svg';
 
-export const QuestionWrapper = styled.div`
+export const SlideWrapper = styled.div`
   background: ${(props) => props.theme.colors.box};
   box-shadow: var(--box-shadow);
   border-radius: 3.2rem;
@@ -12,8 +12,7 @@ export const QuestionWrapper = styled.div`
   grid-template-rows: repeat(4, auto);
   grid-template-areas:
     'number timer'
-    'question question'
-    'response response'
+    'slide slide'
     '- actions';
   justify-content: center;
   grid-gap: 0.8rem;
@@ -46,30 +45,10 @@ export const Timer = styled(TextHeader)`
   background-position: center right;
 `;
 
-export const QuestionText = styled(TextHeader)`
-  color: ${(props) => props.theme.colors.tertiary};
-  grid-area: question;
+export const SlideText = styled(TextHeader)`
+  grid-area: slide;
   font-size: 2.4rem;
-`;
-
-export const ResponseWrapper = styled.div`
-  grid-area: response;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 0.8rem;
-`;
-
-export const Response = styled.p`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${(props) => props.theme.colors.box};
-  box-shadow: var(--box-shadow);
-  border-radius: 3.2rem;
-  text-align: center;
-  padding: 0.8rem;
+  color: ${(props) => props.theme.colors.tertiary};
 `;
 
 export const ActionsWrapper = styled.div`

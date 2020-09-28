@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FiEdit } from 'react-icons/fi';
+import { ButtonStyled } from '../../../../../components/Button/styled';
 
 export const Header = styled.div`
   padding: 3.2rem 24px;
@@ -39,5 +40,30 @@ export const IconEdit = styled(FiEdit)`
 
   &:hover {
     transform: scale(0.9);
+  }
+`;
+
+export const ListQuiz = styled.div`
+  max-height: calc(100vh - 36rem);
+  overflow-y: auto;
+  grid-gap: 1.6rem;
+  margin: 0 24px;
+  flex: 1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const ButtonsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 1.6rem;
+  margin: 2.4rem 24px;
+
+  ${ButtonStyled} {
+    width: 100%;
   }
 `;

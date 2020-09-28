@@ -2,7 +2,10 @@ import React from 'react';
 import {
   QuestionWrapper,
   ResponseWrapper,
+  ActionsWrapper,
   QuestionText,
+  IconTrash,
+  IconEdit,
   Response,
   Number,
   Timer,
@@ -18,10 +21,14 @@ const Question: React.FC = () => {
       <QuestionText>Pergunta do quiz</QuestionText>
       <ResponseWrapper>
         <Response>Resposta 01</Response>
-        <Response>Resposta 01</Response>
-        <Response>Resposta 01</Response>
-        <Response>Resposta 01</Response>
+        <Response>Resposta 02</Response>
+        <Response>Resposta 03</Response>
+        <Response>Resposta 04</Response>
       </ResponseWrapper>
+      <ActionsWrapper>
+        <IconEdit />
+        <IconTrash />
+      </ActionsWrapper>
     </QuestionWrapper>
   );
 };
