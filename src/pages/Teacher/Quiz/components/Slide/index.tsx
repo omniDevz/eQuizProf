@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   ActionsWrapper,
@@ -19,7 +20,12 @@ const Slide: React.FC = () => {
       <Timer>60</Timer>
       <SlideText>Pergunta do quiz</SlideText>
       <ActionsWrapper>
-        <IconEdit />
+        <Link
+          to={`/teacher/quiz/${1}/slide/update`}
+          title="Alterar dados do slide"
+        >
+          <IconEdit />
+        </Link>
         <IconTrash />
       </ActionsWrapper>
     </SlideWrapper>
