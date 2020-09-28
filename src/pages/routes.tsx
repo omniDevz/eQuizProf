@@ -50,11 +50,11 @@ function Routes() {
         <Route path={`/${subdomainTeacher}/home`} component={TeacherHome} />
 
         <Route path={`/${subdomainTeacher}/quiz`} exact component={Quiz} />
-        <Route path={`/${subdomainTeacher}/quiz/new`} component={QuizNew} />
         <Route
-          path={`/${subdomainTeacher}/quiz/update`}
+          path={`/${subdomainTeacher}/quiz/update/:quizId`}
           component={QuizUpdate}
         />
+        <Route path={`/${subdomainTeacher}/quiz/new`} component={QuizNew} />
 
         <Route
           path={`/${subdomainTeacher}/account`}

@@ -23,7 +23,7 @@ function Home() {
     }
 
     const canvas = document.getElementById(
-      'studantsChart'
+      'studentsChart'
     ) as HTMLCanvasElement;
 
     new Chart(canvas, {
@@ -97,7 +97,7 @@ function Home() {
 
       <ContainerRow>
         <SubTitle>Último quiz realizado</SubTitle>
-        <Graph id="studantsChart"></Graph>
+        <Graph id="studentsChart"></Graph>
       </ContainerRow>
     </PageTeacher>
   );

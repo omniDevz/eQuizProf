@@ -15,7 +15,7 @@ import {
   Form,
   ListClass,
   ItemClass,
-  Informations,
+  Descriptions,
   Name,
   Information,
   ButtonWrapper,
@@ -26,31 +26,31 @@ const data = [
     id: 1,
     name: 'Nome da turma',
     quizzes: 6,
-    studants: 123,
+    students: 123,
   },
   {
     id: 2,
     name: 'Nome da turma',
     quizzes: 6,
-    studants: 123,
+    students: 123,
   },
   {
     id: 3,
     name: 'Nome da turma',
     quizzes: 6,
-    studants: 123,
+    students: 123,
   },
   {
     id: 4,
     name: 'Nome da turma',
     quizzes: 6,
-    studants: 123,
+    students: 123,
   },
   {
     id: 5,
     name: 'Nome da turma',
     quizzes: 6,
-    studants: 123,
+    students: 123,
   },
 ];
 
@@ -90,17 +90,17 @@ const Classes: React.FC = () => {
       </Form>
       <ListClass>
         {listClasses &&
-          listClasses.map(({ id, name, quizzes, studants }) => (
+          listClasses.map(({ id, name, quizzes, students }) => (
             <ItemClass key={id}>
-              <Informations>
+              <Descriptions>
                 <Name>{name}</Name>
                 <Information>
                   <b>{quizzes}</b> quizzes realizados
                 </Information>
                 <Information>
-                  <b>{studants}</b> alunos
+                  <b>{students}</b> alunos
                 </Information>
-              </Informations>
+              </Descriptions>
               <FiUsers />
             </ItemClass>
           ))}

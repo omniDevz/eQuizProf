@@ -48,7 +48,7 @@ export const ItemClass = styled.li`
   }
 `;
 
-export const Informations = styled.div`
+export const Descriptions = styled.div`
   align-items: flex-start;
 `;
 

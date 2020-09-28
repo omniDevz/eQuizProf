@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CheckButtonWrapper } from '../../../../../components/CheckButton/styled';
+
 import { FormFieldWrapper } from '../../../../../components/FormField/styled';
 
 export const Form = styled.form`
@@ -11,17 +11,12 @@ export const Form = styled.form`
   row-gap: 1.6rem;
   flex: 1;
 
-  ${CheckButtonWrapper} {
-    justify-content: flex-end;
-  }
-
   ${FormFieldWrapper} {
     width: 100%;
   }
 `;
 
 export const ButtonsWrapper = styled.div`
-  margin: 2.4rem 0;
-  display: flex;
-  row-gap: 1.6rem;
+  padding-bottom: 2.4rem;
+  grid-gap: 1.6rem;
 `;

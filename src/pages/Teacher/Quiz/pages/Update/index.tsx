@@ -1,58 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '../../../../../components/Button';
+import CheckButton from '../../../../../components/CheckButton';
 import FormField from '../../../../../components/FormField';
 import PageTeacher from '../../../../../components/PageTeacher';
 
-import useForm from '../../../../../hooks/useForm';
-
 import { Form, ButtonsWrapper } from './styled';
 
-const BookUpdate: React.FC = () => {
-  const valuesInitials = {
-    title: '',
-    description: '',
-    link: '',
-    author: '',
-    datePublication: '',
-  };
-
-  const { handleChange, values } = useForm(valuesInitials);
+const QuizUpdate: React.FC = () => {
+  const [name, setName] = useState('');
+  const [onlyStudentsRegister, setOnlyStudentsRegister] = useState(false);
 
   return (
-    <PageTeacher type="back" text="Alterar livro">
+    <PageTeacher type="back" text="Alterar quiz">
       <Form>
         <FormField
-          label="Título"
-          name="title"
-          value={values.title}
-          onChange={handleChange}
+          label="Nome"
+          name="name"
+          value={name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setName(e.target.value);
+          }}
         />
-        <FormField
-          label="Descrição"
-          name="description"
-          value={values.description}
-          onChange={handleChange}
-        />
-        <FormField
-          label="Link"
-          name="link"
-          value={values.link}
-          onChange={handleChange}
-          type="url"
-        />
-        <FormField
-          label="Autor"
-          name="author"
-          value={values.author}
-          onChange={handleChange}
-        />
-        <FormField
-          label="Data de publicação"
-          name="datePublication"
-          value={values.datePublication}
-          onChange={handleChange}
-          type="date"
+        <CheckButton
+          label="Apenas alunos cadastrados"
+          name="onlyStudentsRegister"
+          value={onlyStudentsRegister}
+          setValue={setOnlyStudentsRegister}
         />
       </Form>
       <ButtonsWrapper>
@@ -63,4 +37,4 @@ const BookUpdate: React.FC = () => {
   );
 };
 
-export default BookUpdate;
+export default QuizUpdate;
