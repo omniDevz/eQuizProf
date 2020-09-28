@@ -1,7 +1,6 @@
 export interface CheckButtonProps {
   label: string;
   name: string;
-  value: string;
-  checked: boolean;
-  onChange: FunctionComponentElement;
+  value: boolean;
+  setValue: Dispatch<SetStateAction<boolean>>;
 }

@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { CheckButtonWrapper, CheckButtonStyled, Label } from './styled';
+import { CheckButtonWrapper, CheckButtonStyled, Label, Icon } from './styled';
 
 import { CheckButtonProps } from './interface';
 
 const CheckButton: React.FC<CheckButtonProps> = ({
   label,
-  name,
   value,
-  checked,
-  onChange,
+  name,
+  setValue,
 }) => {
   const id = `id_${name}`;
 
@@ -18,12 +17,15 @@ const CheckButton: React.FC<CheckButtonProps> = ({
       <CheckButtonStyled
         id={id}
         type="checkbox"
-        value={value}
-        checked={checked}
-        name={name}
-        onChange={onChange}
+        checked={value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setValue(e.target.checked);
+        }}
       />
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id}>
+        <Icon />
+        {label}
+      </Label>
     </CheckButtonWrapper>
   );
 };

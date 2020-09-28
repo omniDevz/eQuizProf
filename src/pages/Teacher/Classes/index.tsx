@@ -46,6 +46,12 @@ const data = [
     quizzes: 6,
     studants: 123,
   },
+  {
+    id: 5,
+    name: 'Nome da turma',
+    quizzes: 6,
+    studants: 123,
+  },
 ];
 
 const Classes: React.FC = () => {

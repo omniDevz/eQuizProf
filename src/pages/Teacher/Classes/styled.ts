@@ -18,9 +18,13 @@ export const ListClass = styled.ul`
   position: relative;
   padding: 0 24px;
   overflow-y: auto;
-  max-height: 40vh;
+  max-height: calc(100vh - 42rem);
   margin-bottom: 1.6rem;
   flex: 1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ItemClass = styled.li`

@@ -20,15 +20,15 @@ const links = [
     logout: true,
   },
   {
-    route: 'home',
+    route: '',
     title: 'Home',
   },
   {
-    route: 'quizzes',
+    route: 'quiz',
     title: 'Quizzes',
   },
   {
-    route: 'books',
+    route: 'book',
     title: 'Livros',
   },
   {
@@ -51,6 +51,12 @@ const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn, text }) => {
   const { url } = useRouteMatch();
   const routeActive = url.replace('/teacher/', '');
 
+  function isHomePage(path: string): boolean {
+    const isPageHome = path === 'home' && routeActive === '';
+
+    return isPageHome;
+  }
+
   function handleToggleMenu() {
     const menu = document.getElementById('menu');
     menu?.classList.toggle('open');
@@ -72,7 +78,9 @@ const PageHeader: React.FC<HeaderProps> = ({ type, teacherOn, text }) => {
             {links
               .filter(
                 ({ route, logout }) =>
-                  route !== routeActive && Boolean(logout) === !hasTeacherOn
+                  route !== routeActive &&
+                  Boolean(logout) === !hasTeacherOn &&
+                  !isHomePage(route)
               )
               .map((link) => {
                 const logged = Boolean(link?.logout) ? '' : '/teacher';

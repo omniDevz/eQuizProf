@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { CheckButtonWrapper } from '../../../components/CheckButton/styled';
 
 export const Form = styled.form`
   margin: 3.2rem 24px;
