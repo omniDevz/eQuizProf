@@ -31,8 +31,12 @@ const QuizDetail: React.FC = () => {
         <Slide />
       </ListQuiz>
       <ButtonsWrapper>
-        <Button color="primary-outline">Novo slide</Button>
-        <Button color="primary-outline">Novo quiz</Button>
+        <Button color="primary-outline" to={`/teacher/quiz/${1}/slide/new`}>
+          Novo slide
+        </Button>
+        <Button color="primary-outline" to={`/teacher/quiz/${1}/question/new`}>
+          Nova quiz
+        </Button>
       </ButtonsWrapper>
     </PageTeacher>
   );
