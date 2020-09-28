@@ -65,5 +65,6 @@ export const ButtonsWrapper = styled.div`
 
   ${ButtonStyled} {
     width: 100%;
+    margin: auto;
   }
 `;

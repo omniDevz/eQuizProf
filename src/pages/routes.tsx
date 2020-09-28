@@ -32,6 +32,7 @@ import QuizNew from './Teacher/Quiz/pages/New';
 import QuizDetail from './Teacher/Quiz/pages/Detail';
 import QuizUpdate from './Teacher/Quiz/pages/Update';
 import QuizQuestionNew from './Teacher/Quiz/pages/Question/New';
+import QuizQuestionUpdate from './Teacher/Quiz/pages/Question/Update';
 
 import NotFound from './NotFound';
 
@@ -59,6 +60,10 @@ function Routes() {
         <Route
           path={`/${subdomainTeacher}/quiz/:quizId/question/new`}
           component={QuizQuestionNew}
+        />
+        <Route
+          path={`/${subdomainTeacher}/quiz/:quizId/question/update`}
+          component={QuizQuestionUpdate}
         />
         <Route
           path={`/${subdomainTeacher}/quiz/:quizId`}

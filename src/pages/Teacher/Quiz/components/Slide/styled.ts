@@ -57,6 +57,11 @@ export const ActionsWrapper = styled.div`
   justify-content: flex-end;
   grid-gap: 1.6rem;
   padding-top: 0.8rem;
+
+  a {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const IconEdit = styled(FiEdit)`

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   QuestionWrapper,
   ResponseWrapper,
@@ -26,7 +27,12 @@ const Question: React.FC = () => {
         <Response>Resposta 04</Response>
       </ResponseWrapper>
       <ActionsWrapper>
-        <IconEdit />
+        <Link
+          to={`/teacher/quiz/${1}/question/update`}
+          title="Alterar dados da pergunta"
+        >
+          <IconEdit />
+        </Link>
         <IconTrash />
       </ActionsWrapper>
     </QuestionWrapper>
