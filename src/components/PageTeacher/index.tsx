@@ -5,13 +5,9 @@ import Footer from '../Footer';
 
 import { Main } from './styled';
 
-import { PageDefaultProfProps } from './interface';
+import { PageTeacherProps } from './interface';
 
-const PageDefaultProf: React.FC<PageDefaultProfProps> = ({
-  children,
-  type,
-  text,
-}) => {
+const PageTeacher: React.FC<PageTeacherProps> = ({ children, type, text }) => {
   return (
     <>
       <PageHeader teacherOn={true} type={type} text={text} />
@@ -21,4 +17,4 @@ const PageDefaultProf: React.FC<PageDefaultProfProps> = ({
   );
 };
 
-export default PageDefaultProf;
+export default PageTeacher;

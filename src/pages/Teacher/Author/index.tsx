@@ -4,7 +4,7 @@ import { MdYoutubeSearchedFor } from 'react-icons/md';
 
 import Button from '../../../components/Button';
 import FormField from '../../../components/FormField';
-import PageDefaultProf from '../../../components/PageDefaultProf';
+import PageTeacher from '../../../components/PageTeacher';
 import List from './components/List';
 
 import useForm from '../../../hooks/useForm';
@@ -55,7 +55,7 @@ const Author: React.FC = () => {
   }, [addToast]);
 
   return (
-    <PageDefaultProf type="back" text="Autores">
+    <PageTeacher type="back" text="Autores">
       <Form>
         <FormField
           label="Filtro"
@@ -77,7 +77,7 @@ const Author: React.FC = () => {
           Cadastrar autor
         </Button>
       </ButtonWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

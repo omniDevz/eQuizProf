@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from '../../../../../components/Button';
 import FormField from '../../../../../components/FormField';
-import PageDefaultProf from '../../../../../components/PageDefaultProf';
+import PageTeacher from '../../../../../components/PageTeacher';
 
 import useForm from '../../../../../hooks/useForm';
 
@@ -20,7 +20,7 @@ const BookUpdate: React.FC = () => {
   const { handleChange, values } = useForm(valuesInitials);
 
   return (
-    <PageDefaultProf type="back" text="Alterar livro">
+    <PageTeacher type="back" text="Alterar livro">
       <Form>
         <FormField
           label="Título"
@@ -59,7 +59,7 @@ const BookUpdate: React.FC = () => {
         <Button color="primary-outline">Excluir</Button>
         <Button color="primary">Salvar</Button>
       </ButtonsWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

@@ -4,7 +4,7 @@ import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../../../../components/Button';
 import FormField from '../../../../../components/FormField';
-import PageDefaultProf from '../../../../../components/PageDefaultProf';
+import PageTeacher from '../../../../../components/PageTeacher';
 
 import api from '../../../../../services/api';
 
@@ -96,7 +96,7 @@ const AuthorUpdate: React.FC = () => {
   }
 
   return (
-    <PageDefaultProf type="back" text="Alterar autor">
+    <PageTeacher type="back" text="Alterar autor">
       <Form>
         <FormField
           label="Nome"
@@ -123,7 +123,7 @@ const AuthorUpdate: React.FC = () => {
           Salvar
         </Button>
       </ButtonsWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

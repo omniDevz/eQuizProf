@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 
 import FormField from '../../../components/FormField';
-import PageDefaultProf from '../../../components/PageDefaultProf';
+import PageTeacher from '../../../components/PageTeacher';
 import Button from '../../../components/Button';
 
 import useForm from '../../../hooks/useForm';
@@ -51,7 +51,7 @@ const Live: React.FC = () => {
   }
 
   return (
-    <PageDefaultProf type="back" text="Live">
+    <PageTeacher type="back" text="Live">
       <Title>Livestream</Title>
       <Description>
         Inicie uma live para todos os seus alunos registrados
@@ -75,7 +75,7 @@ const Live: React.FC = () => {
           Começar
         </Button>
       </ButtonWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

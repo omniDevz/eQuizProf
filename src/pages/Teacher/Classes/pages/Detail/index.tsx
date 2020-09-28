@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { FiEdit, FiTrash, FiUser } from 'react-icons/fi';
 
 import FormField from '../../../../../components/FormField';
-import PageDefaultProf from '../../../../../components/PageDefaultProf';
+import PageTeacher from '../../../../../components/PageTeacher';
 
 import useForm from '../../../../../hooks/useForm';
 
@@ -73,7 +73,7 @@ const ClassesUpdate: React.FC = () => {
   }
 
   return (
-    <PageDefaultProf type="back" text="Turma">
+    <PageTeacher type="back" text="Turma">
       <Header>
         <Details>
           <Name>Nome da Turma</Name>
@@ -119,7 +119,7 @@ const ClassesUpdate: React.FC = () => {
             </StudantItem>
           ))}
       </StudantsList>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

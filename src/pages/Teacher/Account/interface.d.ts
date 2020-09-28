@@ -4,7 +4,7 @@ export interface AllCountriesProps {
   };
 }
 
-export interface AllStatiesProps {
+export interface AllStatesProps {
   sigla: string;
 }
 

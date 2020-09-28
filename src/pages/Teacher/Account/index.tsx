@@ -4,7 +4,7 @@ import { FiSearch } from 'react-icons/fi';
 import Button from '../../../components/Button';
 import Collapse from '../../../components/Collapse';
 import FormField from '../../../components/FormField';
-import PageDefaultProf from '../../../components/PageDefaultProf';
+import PageTeacher from '../../../components/PageTeacher';
 import RadioButton from '../../../components/RadioButton';
 import Select from '../../../components/Select';
 
@@ -25,7 +25,7 @@ import {
 import {
   AllCitiesProps,
   AllCountriesProps,
-  AllStatiesProps,
+  AllStatesProps,
   OptionsSelect,
 } from './interface';
 
@@ -61,7 +61,7 @@ const Account: React.FC = () => {
     options: [],
   });
 
-  const [staties, setStaties] = useState<OptionsSelect>({
+  const [staties, setStates] = useState<OptionsSelect>({
     options: [
       {
         label: '',
@@ -148,17 +148,17 @@ const Account: React.FC = () => {
     apiLocations
       .get('/estados')
       .then(({ data }) => {
-        const optionsStaties = data.map((state: AllStatiesProps) => {
-          const optionsNameStaties = {
+        const optionsStates = data.map((state: AllStatesProps) => {
+          const optionsNameStates = {
             value: state.sigla,
             label: state.sigla,
           };
 
-          return optionsNameStaties;
+          return optionsNameStates;
         });
 
-        setStaties({
-          options: optionsStaties,
+        setStates({
+          options: optionsStates,
         });
       })
       .catch(({ response }) => {
@@ -191,7 +191,7 @@ const Account: React.FC = () => {
   }, [state, country]);
 
   return (
-    <PageDefaultProf type="icon">
+    <PageTeacher type="icon">
       <Title>Meu perfil</Title>
       <Form>
         <Fieldset>
@@ -300,7 +300,7 @@ const Account: React.FC = () => {
               name="cep"
               value={cep}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setState(e.target.value)
+                setCep(e.target.value)
               }
               onClick={handleCep}
             >
@@ -421,7 +421,7 @@ const Account: React.FC = () => {
           <Button color="primary">Salvar</Button>
         </ButtonsWrapper>
       </Form>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

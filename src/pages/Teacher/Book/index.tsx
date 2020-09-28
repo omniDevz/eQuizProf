@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiEdit, FiExternalLink, FiLink, FiLink2 } from 'react-icons/fi';
+import { FiEdit, FiExternalLink } from 'react-icons/fi';
 
 import { MdYoutubeSearchedFor } from 'react-icons/md';
 
 import Button from '../../../components/Button';
 import FormField from '../../../components/FormField';
-import CheckButton from '../../../components/CheckButton';
-import PageDefaultProf from '../../../components/PageDefaultProf';
+import PageTeacher from '../../../components/PageTeacher';
 import useForm from '../../../hooks/useForm';
 
 import {
@@ -30,7 +29,7 @@ const Book: React.FC = () => {
   const { handleChange, values } = useForm(valuesInitials);
 
   return (
-    <PageDefaultProf type="back" text="Livros">
+    <PageTeacher type="back" text="Livros">
       <Form>
         <FormField
           label="Filtro"
@@ -60,7 +59,6 @@ const Book: React.FC = () => {
                 <a
                   href={`https://google.com`}
                   title="Abrir página de compra do livro"
-                  target="_blank"
                 >
                   <FiExternalLink />
                 </a>
@@ -84,7 +82,7 @@ const Book: React.FC = () => {
           Cadastrar livro
         </Button>
       </ButtonWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

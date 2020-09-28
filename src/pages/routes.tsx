@@ -26,6 +26,7 @@ import TeacherBook from './Teacher/Book';
 import TeacherAuthorUpdate from './Teacher/Author/pages/Update';
 import TeacherAuthorNew from './Teacher/Author/pages/New';
 import TeacherAuthor from './Teacher/Author';
+import Quiz from './Teacher/Quiz';
 
 import NotFound from './NotFound';
 
@@ -42,7 +43,9 @@ function Routes() {
         <Route path="/recoveryPasswordCode" component={RecoveryPasswordCode} />
         <Route path="/recoveryPasswordNew" component={RecoveryPasswordNew} />
 
+        <Route path={`/${subdomainTeacher}`} exact component={TeacherHome} />
         <Route path={`/${subdomainTeacher}/home`} component={TeacherHome} />
+        <Route path={`/${subdomainTeacher}/quiz`} component={Quiz} />
 
         <Route
           path={`/${subdomainTeacher}/account`}

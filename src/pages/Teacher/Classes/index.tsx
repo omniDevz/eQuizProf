@@ -5,7 +5,7 @@ import { MdYoutubeSearchedFor } from 'react-icons/md';
 
 import Button from '../../../components/Button';
 import FormField from '../../../components/FormField';
-import PageDefaultProf from '../../../components/PageDefaultProf';
+import PageTeacher from '../../../components/PageTeacher';
 
 import useForm from '../../../hooks/useForm';
 
@@ -67,7 +67,7 @@ const Classes: React.FC = () => {
   }
 
   return (
-    <PageDefaultProf type={'icon'}>
+    <PageTeacher type={'icon'}>
       <Title>Turmas</Title>
       <Description>Consulte e administre suas turmas</Description>
       <Form>
@@ -104,7 +104,7 @@ const Classes: React.FC = () => {
           <Link to="/teacher/classesNew">Nova Turma</Link>
         </Button>
       </ButtonWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 

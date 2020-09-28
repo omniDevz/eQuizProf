@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 
-import PageDefaultProf from '../../../../../components/PageDefaultProf';
+import PageTeacher from '../../../../../components/PageTeacher';
 import Button from '../../../../../components/Button';
 
 import api from '../../../../../services/api';
@@ -41,16 +41,16 @@ const Streaming: React.FC = () => {
   }
 
   return (
-    <PageDefaultProf type="back" text="Streaming">
+    <PageTeacher type="back" text="Streaming">
       <Stream>
-        <img src="https://source.unsplash.com/random/person"></img>
+        <img src="https://source.unsplash.com/random/person" alt="" />
       </Stream>
       <ButtonWrapper>
         <Button color="primary-outline" onClick={handleExitStream}>
           Encerrar
         </Button>
       </ButtonWrapper>
-    </PageDefaultProf>
+    </PageTeacher>
   );
 };
 
