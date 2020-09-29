@@ -27,6 +27,8 @@ import TeacherAuthorUpdate from './Teacher/Author/pages/Update';
 import TeacherAuthorNew from './Teacher/Author/pages/New';
 import TeacherAuthor from './Teacher/Author';
 
+import Play from './Teacher/Play';
+
 import Quiz from './Teacher/Quiz';
 import QuizNew from './Teacher/Quiz/pages/New';
 import QuizDetail from './Teacher/Quiz/pages/Detail';
@@ -85,6 +87,7 @@ function Routes() {
           path={`/${subdomainTeacher}/account`}
           component={TeacherAccount}
         />
+        <Route path={`/${subdomainTeacher}/play`} component={Play} />
 
         <Route
           path={`/${subdomainTeacher}/live/streaming/:streamingId`}
