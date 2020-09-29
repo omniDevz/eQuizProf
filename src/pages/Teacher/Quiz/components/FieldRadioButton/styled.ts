@@ -1,21 +1,30 @@
 import styled from 'styled-components';
 import { FiX, FiCheck } from 'react-icons/fi';
 
+import { FormFieldWrapper } from '../../../../../components/FormField/styled';
+
 export const FieldRadioButton = styled.div`
   position: relative;
   width: 100%;
+
+  ${FormFieldWrapper} input {
+    width: calc(100% - 7.2rem);
+  }
 `;
 
-export const RadioButtonContainer = styled.div`
+export const RadioButtonContainer = styled.label`
   position: absolute;
+  display: flex;
   top: 2px;
   right: 2px;
   bottom: 2px;
   background: ${(props) => props.theme.colors.primary};
-  width: 7.2rem;
+  width: 8rem;
   border-radius: 3.2rem;
   box-shadow: inset var(--box-shadow);
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   padding-left: 0.6rem;
   padding-right: 4rem;
   transition: all 260ms ease-in-out;

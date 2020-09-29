@@ -25,7 +25,7 @@ const FormRadioButton: React.FC<FieldRadioButtonProps> = ({
   return (
     <FieldRadioButton>
       <FormField label={text} name={name} value={value} onChange={setValue} />
-      <RadioButtonContainer>
+      <RadioButtonContainer htmlFor={id}>
         <RadioButtonStyled
           id={id}
           type="radio"

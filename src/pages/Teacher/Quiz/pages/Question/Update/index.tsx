@@ -4,6 +4,7 @@ import Button from '../../../../../../components/Button';
 import FormField from '../../../../../../components/FormField';
 import PageTeacher from '../../../../../../components/PageTeacher';
 import RadioButton from '../../../../../../components/RadioButton';
+import FieldRadioButton from '../../../components/FieldRadioButton';
 
 import useForm from '../../../../../../hooks/useForm';
 
@@ -11,13 +12,14 @@ import { Form, ButtonsWrapper } from './styled';
 
 const QuestionUpdate: React.FC = () => {
   const valuesInitials = {
+    level: '1',
     question: '',
     alternativeA: '',
     alternativeB: '',
     alternativeC: '',
     alternativeD: '',
     timeInSeconds: '',
-    level: '1',
+    alternativeRight: 'A',
   };
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -31,29 +33,49 @@ const QuestionUpdate: React.FC = () => {
           value={values.question}
           onChange={handleChange}
         />
-        <FormField
-          label="Alternativa A"
+        <FieldRadioButton
+          text="Alternativa A"
           name="alternativeA"
           value={values.alternativeA}
-          onChange={handleChange}
+          setValue={handleChange}
+          check={{
+            name: 'alternativeRight',
+            value: 'A',
+            checked: values.alternativeRight,
+          }}
         />
-        <FormField
-          label="Alternativa B"
+        <FieldRadioButton
+          text="Alternativa B"
           name="alternativeB"
           value={values.alternativeB}
-          onChange={handleChange}
+          setValue={handleChange}
+          check={{
+            name: 'alternativeRight',
+            value: 'B',
+            checked: values.alternativeRight,
+          }}
         />
-        <FormField
-          label="Alternativa C"
+        <FieldRadioButton
+          text="Alternativa C"
           name="alternativeC"
           value={values.alternativeC}
-          onChange={handleChange}
+          setValue={handleChange}
+          check={{
+            name: 'alternativeRight',
+            value: 'C',
+            checked: values.alternativeRight,
+          }}
         />
-        <FormField
-          label="Alternativa D"
+        <FieldRadioButton
+          text="Alternativa D"
           name="alternativeD"
           value={values.alternativeD}
-          onChange={handleChange}
+          setValue={handleChange}
+          check={{
+            name: 'alternativeRight',
+            value: 'D',
+            checked: values.alternativeRight,
+          }}
         />
         <FormField
           label="Tempo em segundos"
