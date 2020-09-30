@@ -1,8 +1,8 @@
 import React from 'react';
-import Await from './pages/Await';
+import Question from './pages/Question';
 
 const Play: React.FC = () => {
-  return <Await />;
+  return <Question />;
 };
 
 export default Play;
