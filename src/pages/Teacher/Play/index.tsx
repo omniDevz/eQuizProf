@@ -1,8 +1,8 @@
 import React from 'react';
-import Question from './pages/Question';
+import Slide from './pages/Slide';
 
 const Play: React.FC = () => {
-  return <Question />;
+  return <Slide />;
 };
 
 export default Play;
