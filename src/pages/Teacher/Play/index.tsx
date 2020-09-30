@@ -1,8 +1,8 @@
 import React from 'react';
-import Slide from './pages/Slide';
+import Result from './pages/Result';
 
 const Play: React.FC = () => {
-  return <Slide />;
+  return <Result />;
 };
 
 export default Play;
