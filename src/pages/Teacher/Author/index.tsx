@@ -14,6 +14,7 @@ import api from '../../../services/api';
 import { Form, ButtonWrapper } from './styled';
 
 import { AuthorProps, AuthorApiProps } from './interface';
+import util from '../../../utils/util';
 
 const Author: React.FC = () => {
   const valuesInitials = {
@@ -33,9 +34,8 @@ const Author: React.FC = () => {
           (author: AuthorApiProps) => {
             const newAuthor: AuthorProps = {
               authorId: author.autorId,
-              firstname: author.nome,
+              firstName: author.nome,
               lastName: author.sobrenome,
-              inactive: author.inativo,
               lastUserUpdate: author.ultimoUsuarioAlteracao,
             };
 
@@ -45,14 +45,17 @@ const Author: React.FC = () => {
 
         setListAuthors(authorFromApi);
       })
-      .catch(({ response }) => {
-        const { data } = response;
-        addToast(data, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
+      .catch((err) => {
+        console.error(err);
       });
   }, [addToast]);
+
+  function handleFilterAuthors(author: AuthorProps) {
+    return (
+      util.includesToLowerCase(author.firstName, values.search) ||
+      util.includesToLowerCase(author.lastName, values.search)
+    );
+  }
 
   return (
     <PageTeacher type="back" text="Autores">
@@ -67,7 +70,9 @@ const Author: React.FC = () => {
           <MdYoutubeSearchedFor />
         </FormField>
       </Form>
-      <List list={listAuthors} />
+      <List
+        list={listAuthors.filter((author) => handleFilterAuthors(author))}
+      />
       <ButtonWrapper>
         <Button
           color="primary-outline"

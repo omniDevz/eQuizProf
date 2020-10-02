@@ -23,6 +23,7 @@ import {
 } from './styled';
 
 import { BookApiProps, BookProps } from './interface';
+import util from '../../../utils/util';
 
 const Book: React.FC = () => {
   const valuesInitials = {
@@ -67,6 +68,15 @@ const Book: React.FC = () => {
       });
   }, [addToast]);
 
+  function filterSearchOnBooks(book: BookProps) {
+    return (
+      util.includesToLowerCase(book.title, values.search) ||
+      util.includesToLowerCase(book.subtitle, values.search) ||
+      util.includesToLowerCase(book.author.firstName, values.search) ||
+      util.includesToLowerCase(book.author.lastName, values.search)
+    );
+  }
+
   return (
     <PageTeacher type="back" text="Livros">
       <Form>
@@ -81,31 +91,36 @@ const Book: React.FC = () => {
       </Form>
       <ListBooks>
         {listBooks.length > 0 &&
-          listBooks.map((book) => (
-            <ItemBook key={book.bookId}>
-              <Collapse label={book.title}>
-                <Description>{book.subtitle}</Description>
-                <FooterBook>
-                  <Infos>
-                    <Description>
-                      <b>{`${book.author.firstName} ${book.author.lastName}`}</b>
-                    </Description>
-                  </Infos>
-                  <Actions>
-                    <a href={book.link} title="Abrir página de compra do livro">
-                      <FiExternalLink />
-                    </a>
-                    <Link
-                      to={`/teacher/book/update/${book.bookId}`}
-                      title="Editar dados de livros"
-                    >
-                      <FiEdit />
-                    </Link>
-                  </Actions>
-                </FooterBook>
-              </Collapse>
-            </ItemBook>
-          ))}
+          listBooks
+            .filter((book) => filterSearchOnBooks(book))
+            .map((book) => (
+              <ItemBook key={book.bookId}>
+                <Collapse label={book.title}>
+                  <Description>{book.subtitle}</Description>
+                  <FooterBook>
+                    <Infos>
+                      <Description>
+                        <b>{`${book.author.firstName} ${book.author.lastName}`}</b>
+                      </Description>
+                    </Infos>
+                    <Actions>
+                      <a
+                        href={book.link}
+                        title="Abrir página de compra do livro"
+                      >
+                        <FiExternalLink />
+                      </a>
+                      <Link
+                        to={`/teacher/book/update/${book.bookId}`}
+                        title="Editar dados de livros"
+                      >
+                        <FiEdit />
+                      </Link>
+                    </Actions>
+                  </FooterBook>
+                </Collapse>
+              </ItemBook>
+            ))}
       </ListBooks>
       <ButtonWrapper>
         <Button

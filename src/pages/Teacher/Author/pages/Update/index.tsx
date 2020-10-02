@@ -13,7 +13,7 @@ import { Form, ButtonsWrapper } from './styled';
 import { ParamsProps } from './interface';
 
 const AuthorUpdate: React.FC = () => {
-  const [firstname, setFirstname] = useState('');
+  const [firstName, setFirstname] = useState('');
   const [lastName, setlastName] = useState('');
 
   let { authorId } = useParams<ParamsProps>();
@@ -40,7 +40,7 @@ const AuthorUpdate: React.FC = () => {
     api
       .put('/autor', {
         AutorId: authorId,
-        Nome: firstname,
+        Nome: firstName,
         Sobrenome: lastName,
         UltimoUsuarioAlteracao: 1,
       })
@@ -100,8 +100,8 @@ const AuthorUpdate: React.FC = () => {
       <Form>
         <FormField
           label="Nome"
-          name="firstname"
-          value={firstname}
+          name="firstName"
+          value={firstName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFirstname(e.target.value)
           }

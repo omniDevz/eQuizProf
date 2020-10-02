@@ -13,7 +13,7 @@ import { Form, ButtonWrapper } from './styled';
 
 const AuthorNew: React.FC = () => {
   const valuesInitials = {
-    firstname: '',
+    firstName: '',
     lastName: '',
   };
 
@@ -25,7 +25,7 @@ const AuthorNew: React.FC = () => {
   function handleRegisterAuthor() {
     api
       .post('/autor', {
-        Nome: values.firstname,
+        Nome: values.firstName,
         Sobrenome: values.lastName,
         UltimoUsuarioAlteracao: 1,
       })
@@ -58,8 +58,8 @@ const AuthorNew: React.FC = () => {
       <Form>
         <FormField
           label="Nome"
-          name="firstname"
-          value={values.firstname}
+          name="firstName"
+          value={values.firstName}
           onChange={handleChange}
         />
         <FormField

@@ -28,8 +28,6 @@ function Login() {
         senha: values.password,
       })
       .then((response) => {
-        const { data } = response;
-
         history.push('/teacher/home');
       })
       .catch((err) => {

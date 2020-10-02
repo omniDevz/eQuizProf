@@ -32,6 +32,10 @@ const links = [
     title: 'Livros',
   },
   {
+    route: 'author',
+    title: 'Autores',
+  },
+  {
     route: 'live',
     title: 'Live',
   },

@@ -13,25 +13,25 @@ import useForm from '../../../hooks/useForm';
 import { apiCountries, apiViaCep, apiLocations } from '../../../services/api';
 
 import {
+  ButtonsWrapper,
+  ThreeColumns,
+  TwoColumns,
+  TypesFone,
+  Fieldset,
   Title,
   Form,
-  Fieldset,
-  TwoColumns,
-  ThreeColumns,
-  TypesFone,
-  ButtonsWrapper,
 } from './styled';
 
 import {
-  AllCitiesProps,
   AllCountriesProps,
+  AllCitiesProps,
   AllStatesProps,
   OptionsSelect,
 } from './interface';
 
 const Account: React.FC = () => {
   const valuesInitials = {
-    firstname: '',
+    firstName: '',
     lastName: '',
     cpf: '',
     dateOfBirth: '',
@@ -61,7 +61,7 @@ const Account: React.FC = () => {
     options: [],
   });
 
-  const [staties, setStates] = useState<OptionsSelect>({
+  const [states, setStates] = useState<OptionsSelect>({
     options: [
       {
         label: '',
@@ -199,8 +199,8 @@ const Account: React.FC = () => {
             <TwoColumns>
               <FormField
                 label="Nome"
-                name="firstname"
-                value={values.firstname}
+                name="firstName"
+                value={values.firstName}
                 onChange={handleChange}
               />
               <FormField
@@ -320,7 +320,7 @@ const Account: React.FC = () => {
                   label="UF"
                   onChange={(e: any) => setState(e.value)}
                   value={state}
-                  options={staties.options}
+                  options={states.options}
                 />
               ) : (
                 <FormField

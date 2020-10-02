@@ -37,7 +37,7 @@ const StepThree: React.FC<StepThreeProps> = ({
     options: [],
   });
 
-  const [staties, setStates] = useState<OptionsSelect>({
+  const [states, setStates] = useState<OptionsSelect>({
     options: [
       {
         label: '',
@@ -200,7 +200,7 @@ const StepThree: React.FC<StepThreeProps> = ({
               label="UF"
               onChange={(e: any) => setValues.setState(e.value)}
               value={values.state}
-              options={staties.options}
+              options={states.options}
             />
           ) : (
             <FormField
