@@ -34,7 +34,7 @@ const Author: React.FC = () => {
             const newAuthor: AuthorProps = {
               authorId: author.autorId,
               firstname: author.nome,
-              lastname: author.sobrenome,
+              lastName: author.sobrenome,
               inactive: author.inativo,
               lastUserUpdate: author.ultimoUsuarioAlteracao,
             };

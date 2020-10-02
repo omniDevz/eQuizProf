@@ -30,14 +30,14 @@ export const FormFieldWrapper = styled.div`
   padding: 0.8rem 24px 1.6rem;
 `;
 
-export const StudantsList = styled.ul`
+export const StudentsList = styled.ul`
   padding: 0.8rem 24px 2.4rem;
   max-height: 56vh;
   overflow-y: auto;
   flex: 1;
 `;
 
-export const StudantItem = styled.li`
+export const StudentItem = styled.li`
   background: ${({ theme }) => theme.colors.box};
   border-radius: 3.2rem;
   padding: 0.8rem;
@@ -48,7 +48,7 @@ export const StudantItem = styled.li`
   }
 `;
 
-export const HeaderStudant = styled.div`
+export const HeaderStudent = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: flex-start;
@@ -72,7 +72,7 @@ export const Info = styled.div`
   align-items: flex-start;
 `;
 
-export const NameStudant = styled.p`
+export const NameStudent = styled.p`
   font: 600 2.4rem 'Ubuntu', sans-serif;
 `;
 

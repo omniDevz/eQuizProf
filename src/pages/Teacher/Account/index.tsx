@@ -32,7 +32,7 @@ import {
 const Account: React.FC = () => {
   const valuesInitials = {
     firstname: '',
-    lastname: '',
+    lastName: '',
     cpf: '',
     dateOfBirth: '',
     genre: 'M',
@@ -205,8 +205,8 @@ const Account: React.FC = () => {
               />
               <FormField
                 label="Sobrenome"
-                name="lastname"
-                value={values.lastname}
+                name="lastName"
+                value={values.lastName}
                 onChange={handleChange}
               />
             </TwoColumns>

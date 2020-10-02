@@ -14,7 +14,7 @@ import { Form, ButtonWrapper } from './styled';
 const AuthorNew: React.FC = () => {
   const valuesInitials = {
     firstname: '',
-    lastname: '',
+    lastName: '',
   };
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -26,7 +26,7 @@ const AuthorNew: React.FC = () => {
     api
       .post('/autor', {
         Nome: values.firstname,
-        Sobrenome: values.lastname,
+        Sobrenome: values.lastName,
         UltimoUsuarioAlteracao: 1,
       })
       .then(({ status, data }) => {
@@ -64,8 +64,8 @@ const AuthorNew: React.FC = () => {
         />
         <FormField
           label="Sobrenome"
-          name="lastname"
-          value={values.lastname}
+          name="lastName"
+          value={values.lastName}
           onChange={handleChange}
         />
       </Form>

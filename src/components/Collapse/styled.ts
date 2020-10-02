@@ -30,6 +30,7 @@ export const CollapseBody = styled.div`
   max-height: 0px;
   overflow: hidden;
   transition: all 400ms ease-in-out;
+  width: 100%;
 `;
 
 export const CollapseWrapper = styled.div<CollapseToggleProps>`

@@ -52,7 +52,7 @@ function Landing() {
         <Article>
           <Title>Suas aulas em outro nível!</Title>
           <Description>
-            Que tal levar um gameshow e todo um ecosistema para auxiliar em suas
+            Que tal levar um quiz e todo um ecossistemas para auxiliar em suas
             aulas
           </Description>
         </Article>

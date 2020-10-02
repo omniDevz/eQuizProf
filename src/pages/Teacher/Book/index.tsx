@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiEdit, FiExternalLink } from 'react-icons/fi';
-
-import { MdYoutubeSearchedFor } from 'react-icons/md';
+import { FiEdit, FiExternalLink, FiSearch } from 'react-icons/fi';
+import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../../components/Button';
+import Collapse from '../../../components/Collapse';
 import FormField from '../../../components/FormField';
 import PageTeacher from '../../../components/PageTeacher';
 import useForm from '../../../hooks/useForm';
+
+import api from '../../../services/api';
 
 import {
   Form,
@@ -19,7 +21,8 @@ import {
   Actions,
   ButtonWrapper,
 } from './styled';
-import Collapse from '../../../components/Collapse';
+
+import { BookApiProps, BookProps } from './interface';
 
 const Book: React.FC = () => {
   const valuesInitials = {
@@ -27,6 +30,42 @@ const Book: React.FC = () => {
   };
 
   const { handleChange, values } = useForm(valuesInitials);
+
+  const [listBooks, setListBooks] = useState<BookProps[]>([]);
+
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    api
+      .get('/livro')
+      .then(({ data }) => {
+        const bookFromApi: BookProps[] = data.map((book: BookApiProps) => {
+          const newBook: BookProps = {
+            bookId: book.livroId,
+            author: {
+              authorId: book.autor.autorId,
+              firstName: book.autor.nome,
+              lastName: book.autor.sobrenome,
+            },
+            title: book.titulo,
+            subtitle: book.subtitulo,
+            link: book.linkLivro,
+            datePublication: book.dataPublicacao,
+          };
+
+          return newBook;
+        });
+
+        setListBooks(bookFromApi);
+      })
+      .catch(({ response }) => {
+        const { data } = response;
+        addToast(data, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      });
+  }, [addToast]);
 
   return (
     <PageTeacher type="back" text="Livros">
@@ -36,42 +75,37 @@ const Book: React.FC = () => {
           name="search"
           value={values.search}
           onChange={handleChange}
-          stroke="0.5"
         >
-          <MdYoutubeSearchedFor />
+          <FiSearch />
         </FormField>
       </Form>
       <ListBooks>
-        <ItemBook>
-          <Collapse label="Como fazer pao">
-            <Description>
-              Que tal aprender a fazer um pãozin neste artigo totalmente em
-              inglês?
-            </Description>
-
-            <FooterBook>
-              <Infos>
-                <Description>
-                  <b>fulano</b>
-                </Description>
-              </Infos>
-              <Actions>
-                <a
-                  href={`https://google.com`}
-                  title="Abrir página de compra do livro"
-                >
-                  <FiExternalLink />
-                </a>
-                <Link
-                  to={`/teacher/book/update/${2}`}
-                  title="Editar dados de livros"
-                >
-                  <FiEdit />
-                </Link>
-              </Actions>
-            </FooterBook>
-          </Collapse>
-        </ItemBook>
+        {listBooks.length > 0 &&
+          listBooks.map((book) => (
+            <ItemBook key={book.bookId}>
+              <Collapse label={book.title}>
+                <Description>{book.subtitle}</Description>
+                <FooterBook>
+                  <Infos>
+                    <Description>
+                      <b>{`${book.author.firstName} ${book.author.lastName}`}</b>
+                    </Description>
+                  </Infos>
+                  <Actions>
+                    <a href={book.link} title="Abrir página de compra do livro">
+                      <FiExternalLink />
+                    </a>
+                    <Link
+                      to={`/teacher/book/update/${book.bookId}`}
+                      title="Editar dados de livros"
+                    >
+                      <FiEdit />
+                    </Link>
+                  </Actions>
+                </FooterBook>
+              </Collapse>
+            </ItemBook>
+          ))}
       </ListBooks>
       <ButtonWrapper>
         <Button

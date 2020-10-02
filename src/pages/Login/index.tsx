@@ -21,7 +21,7 @@ function Login() {
   const history = useHistory();
   const { handleChange, values } = useForm(valuesInitials);
 
-  function loginStudant() {
+  function loginTeacher() {
     api
       .post('/professor/validarLoginProfessor', {
         usuario: values.username,
@@ -29,13 +29,11 @@ function Login() {
       })
       .then((response) => {
         const { data } = response;
-        console.log(data);
 
         history.push('/teacher/home');
       })
-      .catch(({ response }) => {
-        const { data } = response;
-        alert(data);
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -63,7 +61,7 @@ function Login() {
             </Link>
           </FormField>
         </FieldsWrapper>
-        <Button color="primary" onClick={loginStudant}>
+        <Button color="primary" onClick={loginTeacher}>
           Entrar
         </Button>
       </Form>

@@ -2,7 +2,7 @@ export interface AuthorProps {
   authorId: number;
   inactive: boolean;
   firstname: string;
-  lastname: string;
+  lastName: string;
   lastUserUpdate: number;
 }
 

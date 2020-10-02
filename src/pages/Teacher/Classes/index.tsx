@@ -10,15 +10,15 @@ import PageTeacher from '../../../components/PageTeacher';
 import useForm from '../../../hooks/useForm';
 
 import {
-  Title,
+  ButtonWrapper,
+  Descriptions,
   Description,
-  Form,
+  Information,
   ListClass,
   ItemClass,
-  Descriptions,
+  Title,
+  Form,
   Name,
-  Information,
-  ButtonWrapper,
 } from './styled';
 
 const data = [

@@ -13,11 +13,11 @@ import {
   Name,
   Code,
   FormFieldWrapper,
-  StudantsList,
-  StudantItem,
-  HeaderStudant,
+  StudentsList,
+  StudentItem,
+  HeaderStudent,
   Info,
-  NameStudant,
+  NameStudent,
   BirthDate,
   Contact,
   ContactItem,
@@ -57,17 +57,17 @@ const ClassesUpdate: React.FC = () => {
   };
 
   const { handleChange, values } = useForm(valuesInitials);
-  const [listStudants, setListStudants] = useState(data);
+  const [listStudents, setListStudents] = useState(data);
 
   const { idClass } = useParams<ParamsProps>();
 
   function applySearch() {
-    setListStudants(
-      data.filter((studant) => studant.name.includes(values.search))
+    setListStudents(
+      data.filter((Student) => Student.name.includes(values.search))
     );
   }
 
-  function handleListStudant(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleListStudent(e: React.ChangeEvent<HTMLInputElement>) {
     handleChange(e);
     applySearch();
   }
@@ -92,7 +92,7 @@ const ClassesUpdate: React.FC = () => {
           label="Pesquisar"
           name="search"
           value={values.search}
-          onChange={handleListStudant}
+          onChange={handleListStudent}
           stroke="0.5"
           onClick={applySearch}
         >
@@ -100,25 +100,25 @@ const ClassesUpdate: React.FC = () => {
         </FormField>
       </FormFieldWrapper>
 
-      <StudantsList>
-        {listStudants &&
-          listStudants.map((studant) => (
-            <StudantItem key={studant.id}>
-              <HeaderStudant>
+      <StudentsList>
+        {listStudents &&
+          listStudents.map((Student) => (
+            <StudentItem key={Student.id}>
+              <HeaderStudent>
                 <FiUser />
                 <Info>
-                  <NameStudant>{studant.name}</NameStudant>
-                  <BirthDate>{studant.birthDate}</BirthDate>
+                  <NameStudent>{Student.name}</NameStudent>
+                  <BirthDate>{Student.birthDate}</BirthDate>
                 </Info>
                 <FiTrash />
-              </HeaderStudant>
+              </HeaderStudent>
               <Contact>
-                <ContactItem>{studant.email}</ContactItem>
-                <ContactItem>{studant.fone}</ContactItem>
+                <ContactItem>{Student.email}</ContactItem>
+                <ContactItem>{Student.fone}</ContactItem>
               </Contact>
-            </StudantItem>
+            </StudentItem>
           ))}
-      </StudantsList>
+      </StudentsList>
     </PageTeacher>
   );
 };

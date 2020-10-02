@@ -12,6 +12,8 @@ import StepFive from './components/StepFive';
 
 import useForm from '../../hooks/useForm';
 
+import util from '../../utils/util';
+
 import lottieAccept from '../../assets/lottie/accept.json';
 
 import { Steps, ConfirmContainer } from './styled';
@@ -22,7 +24,6 @@ function NewRegister() {
   const valuesInitials = {
     firstName: '',
     lastName: '',
-    cpf: '',
     dateOfBirth: '',
     email: '',
     genre: 'M',
@@ -33,6 +34,7 @@ function NewRegister() {
     username: '',
     password: '',
   };
+  const [cpf, setCpf] = useState<string>('');
   const [cep, setCep] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [state, setState] = useState<string>('');
@@ -75,7 +77,7 @@ function NewRegister() {
           document.getElementById('id_lastName')?.focus();
           return false;
         }
-        if (values.cpf === '') {
+        if (cpf === '') {
           addToast('Preencha o CPF', {
             appearance: 'warning',
             autoDismiss: true,
@@ -83,14 +85,7 @@ function NewRegister() {
           document.getElementById('id_cpf')?.focus();
           return false;
         }
-        if (values.cpf.length !== 11) {
-          addToast('Informe seu CPF corretamente', {
-            appearance: 'warning',
-            autoDismiss: true,
-          });
-          document.getElementById('id_cpf')?.focus();
-          return false;
-        }
+
         if (values.dateOfBirth === '') {
           addToast('Preencha a data de aniversário', {
             appearance: 'warning',
@@ -100,7 +95,7 @@ function NewRegister() {
           return false;
         }
         if (values.genre === '') {
-          addToast('Selecione seu genêro sexual', {
+          addToast('Selecione seu gênero sexual', {
             appearance: 'warning',
             autoDismiss: true,
           });
@@ -249,12 +244,12 @@ function NewRegister() {
 
   function addNewTeacher() {
     api
-      .post('/professor', {
+      .post('professor', {
         administrador: {
           pessoa: {
             nome: values.firstName,
-            sobrenome: values.lastname,
-            cpf: values.cpf.replace('.', '').replace('-', ''),
+            sobrenome: values.lastName,
+            cpf: util.onlyNumbers(cpf),
             dataNascimento: values.dateOfBirth,
             sexo: values.genre,
             numero: numberAddress,
@@ -267,7 +262,7 @@ function NewRegister() {
               TipoTelefone: values.typeFone,
             },
             endereco: {
-              Cep: cep.replace('-', ''),
+              Cep: util.onlyNumbers(cep),
               Logradouro: address,
               Bairro: neighborhood,
               Cidade: city,
@@ -295,13 +290,8 @@ function NewRegister() {
           history.push('/teacher/home');
         }, 3600);
       })
-      .catch(({ response }) => {
-        const { data } = response;
-        console.error(data);
-        addToast(data, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -315,6 +305,10 @@ function NewRegister() {
         <StepOne
           handleChange={handleChange}
           handleStep={handleStep}
+          setValues={{
+            setCpf,
+          }}
+          cpf={cpf}
           values={values}
         />
         <StepTwo

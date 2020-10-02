@@ -14,7 +14,7 @@ import { ParamsProps } from './interface';
 
 const AuthorUpdate: React.FC = () => {
   const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
+  const [lastName, setlastName] = useState('');
 
   let { authorId } = useParams<ParamsProps>();
   const { addToast } = useToasts();
@@ -25,7 +25,7 @@ const AuthorUpdate: React.FC = () => {
       .get(`/autor/${authorId}`)
       .then(({ data }) => {
         setFirstname(data.nome);
-        setLastname(data.sobrenome);
+        setlastName(data.sobrenome);
       })
       .catch(({ response }) => {
         const { data } = response;
@@ -41,7 +41,7 @@ const AuthorUpdate: React.FC = () => {
       .put('/autor', {
         AutorId: authorId,
         Nome: firstname,
-        Sobrenome: lastname,
+        Sobrenome: lastName,
         UltimoUsuarioAlteracao: 1,
       })
       .then(({ status, data }) => {
@@ -108,10 +108,10 @@ const AuthorUpdate: React.FC = () => {
         />
         <FormField
           label="Sobrenome"
-          name="lastname"
-          value={lastname}
+          name="lastName"
+          value={lastName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setLastname(e.target.value)
+            setlastName(e.target.value)
           }
         />
       </Form>

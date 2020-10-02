@@ -4,6 +4,8 @@ import FormField from '../../../../components/FormField';
 import Button from '../../../../components/Button';
 import RadioButton from '../../../../components/RadioButton';
 
+import mask from '../../../../utils/mask';
+
 import {
   Container,
   Title,
@@ -17,9 +19,16 @@ import { StepOneProps } from './interface';
 
 const StepOne: React.FC<StepOneProps> = ({
   values,
+  setValues,
+  cpf,
   handleChange,
   handleStep,
 }) => {
+  function handleCep(e: React.ChangeEvent<HTMLInputElement>) {
+    const cpfOnMask = mask.cpf(e.target.value);
+    setValues.setCpf(cpfOnMask);
+  }
+
   return (
     <Container>
       <Title>Cadastre-se</Title>
@@ -42,12 +51,7 @@ const StepOne: React.FC<StepOneProps> = ({
           />
         </TwoColumns>
         <TwoColumns>
-          <FormField
-            label="CPF"
-            name="cpf"
-            value={values.cpf}
-            onChange={handleChange}
-          />
+          <FormField label="CPF" name="cpf" value={cpf} onChange={handleCep} />
           <FormField
             label="Nascimento"
             name="dateOfBirth"

@@ -35,6 +35,7 @@ export const Description = styled.p`
   color: ${(props) => props.theme.colors.tertiaryOpacity64};
   font-size: 1.64rem;
   margin: 0.8rem 0;
+  width: 100%;
 `;
 
 export const FooterBook = styled.div`
