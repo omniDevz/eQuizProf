@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiUsers } from 'react-icons/fi';
-import { MdYoutubeSearchedFor } from 'react-icons/md';
+import { FiSearch, FiUsers } from 'react-icons/fi';
+import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../../components/Button';
 import FormField from '../../../components/FormField';
@@ -9,11 +9,14 @@ import PageTeacher from '../../../components/PageTeacher';
 
 import useForm from '../../../hooks/useForm';
 
+import api from '../../../services/api';
+
 import {
   ButtonWrapper,
   Descriptions,
   Description,
   Information,
+  TwoColumns,
   ListClass,
   ItemClass,
   Title,
@@ -21,55 +24,46 @@ import {
   Name,
 } from './styled';
 
-const data = [
-  {
-    id: 1,
-    name: 'Nome da turma',
-    quizzes: 6,
-    students: 123,
-  },
-  {
-    id: 2,
-    name: 'Nome da turma',
-    quizzes: 6,
-    students: 123,
-  },
-  {
-    id: 3,
-    name: 'Nome da turma',
-    quizzes: 6,
-    students: 123,
-  },
-  {
-    id: 4,
-    name: 'Nome da turma',
-    quizzes: 6,
-    students: 123,
-  },
-  {
-    id: 5,
-    name: 'Nome da turma',
-    quizzes: 6,
-    students: 123,
-  },
-];
+import { ClassApiProps, ClassProps } from './interface';
+import util from '../../../utils/util';
 
 const Classes: React.FC = () => {
   const valuesInitials = {
     search: '',
   };
   const { handleChange, values } = useForm(valuesInitials);
-  const [listClasses, setListClasses] = useState(data);
+  const [listClasses, setListClasses] = useState<ClassProps[]>();
 
-  function applySearch() {
-    setListClasses(
-      data.filter((classes) => classes.name.includes(values.search))
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    api
+      .get('/turma')
+      .then(({ data }) => {
+        const classFromApi: ClassProps[] = data.map((c: ClassApiProps) => {
+          const newClass: ClassProps = {
+            classId: c.turmaId,
+            name: c.nome,
+            description: c.descricao,
+            quizzes: 0,
+            students: 0,
+          };
+
+          return newClass;
+        });
+
+        setListClasses(classFromApi);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [addToast]);
+
+  function handleFilterClasses(c: ClassProps): boolean {
+    return (
+      util.includesToLowerCase(c.name, values.search) ||
+      util.includesToLowerCase(c.description, values.search)
     );
-  }
-
-  function handleListClasses(e: React.ChangeEvent<HTMLInputElement>) {
-    handleChange(e);
-    applySearch();
   }
 
   return (
@@ -81,29 +75,38 @@ const Classes: React.FC = () => {
           label="Pesquisar"
           name="search"
           value={values.search}
-          onChange={handleListClasses}
-          stroke="0.5"
-          onClick={applySearch}
+          onChange={handleChange}
         >
-          <MdYoutubeSearchedFor />
+          <FiSearch />
         </FormField>
       </Form>
       <ListClass>
         {listClasses &&
-          listClasses.map(({ id, name, quizzes, students }) => (
-            <ItemClass key={id}>
-              <Descriptions>
-                <Name>{name}</Name>
-                <Information>
-                  <b>{quizzes}</b> quizzes realizados
-                </Information>
-                <Information>
-                  <b>{students}</b> alunos
-                </Information>
-              </Descriptions>
-              <FiUsers />
-            </ItemClass>
-          ))}
+          listClasses
+            .filter((className) => handleFilterClasses(className))
+            .map(({ classId, name, description, quizzes, students }) => (
+              <ItemClass key={classId}>
+                <Descriptions>
+                  <Name>{name}</Name>
+                  <Information>{description}</Information>
+                  <TwoColumns>
+                    <Information>
+                      <b>{quizzes}</b> quizzes realizados
+                    </Information>
+                    |
+                    <Information>
+                      <b>{students}</b> alunos
+                    </Information>
+                  </TwoColumns>
+                </Descriptions>
+                <Link
+                  to={`/teacher/classes/${classId}`}
+                  title="Detalhes da turma"
+                >
+                  <FiUsers />
+                </Link>
+              </ItemClass>
+            ))}
       </ListClass>
       <ButtonWrapper>
         <Button color="primary">

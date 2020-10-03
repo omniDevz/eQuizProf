@@ -48,8 +48,9 @@ export const ItemClass = styled.li`
   }
 `;
 
-export const Descriptions = styled.div`
-  align-items: flex-start;
+export const TwoColumns = styled.div`
+  flex-direction: row;
+  grid-gap: 1.2rem;
 `;
 
 export const Name = styled.h5`
@@ -62,6 +63,14 @@ export const Information = styled.p`
 
   b {
     font-size: 1.8rem;
+  }
+`;
+
+export const Descriptions = styled.div`
+  align-items: flex-start;
+
+  > ${Information}:nth-child(2) {
+    margin-bottom: 1.6rem;
   }
 `;
 

@@ -21,6 +21,10 @@ export const Name = styled.h5`
   font-size: 3.2rem;
 `;
 
+export const Description = styled.p`
+  font-size: 1.8rem;
+`;
+
 export const Code = styled.p`
   font: 600 2rem 'Ubuntu', sans-serif;
   padding-top: 0.8rem;
@@ -82,7 +86,9 @@ export const BirthDate = styled.p`
 `;
 
 export const Contact = styled.div`
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 1.2rem;
   padding: 0.8rem;
 `;
 

@@ -1,31 +1,121 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { useToasts } from 'react-toast-notifications';
 
 import PageTeacher from '../../../../../components/PageTeacher';
 import Button from '../../../../../components/Button';
 import FormField from '../../../../../components/FormField';
-import useForm from '../../../../../hooks/useForm';
 
-import { Form, ButtonsWrapper } from './styled';
+import api from '../../../../../services/api';
+
+import { Form, Fieldset, ButtonsWrapper } from './styled';
+
+import { ParamsProps } from './interface';
 
 const ClassesUpdate: React.FC = () => {
-  const valuesInitials = {
-    name: '',
-  };
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
-  const { handleChange, values } = useForm(valuesInitials);
+  const { idClass } = useParams<ParamsProps>();
+
+  const { addToast } = useToasts();
+  const history = useHistory();
+
+  useEffect(() => {
+    api
+      .get(`/turma/${idClass}`)
+      .then(({ data }) => {
+        setName(data.nome);
+        setDescription(data.descricao);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [idClass, addToast]);
+
+  function handleUpdateClass() {
+    api
+      .put('/turma', {
+        professorId: 1,
+        descricao: description,
+        turmaId: idClass,
+        nome: name,
+      })
+      .then(({ status, data }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Turma alterada com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+        history.push(`/teacher/classes/${idClass}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  function handleDeleteClass() {
+    api
+      .delete(`/turma/${idClass}`)
+      .then(({ status, data }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Turma removido com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+        history.push('/teacher/classes');
+      })
+      .catch(({ response }) => {
+        const { data } = response;
+        addToast(data, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      });
+  }
 
   return (
     <PageTeacher type="back" text="Alterar turma">
       <Form>
-        <FormField
-          label="Nome da turma"
-          name="name"
-          value={values.name}
-          onChange={handleChange}
-        />
+        <Fieldset>
+          <FormField
+            label="Nome da turma"
+            name="name"
+            value={name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
+          />
+          <FormField
+            label="Descrição"
+            name="description"
+            value={description}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setDescription(e.target.value)
+            }
+          />
+        </Fieldset>
         <ButtonsWrapper>
-          <Button color="primary">Cadastrar turma</Button>
-          <Button color="primary-outline">Exluir turma</Button>
+          <Button color="primary" onClick={handleUpdateClass}>
+            Salvar turma
+          </Button>
+          <Button color="primary-outline" onClick={handleDeleteClass}>
+            Excluir turma
+          </Button>
         </ButtonsWrapper>
       </Form>
     </PageTeacher>

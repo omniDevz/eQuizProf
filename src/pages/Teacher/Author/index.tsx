@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
-import { MdYoutubeSearchedFor } from 'react-icons/md';
+import { FiSearch } from 'react-icons/fi';
 
 import Button from '../../../components/Button';
 import FormField from '../../../components/FormField';
@@ -65,9 +65,8 @@ const Author: React.FC = () => {
           name="search"
           value={values.search}
           onChange={handleChange}
-          stroke="0.5"
         >
-          <MdYoutubeSearchedFor />
+          <FiSearch />
         </FormField>
       </Form>
       <List

@@ -1,5 +1,13 @@
 import { RouteComponentProps } from 'react-router';
 
 export interface ParamsProps {
-  idClass: numer;
+  idClass: string;
+}
+
+export interface StudentProps {
+  id: number;
+  name: string;
+  birthDate: string;
+  email: string;
+  fone: string;
 }

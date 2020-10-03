@@ -13,8 +13,8 @@ import { Form, ButtonsWrapper } from './styled';
 import { ParamsProps } from './interface';
 
 const AuthorUpdate: React.FC = () => {
-  const [firstName, setFirstname] = useState('');
-  const [lastName, setlastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   let { authorId } = useParams<ParamsProps>();
   const { addToast } = useToasts();
@@ -24,8 +24,8 @@ const AuthorUpdate: React.FC = () => {
     api
       .get(`/autor/${authorId}`)
       .then(({ data }) => {
-        setFirstname(data.nome);
-        setlastName(data.sobrenome);
+        setFirstName(data.nome);
+        setLastName(data.sobrenome);
       })
       .catch(({ response }) => {
         const { data } = response;
@@ -59,12 +59,8 @@ const AuthorUpdate: React.FC = () => {
         });
         history.push('/teacher/author');
       })
-      .catch(({ response }) => {
-        const { data } = response;
-        addToast(data, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -103,7 +99,7 @@ const AuthorUpdate: React.FC = () => {
           name="firstName"
           value={firstName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setFirstname(e.target.value)
+            setFirstName(e.target.value)
           }
         />
         <FormField
@@ -111,7 +107,7 @@ const AuthorUpdate: React.FC = () => {
           name="lastName"
           value={lastName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setlastName(e.target.value)
+            setLastName(e.target.value)
           }
         />
       </Form>
