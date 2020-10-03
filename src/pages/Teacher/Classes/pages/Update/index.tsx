@@ -15,6 +15,7 @@ import { ParamsProps } from './interface';
 const ClassesUpdate: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [code, setCode] = useState('');
 
   const { idClass } = useParams<ParamsProps>();
 
@@ -27,6 +28,7 @@ const ClassesUpdate: React.FC = () => {
       .then(({ data }) => {
         setName(data.nome);
         setDescription(data.descricao);
+        setCode(data.codigo);
       })
       .catch((err) => {
         console.error(err);
@@ -39,6 +41,7 @@ const ClassesUpdate: React.FC = () => {
         professorId: 1,
         descricao: description,
         turmaId: idClass,
+        codigo: code,
         nome: name,
       })
       .then(({ status, data }) => {
