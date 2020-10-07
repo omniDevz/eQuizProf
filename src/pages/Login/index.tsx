@@ -1,38 +1,28 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import api from '../../services/api';
 
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
 import PageDefault from '../../components/PageDefault';
 
 import useForm from '../../hooks/useForm';
+import { useAuth } from '../../contexts/auth';
 
 import iconRecovery from '../../assets/images/icons/recoveryPassword.svg';
 
 import { Title, Description, Form, FieldsWrapper, LinkLogin } from './styled';
 
-function Login() {
+const Login: React.FC = () => {
   const valuesInitials = {
     username: '',
     password: '',
   };
 
-  const history = useHistory();
   const { handleChange, values } = useForm(valuesInitials);
+  const { signIn } = useAuth();
 
   function loginTeacher() {
-    api
-      .post('/professor/validarLoginProfessor', {
-        usuario: values.username,
-        senha: values.password,
-      })
-      .then((response) => {
-        history.push('/teacher/home');
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    signIn(values.username, values.password);
   }
 
   return (
@@ -68,6 +58,6 @@ function Login() {
       </LinkLogin>
     </PageDefault>
   );
-}
+};
 
 export default Login;

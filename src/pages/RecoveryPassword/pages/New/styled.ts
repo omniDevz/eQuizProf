@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { FormFieldWrapper } from '../../components/FormField/styled';
+import { FormFieldWrapper } from '../../../../components/FormField/styled';
 
 export const Title = styled.h2`
   padding: 2rem 24px 8px;
@@ -20,6 +19,11 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  > button:last-child {
+    margin-top: 2.4rem;
+    margin-bottom: 16px;
+  }
 `;
 
 export const FieldsWrapper = styled.fieldset`
@@ -29,14 +33,7 @@ export const FieldsWrapper = styled.fieldset`
   flex-direction: column;
   align-items: center;
 
-  ${FormFieldWrapper} {
-    margin-bottom: 8px;
+  ${FormFieldWrapper}:first-of-type {
+    margin-bottom: 2.4rem;
   }
-`;
-
-export const LinkLogin = styled(Link)`
-  padding: 24px;
-  font-size: 1.8rem;
-  text-align: center;
-  width: 100%;
 `;

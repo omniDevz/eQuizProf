@@ -1,10 +1,10 @@
 import React from 'react';
 
-import FormField from '../../components/FormField';
-import Button from '../../components/Button';
-import PageDefault from '../../components/PageDefault';
+import FormField from '../../../../components/FormField';
+import Button from '../../../../components/Button';
+import PageDefault from '../../../../components/PageDefault';
 
-import useForm from '../../hooks/useForm';
+import useForm from '../../../../hooks/useForm';
 
 import { Title, Description, Form, FieldsWrapper } from './styled';
 

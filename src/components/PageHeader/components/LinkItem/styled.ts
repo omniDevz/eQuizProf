@@ -35,15 +35,15 @@ export const LinkItemContainer = styled.li`
   font-weight: 500;
   box-shadow: var(--box-shadow);
   text-shadow: var(--text-shadow);
-  margin-top: 2.4rem;
+  margin-top: 1.6rem;
 
   &:first-child {
     margin-top: 0;
   }
 
   a {
-    font-size: 2.4rem;
-    height: 4.6rem;
+    font-size: 2rem;
+    height: 4rem;
     padding: 8px 24px;
     border-radius: 32px;
     flex: 1;

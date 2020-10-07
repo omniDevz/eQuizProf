@@ -31,7 +31,7 @@ function RecoveryPassword() {
             value={values.recovery}
             onChange={handleChange}
           >
-            <Link to="/recoveryPasswordCode">
+            <Link to="/recoveryPassword/code">
               <FiSend />
             </Link>
           </FormField>
