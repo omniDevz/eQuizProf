@@ -11,27 +11,38 @@ import Author from './author.routes';
 import Book from './book.routes';
 import Quiz from './quiz.routes';
 
-const AuthRoutes: React.FC = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route path={`/`} exact component={Home} />
-      <Route path={`/home`}>
-        <Redirect to="/" />
-      </Route>
-      <Route path={`/login`}>
-        <Redirect to="/" />
-      </Route>
+const AuthRoutes: React.FC = () => {
+  const routes = [
+    {
+      path: '/',
+      component: Home,
+    },
+    {
+      path: '/account',
+      component: Account,
+    },
+    {
+      path: '/play',
+      component: Play,
+    },
+  ].concat(Author, Classes, Book, Quiz, Live);
 
-      <Route path={`/account`} component={Account} />
-      <Route path={`/play`} component={Play} />
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path={`/home`}>
+          <Redirect to="/" />
+        </Route>
+        <Route path={`/login`}>
+          <Redirect to="/" />
+        </Route>
 
-      <Quiz />
-      <Classes />
-      <Live />
-      <Author />
-      <Book />
-    </Switch>
-  </BrowserRouter>
-);
+        {routes.map((entry) => (
+          <Route exact {...entry} />
+        ))}
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default AuthRoutes;

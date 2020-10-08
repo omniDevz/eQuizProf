@@ -1,16 +1,20 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-
 import Update from '../pages/Teacher/Author/pages/Update';
 import New from '../pages/Teacher/Author/pages/New';
-import Authors from '../pages/Teacher/Author';
+import Author from '../pages/Teacher/Author';
 
-const AuthRoutes: React.FC = () => (
-  <Switch>
-    <Route path={`/author/update/:authorId`} component={Update} />
-    <Route path={`/author/new`} component={New} />
-    <Route path={`/author`} component={Authors} />
-  </Switch>
-);
+const AuthorRoutes = [
+  {
+    component: Update,
+    path: '/author/update/:authorId',
+  },
+  {
+    component: New,
+    path: '/author/new',
+  },
+  {
+    component: Author,
+    path: '/author',
+  },
+];
 
-export default AuthRoutes;
+export default AuthorRoutes;
