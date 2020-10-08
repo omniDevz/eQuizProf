@@ -80,7 +80,7 @@ const ClassesUpdate: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/teacher/classes');
+        history.push('/classes');
       })
       .catch(({ response }) => {
         const { data } = response;

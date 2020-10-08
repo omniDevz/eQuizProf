@@ -26,6 +26,7 @@ import {
 
 import { ClassApiProps, ClassProps } from './interface';
 import util from '../../../utils/util';
+import { useAuth } from '../../../contexts/auth';
 
 const Classes: React.FC = () => {
   const valuesInitials = {
@@ -34,19 +35,21 @@ const Classes: React.FC = () => {
   const { handleChange, values } = useForm(valuesInitials);
   const [listClasses, setListClasses] = useState<ClassProps[]>();
 
+  const { user } = useAuth();
+
   const { addToast } = useToasts();
 
   useEffect(() => {
     api
-      .get('/turma')
+      .get(`movAlunoTurma/professorId/${user?.teacherId}`)
       .then(({ data }) => {
         const classFromApi: ClassProps[] = data.map((c: ClassApiProps) => {
           const newClass: ClassProps = {
-            classId: c.turmaId,
-            name: c.nome,
-            description: c.descricao,
-            quizzes: 0,
-            students: 0,
+            classId: c.turma.turmaId,
+            name: c.turma.nome,
+            description: c.turma.descricao,
+            quizzes: c.quantidadeQuizRealizados,
+            students: c.quantidadeAlunos,
           };
 
           return newClass;
@@ -57,9 +60,11 @@ const Classes: React.FC = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [addToast]);
+  }, [user, addToast]);
 
   function handleFilterClasses(c: ClassProps): boolean {
+    if (setListClasses.length <= 0) return false;
+
     return (
       util.includesToLowerCase(c.name, values.search) ||
       util.includesToLowerCase(c.description, values.search)
@@ -99,10 +104,7 @@ const Classes: React.FC = () => {
                     </Information>
                   </TwoColumns>
                 </Descriptions>
-                <Link
-                  to={`/teacher/classes/${classId}`}
-                  title="Detalhes da turma"
-                >
+                <Link to={`/classes/${classId}`} title="Detalhes da turma">
                   <FiUsers />
                 </Link>
               </ItemClass>
@@ -110,7 +112,7 @@ const Classes: React.FC = () => {
       </ListClass>
       <ButtonWrapper>
         <Button color="primary">
-          <Link to="/teacher/classesNew">Nova Turma</Link>
+          <Link to="/classes/new">Nova Turma</Link>
         </Button>
       </ButtonWrapper>
     </PageTeacher>

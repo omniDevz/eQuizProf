@@ -47,7 +47,7 @@ const BookNew: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/teacher/book');
+        history.push('/book');
       })
       .catch((err) => {
         console.error(err);

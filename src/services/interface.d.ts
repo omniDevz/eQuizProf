@@ -78,6 +78,8 @@ export interface AddressProps {
 }
 
 export interface UserProps {
+  adminId: number;
+  teacherId: number;
   firstName: string;
   lastName: string;
   cpf: string;

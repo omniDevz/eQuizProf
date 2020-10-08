@@ -3,16 +3,11 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import * as auth from '../services/auth';
 import api from '../services/api';
+import storage from '../utils/storage';
 
 import { UserProps } from '../services/interface';
-
-interface IAuthContext {
-  signed: boolean;
-  user: UserProps | null;
-  signIn(username: string, password: string): Promise<void>;
-  signOut(): void;
-  loading: boolean;
-}
+import { IAuthContext } from './interface';
+import configApi from '../config/api';
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
@@ -23,8 +18,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function loadStoriedData() {
-      const storiedUser = localStorage.getItem('@EQuiz:user');
-      const storiedToken = localStorage.getItem('@EQuiz:token');
+      const storiedUser = storage.getUserJTW();
+      const storiedToken = storage.getTokenJTW();
 
       if (storiedUser && storiedToken) {
         api.defaults.headers.Authorization = `Bearer ${storiedToken}`;
@@ -36,6 +31,16 @@ export const AuthProvider: React.FC = ({ children }) => {
     loadStoriedData();
   }, []);
 
+  const notAuthorization = () => {
+    addToast('Sua sessão foi expirada, efetue o login novamente', {
+      appearance: 'success',
+      autoDismiss: true,
+    });
+
+    storage.removeValuesJTW();
+    window.location.href = '/login';
+  };
+
   async function signIn(username: string, password: string) {
     const user = await auth.signIn(username, password);
 
@@ -46,11 +51,9 @@ export const AuthProvider: React.FC = ({ children }) => {
       });
     } else {
       setUser(user);
+      configApi(user, notAuthorization);
+      storage.setValuesJTW(user);
 
-      api.defaults.headers.Authorization = `Bearer ${user.token}`;
-
-      localStorage.setItem('@EQuiz:user', JSON.stringify(user));
-      localStorage.setItem('@EQuiz:token', user.token);
       addToast('Logado com sucesso', {
         appearance: 'success',
         autoDismiss: true,
@@ -59,8 +62,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   function signOut() {
-    localStorage.removeItem('@EQuiz:user');
-    localStorage.removeItem('@EQuiz:token');
+    storage.removeValuesJTW();
     setUser(null);
   }
 

@@ -4,6 +4,10 @@ import Chart from 'chart.js';
 
 import PageTeacher from '../../../components/PageTeacher';
 
+import api from '../../../services/api';
+import { useAuth } from '../../../contexts/auth';
+import { useToasts } from 'react-toast-notifications';
+
 import {
   Container,
   Content,
@@ -14,7 +18,34 @@ import {
   Graph,
 } from './styled';
 
-function Home() {
+const Home: React.FC = () => {
+  const { user } = useAuth();
+
+  const { addToast } = useToasts();
+
+  // useEffect(() => {
+  //   api
+  //     .get(`/movAlunoTurma/professorId/${user?.teacherId}`)
+  //     .then(({ data }) => {
+  //       const classFromApi: ClassProps[] = data.map((c: ClassApiProps) => {
+  //         const newClass: ClassProps = {
+  //           classId: c.turmaId,
+  //           name: c.nome,
+  //           description: c.descricao,
+  //           quizzes: 0,
+  //           students: 0,
+  //         };
+
+  //         return newClass;
+  //       });
+
+  //       setListClasses(classFromApi);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, [addToast]);
+
   useEffect(() => {
     let labelsChart = [];
 
@@ -33,7 +64,7 @@ function Home() {
         datasets: [
           {
             label: 'Média de Acertos',
-            data: [6, 7, 2, 3, 5, 2, 8, 4, 2, 5],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
             pointBackgroundColor: '#E01916',
             backgroundColor: 'rgba(242, 49, 49, .24)',
@@ -90,7 +121,7 @@ function Home() {
       <Container>
         <Content>
           <Number>0,000</Number>
-          <Description>Alunos cadastrados</Description>
+          <Description>Alunos nas turmas</Description>
         </Content>
         <FiUsers />
       </Container>
@@ -101,6 +132,6 @@ function Home() {
       </ContainerRow>
     </PageTeacher>
   );
-}
+};
 
 export default Home;

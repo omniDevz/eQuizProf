@@ -8,6 +8,18 @@ const util = {
   includesToLowerCase(valueOne: string, valueTwo: string): boolean {
     return valueOne.toLowerCase().includes(valueTwo.toLowerCase());
   },
+  getFormatDate(value: string) {
+    const date = new Date(util.removeHoursDateTimeApi(value));
+
+    const day = `0${date.getDate()}`.slice(-2);
+    const month = `0${date.getMonth() + 1}`.slice(-2);
+
+    return `${day}/${month}/${date.getFullYear()}`;
+  },
+  removeUserAndTokenFrom() {
+    localStorage.removeItem('@EQuiz:user');
+    localStorage.removeItem('@EQuiz:token');
+  },
 };
 
 export default util;

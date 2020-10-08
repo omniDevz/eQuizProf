@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Quizzes from '../pages/Teacher/Quiz';
 import New from '../pages/Teacher/Quiz/pages/New';
@@ -11,7 +11,7 @@ import SlideNew from '../pages/Teacher/Quiz/pages/Slide/New';
 import SlideUpdate from '../pages/Teacher/Quiz/pages/Slide/Update';
 
 const AuthRoutes: React.FC = () => (
-  <>
+  <Switch>
     <Route path={`/quiz/update/:quizId`} component={Update} />
     <Route path={`/quiz/new`} component={New} />
     <Route path={`/quiz/:quizId/slide/new`} component={SlideNew} />
@@ -20,7 +20,7 @@ const AuthRoutes: React.FC = () => (
     <Route path={`/quiz/:quizId/question/update`} component={QuestionUpdate} />
     <Route path={`/quiz/:quizId`} component={Detail} />
     <Route path={`/quiz`} exact component={Quizzes} />
-  </>
+  </Switch>
 );
 
 export default AuthRoutes;

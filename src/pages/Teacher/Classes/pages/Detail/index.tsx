@@ -27,34 +27,10 @@ import {
   Info,
 } from './styled';
 
-import { ClassApiProps, ClassProps } from '../../interface';
-import { ParamsProps, StudentProps } from './interface';
+import { ClassProps } from '../../interface';
+import { ParamsProps, StudentProps, IStudent } from './interface';
 import { useToasts } from 'react-toast-notifications';
 import util from '../../../../../utils/util';
-
-const data: StudentProps[] = [
-  {
-    id: 1,
-    name: 'Nome do aluno',
-    birthDate: '18/09/1999',
-    email: 'nome@gmail.com',
-    fone: '+55 (16) 91111-1111',
-  },
-  {
-    id: 2,
-    name: 'tes',
-    birthDate: '18/09/1999',
-    email: 'nome@gmail.com',
-    fone: '+55 (16) 91111-1111',
-  },
-  {
-    id: 3,
-    name: 'Nome do aluno',
-    birthDate: '18/09/1999',
-    email: 'nome@gmail.com',
-    fone: '+55 (16) 91111-1111',
-  },
-];
 
 const ClassesUpdate: React.FC = () => {
   const valuesInitials = {
@@ -62,7 +38,7 @@ const ClassesUpdate: React.FC = () => {
   };
 
   const { handleChange, values } = useForm(valuesInitials);
-  const [listStudents, setListStudents] = useState(data);
+  const [listStudents, setListStudents] = useState<StudentProps[]>([]);
   const [classDetail, setClassDetail] = useState<ClassProps>({
     description: '',
     name: '',
@@ -75,27 +51,88 @@ const ClassesUpdate: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/turma/${idClass}`)
+      .get(`/movAlunoTurma/turmaId/${idClass}`)
       .then(({ data }) => {
         const classFromApi: ClassProps = {
-          name: data.nome,
-          description: data.descricao,
-          code: data.codigo,
-          quizzes: 0,
-          students: 0,
+          name: data.turma.nome,
+          description: data.turma.descricao,
+          code: data.turma.codigo,
         };
 
         setClassDetail(classFromApi);
+
+        const studentsFromApi: StudentProps[] = !!data.alunos
+          ? data.alunos.map((student: IStudent) => {
+              const newStudent: StudentProps = {
+                studentId: student.alunoId,
+                person: {
+                  firstName: student.pessoa.nome,
+                  lastName: student.pessoa.sobrenome,
+                  dateOfBirth: util.getFormatDate(
+                    student.pessoa.dataNascimento
+                  ),
+                  email: student.pessoa.email,
+                  phone: !!student.pessoa.telefone
+                    ? {
+                        countryCode: student.pessoa.telefone.codigoDiscagem,
+                        ddd: student.pessoa.telefone.ddd,
+                        number: student.pessoa.telefone.numero,
+                        typeFone: student.pessoa.telefone.tipoTelefone,
+                      }
+                    : null,
+                },
+              };
+
+              return newStudent;
+            })
+          : [];
+
+        setListStudents(studentsFromApi);
       })
       .catch((err) => {
         console.error(err);
       });
   }, [idClass, addToast]);
 
+  function handleRemoveStudentFromClass(studentId: string) {
+    api
+      .delete(`movAlunoTurma/TurmaId=${idClass}&AlunoId=${studentId}`)
+      .then(({ status, data }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        const newListStudents = listStudents.filter(
+          (student) => student.studentId !== studentId
+        );
+
+        setListStudents(newListStudents);
+
+        addToast('Aluno removido da turma com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      });
+  }
+
   function handleListStudents(student: StudentProps) {
+    if (listStudents.length <= 0) return false;
+
     return (
-      util.includesToLowerCase(student.name, values.search) ||
-      util.includesToLowerCase(student.email, values.search)
+      util.includesToLowerCase(student.person.firstName, values.search) ||
+      util.includesToLowerCase(student.person.lastName, values.search) ||
+      util.includesToLowerCase(student.person.email, values.search)
     );
   }
 
@@ -107,10 +144,7 @@ const ClassesUpdate: React.FC = () => {
           <Description>{classDetail.description}</Description>
           <Code>#{classDetail.code}</Code>
         </Details>
-        <Link
-          to={`/teacher/classes/update/${idClass}`}
-          title="Alterar dados da turma"
-        >
+        <Link to={`/classes/update/${idClass}`} title="Alterar dados da turma">
           <FiEdit />
         </Link>
       </Header>
@@ -130,19 +164,33 @@ const ClassesUpdate: React.FC = () => {
         {listStudents &&
           listStudents
             .filter((student) => handleListStudents(student))
-            .map((Student) => (
-              <StudentItem key={Student.id}>
+            .map((Student: StudentProps) => (
+              <StudentItem key={Student.studentId}>
                 <HeaderStudent>
                   <FiUser />
                   <Info>
-                    <NameStudent>{Student.name}</NameStudent>
-                    <BirthDate>{Student.birthDate}</BirthDate>
+                    <NameStudent>
+                      {Student.person.firstName} {Student.person.lastName}
+                    </NameStudent>
+                    <BirthDate>{Student.person.dateOfBirth}</BirthDate>
                   </Info>
-                  <FiTrash />
+                  <FiTrash
+                    onClick={() =>
+                      handleRemoveStudentFromClass(Student.studentId)
+                    }
+                  />
                 </HeaderStudent>
                 <Contact>
-                  <ContactItem>{Student.email}</ContactItem>|
-                  <ContactItem>{Student.fone}</ContactItem>
+                  <ContactItem>{Student.person.email}</ContactItem>
+                  {!!Student.person.phone && (
+                    <>
+                      |{' '}
+                      <ContactItem>
+                        +{Student.person.phone.countryCode} (0
+                        {Student.person.phone.ddd}) Student.person.phone.number
+                      </ContactItem>
+                    </>
+                  )}
                 </Contact>
               </StudentItem>
             ))}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
@@ -14,8 +14,8 @@ import { Title, Description, Form, FieldsWrapper, LinkLogin } from './styled';
 
 const Login: React.FC = () => {
   const valuesInitials = {
-    username: '',
-    password: '',
+    username: 'leo',
+    password: '123',
   };
 
   const { handleChange, values } = useForm(valuesInitials);

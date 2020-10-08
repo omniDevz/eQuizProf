@@ -7,6 +7,7 @@ import logoImg from '../../../../assets/images/FavIcon.svg';
 import { HeaderContainer, Logo, Button, Text } from './styled';
 
 import { HeaderProps } from './interface';
+import { useAuth } from '../../../../contexts/auth';
 
 const Header: React.FC<HeaderProps> = ({
   isMenuIcon,
@@ -18,6 +19,8 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const hasText = Boolean(text);
   const history = useHistory();
+
+  const { signOut } = useAuth();
 
   function handleBackNavigation() {
     history.goBack();
@@ -31,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({
             <FiArrowLeft />
           </Button>
         ) : type === 'exit' ? (
-          <Button>
+          <Button onClick={signOut}>
             <FiLogOut />
           </Button>
         ) : (
