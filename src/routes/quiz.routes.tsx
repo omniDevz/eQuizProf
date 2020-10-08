@@ -19,7 +19,7 @@ const AuthRoutes: React.FC = () => (
     <Route path={`/quiz/:quizId/question/new`} component={QuestionNew} />
     <Route path={`/quiz/:quizId/question/update`} component={QuestionUpdate} />
     <Route path={`/quiz/:quizId`} component={Detail} />
-    <Route path={`/quiz`} exact component={Quizzes} />
+    <Route path={`/quiz`} component={Quizzes} />
   </Switch>
 );
 

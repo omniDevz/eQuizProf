@@ -59,6 +59,10 @@ const Classes: React.FC = () => {
       })
       .catch((err) => {
         console.error(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
       });
   }, [user, addToast]);
 

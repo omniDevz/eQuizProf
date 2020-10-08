@@ -83,8 +83,7 @@ const ClassesUpdate: React.FC = () => {
         history.push('/classes');
       })
       .catch(({ response }) => {
-        const { data } = response;
-        addToast(data, {
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
           appearance: 'error',
           autoDismiss: true,
         });

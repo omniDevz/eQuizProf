@@ -260,6 +260,11 @@ function NewRegister() {
   }
 
   function addNewTeacher() {
+    addToast('Solicitação enviada ao servidor', {
+      appearance: 'warning',
+      autoDismiss: true,
+    });
+
     api
       .post('professor', {
         administrador: {
@@ -304,11 +309,15 @@ function NewRegister() {
         setTimeout(() => {
           setRegisterConfirm(false);
 
-          history.push('/teacher/home');
-        }, 3600);
+          history.push('/login');
+        }, 3000);
       })
       .catch((err) => {
         console.error(err);
+        addToast('Houve um erro inesperado, tente novamente mais tarde', {
+          appearance: 'warning',
+          autoDismiss: true,
+        });
       });
   }
 

@@ -25,11 +25,11 @@ const AuthRoutes: React.FC = () => (
       <Route path={`/account`} component={Account} />
       <Route path={`/play`} component={Play} />
 
+      <Quiz />
       <Classes />
       <Live />
       <Author />
       <Book />
-      <Quiz />
     </Switch>
   </BrowserRouter>
 );

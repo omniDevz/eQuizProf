@@ -26,6 +26,7 @@ export const Name = styled(Text)`
 export const Code = styled(Text)`
   grid-area: code;
   font-size: 2.4rem;
+  color: ${(props) => props.theme.colors.tertiary};
 `;
 
 export const IconEdit = styled(FiEdit)`

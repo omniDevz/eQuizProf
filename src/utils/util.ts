@@ -8,6 +8,12 @@ const util = {
   includesToLowerCase(valueOne: string, valueTwo: string): boolean {
     return valueOne.toLowerCase().includes(valueTwo.toLowerCase());
   },
+  includesToArray(values: string[], compare: string): boolean {
+    for (const value of values) {
+      if (util.includesToLowerCase(value, compare)) return true;
+    }
+    return false;
+  },
   getFormatDate(value: string) {
     const date = new Date(util.removeHoursDateTimeApi(value));
 

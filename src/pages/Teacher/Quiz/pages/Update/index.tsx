@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Button from '../../../../../components/Button';
-import CheckButton from '../../../../../components/CheckButton';
 import FormField from '../../../../../components/FormField';
 import PageTeacher from '../../../../../components/PageTeacher';
 
@@ -9,7 +8,7 @@ import { Form, ButtonsWrapper } from './styled';
 
 const QuizUpdate: React.FC = () => {
   const [name, setName] = useState('');
-  const [onlyStudentsRegister, setOnlyStudentsRegister] = useState(false);
+  const [description, setDescription] = useState('');
 
   return (
     <PageTeacher type="back" text="Alterar quiz">
@@ -22,11 +21,13 @@ const QuizUpdate: React.FC = () => {
             setName(e.target.value);
           }}
         />
-        <CheckButton
-          label="Apenas alunos cadastrados"
-          name="onlyStudentsRegister"
-          value={onlyStudentsRegister}
-          setValue={setOnlyStudentsRegister}
+        <FormField
+          label="Descrição"
+          name="description"
+          value={description}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setDescription(e.target.value);
+          }}
         />
       </Form>
       <ButtonsWrapper>
