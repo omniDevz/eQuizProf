@@ -33,6 +33,7 @@ function NewRegister() {
     number: '',
     username: '',
     password: '',
+    passwordConfirm: '',
   };
   const [cpf, setCpf] = useState<string>('');
   const [cep, setCep] = useState<string>('');
@@ -44,7 +45,7 @@ function NewRegister() {
   const [numberAddress, setNumberAddress] = useState<string>('');
 
   const history = useHistory();
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(4);
   const [registerConfirm, setRegisterConfirm] = useState<Boolean>(false);
 
   const { handleChange, values } = useForm(valuesInitials);
@@ -223,6 +224,22 @@ function NewRegister() {
         }
         if (values.password === '') {
           addToast('Preencha a senha do usuário', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          document.getElementById('id_password')?.focus();
+          return false;
+        }
+        if (values.passwordConfirm === '') {
+          addToast('Preencha a confirmação da senha do usuário', {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          document.getElementById('id_passwordConfirm')?.focus();
+          return false;
+        }
+        if (values.passwordConfirm === values.password) {
+          addToast('A senha e a sua confirmação deve ser iguais', {
             appearance: 'warning',
             autoDismiss: true,
           });

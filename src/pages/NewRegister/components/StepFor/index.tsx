@@ -4,12 +4,12 @@ import FormField from '../../../../components/FormField';
 import Button from '../../../../components/Button';
 
 import {
-  Container,
-  Title,
-  Description,
-  Form,
-  TwoColumns,
   ButtonsWrapper,
+  Description,
+  Container,
+  Fields,
+  Title,
+  Form,
 } from './styled';
 
 import { StepForProps } from './interface';
@@ -24,7 +24,7 @@ const StepFor: React.FC<StepForProps> = ({
       <Title>Dados de acesso</Title>
       <Description>Usuário e senha para o acesso</Description>
       <Form>
-        <TwoColumns>
+        <Fields>
           <FormField
             label="Usuário"
             name="username"
@@ -38,7 +38,14 @@ const StepFor: React.FC<StepForProps> = ({
             onChange={handleChange}
             type="password"
           />
-        </TwoColumns>
+          <FormField
+            label="Confirme a senha"
+            name="passwordConfirma"
+            value={values.passwordConfirm}
+            onChange={handleChange}
+            type="password"
+          />
+        </Fields>
 
         <ButtonsWrapper>
           <Button onClick={() => handleStep(4, 5)} color="primary">
