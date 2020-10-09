@@ -2,7 +2,7 @@ export interface AuthorProps {
   authorId: number;
   firstName: string;
   lastName: string;
-  lastUserUpdate: number;
+  lastUserUpdate?: number;
 }
 
 export interface AuthorApiProps {

@@ -13,12 +13,15 @@ import api from '../../../../../services/api';
 import { ParamsProps } from './interface';
 
 import { Form, ButtonsWrapper } from './styled';
+import { AuthorApiProps, AuthorProps } from '../../../Author/interface';
 
 const BookUpdate: React.FC = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [link, setLink] = useState('');
   const [datePublication, setDatePublication] = useState('');
+  const [autorId, setAutorId] = useState(0);
+  const [listAuthors, setListAuthors] = useState<AuthorProps[]>([]);
 
   const { addToast } = useToasts();
 
@@ -39,6 +42,29 @@ const BookUpdate: React.FC = () => {
         console.error(err);
       });
   }, [addToast, bookId]);
+
+  useEffect(() => {
+    api
+      .get('/autor')
+      .then(({ data }) => {
+        const authorFromApi: AuthorProps[] = data.map(
+          (author: AuthorApiProps) => {
+            const newAuthor: AuthorProps = {
+              authorId: author.autorId,
+              firstName: author.nome,
+              lastName: author.sobrenome,
+            };
+
+            return newAuthor;
+          }
+        );
+
+        setListAuthors(authorFromApi);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [addToast]);
 
   function handleUpdateBook() {
     api
@@ -90,7 +116,7 @@ const BookUpdate: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/teacher/book');
+        history.push('/book');
       })
       .catch((err) => {
         console.error(err);

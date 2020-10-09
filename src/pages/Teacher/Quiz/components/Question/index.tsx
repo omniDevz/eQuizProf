@@ -12,23 +12,26 @@ import {
   Timer,
 } from './styled';
 
-const Question: React.FC = () => {
+import { IQuestion } from './interface';
+
+const Question: React.FC<IQuestion> = ({ question }) => {
   return (
     <QuestionWrapper>
       <Number>
-        <sup>1</sup>/<sub>10</sub>
+        <sup>{question?.orderByQuiz}</sup>/<sub>{question?.count}</sub>
       </Number>
-      <Timer>60</Timer>
-      <QuestionText>Pergunta do quiz</QuestionText>
+      <Timer>{question?.timeSeconds}s</Timer>
+      <QuestionText>{question?.text}</QuestionText>
       <ResponseWrapper>
-        <Response>Resposta 01</Response>
-        <Response>Resposta 02</Response>
-        <Response>Resposta 03</Response>
-        <Response>Resposta 04</Response>
+        {question?.alternativeQuiz.map((alternative) => (
+          <Response key={alternative.alternativeQuizId}>
+            {alternative.letterAlternative}: {alternative.text}
+          </Response>
+        ))}
       </ResponseWrapper>
       <ActionsWrapper>
         <Link
-          to={`/teacher/quiz/${1}/question/update`}
+          to={`/quiz/${question?.questionQuizId}/question/update`}
           title="Alterar dados da pergunta"
         >
           <IconEdit />

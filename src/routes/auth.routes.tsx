@@ -38,7 +38,7 @@ const AuthRoutes: React.FC = () => {
         </Route>
 
         {routes.map((entry) => (
-          <Route exact {...entry} />
+          <Route key={entry.path} exact {...entry} />
         ))}
       </Switch>
     </BrowserRouter>

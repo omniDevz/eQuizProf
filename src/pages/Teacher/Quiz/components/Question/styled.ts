@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 
-import logoSVG from '../../../../../assets/images/icons/iconTime.svg';
-
 export const QuestionWrapper = styled.div`
   background: ${(props) => props.theme.colors.box};
   box-shadow: var(--box-shadow);
@@ -36,14 +34,9 @@ export const Number = styled(TextHeader)`
 
 export const Timer = styled(TextHeader)`
   grid-area: timer;
-  padding: 1rem;
-  padding-right: 1.12rem;
-  padding-bottom: 0.8rem;
+  padding: 1.9rem;
+  padding-right: 1rem;
   text-align: right;
-  background: url(${logoSVG});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center right;
 `;
 
 export const QuestionText = styled(TextHeader)`

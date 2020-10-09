@@ -20,6 +20,7 @@ export const HeaderItem = styled.div`
   grid-template-columns: 1fr 3.2rem;
   grid-gap: 1.6rem;
   align-items: flex-start;
+  width: 100%;
 
   svg {
     width: 3.2rem;

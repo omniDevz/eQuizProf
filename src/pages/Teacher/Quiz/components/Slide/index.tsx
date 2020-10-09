@@ -11,17 +11,18 @@ import {
   Timer,
 } from './styled';
 
-const Slide: React.FC = () => {
+import { ISlide } from './interface';
+
+const Slide: React.FC<ISlide> = ({ slide }) => {
   return (
     <SlideWrapper>
       <Number>
-        <sup>1</sup>/<sub>10</sub>
+        <sup>{slide?.orderByQuiz}</sup>/<sub>{slide?.count}</sub>
       </Number>
-      <Timer>60</Timer>
-      <SlideText>Pergunta do quiz</SlideText>
+      <SlideText>{slide?.content}</SlideText>
       <ActionsWrapper>
         <Link
-          to={`/teacher/quiz/${1}/slide/update`}
+          to={`/quiz/${slide?.slideQuizId}/slide/update`}
           title="Alterar dados do slide"
         >
           <IconEdit />

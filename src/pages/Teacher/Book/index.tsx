@@ -69,11 +69,9 @@ const Book: React.FC = () => {
   }, [addToast]);
 
   function filterSearchOnBooks(book: BookProps) {
-    return (
-      util.includesToLowerCase(book.title, values.search) ||
-      util.includesToLowerCase(book.subtitle, values.search) ||
-      util.includesToLowerCase(book.author.firstName, values.search) ||
-      util.includesToLowerCase(book.author.lastName, values.search)
+    return util.includesToArray(
+      [book.title, book.subtitle, book.author.firstName, book.author.lastName],
+      values.search
     );
   }
 
@@ -111,7 +109,7 @@ const Book: React.FC = () => {
                         <FiExternalLink />
                       </a>
                       <Link
-                        to={`/teacher/book/update/${book.bookId}`}
+                        to={`/book/update/${book.bookId}`}
                         title="Editar dados de livros"
                       >
                         <FiEdit />
