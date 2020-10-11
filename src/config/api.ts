@@ -4,8 +4,6 @@ import storage from '../utils/storage';
 import { UserProps } from '../services/interface';
 
 const configApi = (user: UserProps, notAuthorization: () => void) => {
-  api.defaults.headers.Authorization = `Bearer ${user.token}`;
-
   api.interceptors.response.use(
     (response) => {
       return response;

@@ -51,6 +51,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       });
     } else {
       setUser(user);
+      api.defaults.headers.Authorization = `Bearer ${user.token}`;
       configApi(user, notAuthorization);
       storage.setValuesJTW(user);
 

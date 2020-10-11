@@ -1,11 +1,6 @@
 import api from './api';
 import { IResponse, PhoneProps, UserProps, AddressProps } from './interface';
 
-interface ILogin {
-  username: string;
-  password: string;
-}
-
 export async function signIn(
   username: string,
   password: string
