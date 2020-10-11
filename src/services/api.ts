@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { MdDesktopWindows } from 'react-icons/md';
+import { useHistory } from 'react-router';
 
 import config from '../config';
-import { useAuth } from '../contexts/auth';
 import storage from '../utils/storage';
-import { UserProps } from './interface';
+import util from '../utils/util';
 
 export const apiViaCep = axios.create({
   baseURL: config.URL_API_VIACEP,
@@ -21,16 +22,9 @@ const api = axios.create({
   baseURL: config.URL_BACKEND,
 });
 
-const reloadLoginByStorage = () => {
-  const storageUser = storage.getUserJTW() || '';
-  const storageToken = storage.getTokenJTW();
-  if (!storageUser || !storageToken) {
-  }
-
-  const user: UserProps = JSON.parse(storageUser);
-
-  const { signIn } = useAuth();
-  signIn(user.username, '');
+const tokenExpired = () => {
+  window.location.href = '/login?tokenExpired=true';
+  storage.removeValuesJTW();
 };
 
 api.interceptors.response.use(
@@ -39,6 +33,7 @@ api.interceptors.response.use(
   },
   function (error) {
     if (401 === error.response.status) {
+      tokenExpired();
     } else {
       return Promise.reject(error);
     }
@@ -51,6 +46,7 @@ api.interceptors.request.use(
       const userTokenExpiration = storage.getDateExpirationJTW();
       const today = new Date();
       if (today > userTokenExpiration) {
+        tokenExpired();
       }
     }
 

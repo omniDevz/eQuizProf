@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
@@ -11,6 +11,8 @@ import { useAuth } from '../../contexts/auth';
 import iconRecovery from '../../assets/images/icons/recoveryPassword.svg';
 
 import { Title, Description, Form, FieldsWrapper, LinkLogin } from './styled';
+import { ILoginParams } from './interface';
+import { useToasts } from 'react-toast-notifications';
 
 const Login: React.FC = () => {
   const valuesInitials = {
@@ -20,6 +22,20 @@ const Login: React.FC = () => {
 
   const { handleChange, values } = useForm(valuesInitials);
   const { signIn } = useAuth();
+
+  const { tokenExpired } = useParams<ILoginParams>();
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    if (!!tokenExpired) return;
+
+    addToast('Sua autenticação expirou, efetue o login novamente', {
+      appearance: 'info',
+      autoDismiss: true,
+    });
+
+    document.getElementById('id_username')?.focus();
+  }, [tokenExpired]);
 
   function loginTeacher() {
     signIn(values.username, values.password);
