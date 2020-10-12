@@ -18,21 +18,24 @@ export const SelectStyled = styled(ReactSelect)`
     border: 2.5px solid ${(props) => props.theme.colors.primary};
     border-radius: 3.2rem;
     box-shadow: var(--box-shadow);
-    padding: 0 2.4rem;
+    padding: 0 1.4rem;
 
     .react-select__value-container {
-      font: 600 1.8rem 'Roboto', sans-serif;
+      font: 500 1.8rem 'Roboto', sans-serif;
       color: ${(props) => props.theme.colors.tertiaryOpacity64};
+      padding: 0;
 
       .react-select__input,
       .react-select__single-value {
-        font: 600 1.8rem 'Roboto', sans-serif;
+        font: 500 1.8rem 'Roboto', sans-serif;
         color: ${(props) => props.theme.colors.tertiary};
+        padding: 0;
       }
 
       .react-select__placeholder {
-        font: 600 1.8rem 'Roboto', sans-serif;
+        font: 500 1.8rem 'Roboto', sans-serif;
         color: ${(props) => props.theme.colors.tertiaryOpacity64};
+        padding: 0;
       }
     }
 
@@ -111,11 +114,11 @@ export const Text = styled.label`
   align-items: center;
 
   transform-origin: 0% 0%;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
 
-  padding: 1.4rem 2.6rem;
+  padding: 0 1.4rem;
   border-radius: 1.2rem;
 
   transition: 240ms ease-in-out;
@@ -139,6 +142,7 @@ export const Text = styled.label`
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
   position: relative;
+  width: 100%;
 
   ${({ hasValue }) =>
     hasValue &&

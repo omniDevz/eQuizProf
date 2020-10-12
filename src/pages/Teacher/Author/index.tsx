@@ -75,7 +75,7 @@ const Author: React.FC = () => {
       <ButtonWrapper>
         <Button
           color="primary-outline"
-          to="/teacher/author/new"
+          to="/author/new"
           title="Cadastrar autor"
         >
           Cadastrar autor

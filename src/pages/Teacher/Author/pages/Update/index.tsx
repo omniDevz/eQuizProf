@@ -80,7 +80,7 @@ const AuthorUpdate: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/teacher/author');
+        history.push('/author');
       })
       .catch(({ response }) => {
         const { data } = response;

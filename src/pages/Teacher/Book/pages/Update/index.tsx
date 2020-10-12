@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
 
+import Select from '../../../../../components/Select';
 import Button from '../../../../../components/Button';
 import FormField from '../../../../../components/FormField';
 import PageTeacher from '../../../../../components/PageTeacher';
@@ -13,21 +14,53 @@ import api from '../../../../../services/api';
 import { ParamsProps } from './interface';
 
 import { Form, ButtonsWrapper } from './styled';
-import { AuthorApiProps, AuthorProps } from '../../../Author/interface';
+
+import { AuthorApiProps } from '../../../Author/interface';
+import { ISelectOptions } from '../../../../../components/Select/interface';
 
 const BookUpdate: React.FC = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [link, setLink] = useState('');
   const [datePublication, setDatePublication] = useState('');
-  const [autorId, setAutorId] = useState(0);
-  const [listAuthors, setListAuthors] = useState<AuthorProps[]>([]);
+  const [authorId, setAuthorId] = useState(0);
+  const [listAuthorsOptions, setListAuthorsOptions] = useState<
+    ISelectOptions[]
+  >([]);
 
+  const history = useHistory();
   const { addToast } = useToasts();
 
   let { bookId } = useParams<ParamsProps>();
 
-  const history = useHistory();
+  useEffect(() => {
+    api
+      .get('/autor')
+      .then(({ data }) => {
+        const authorFromApi: ISelectOptions[] = data.map(
+          (author: AuthorApiProps) => {
+            const newAuthor: ISelectOptions = {
+              value: String(author.autorId),
+              label: `${author.nome} ${author.sobrenome}`,
+            };
+
+            return newAuthor;
+          }
+        );
+
+        setListAuthorsOptions(authorFromApi);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado na busca pelos autores, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }, [addToast]);
 
   useEffect(() => {
     api
@@ -36,35 +69,20 @@ const BookUpdate: React.FC = () => {
         setTitle(data.titulo);
         setSubtitle(data.subtitulo);
         setLink(data.linkLivro);
+        setAuthorId(data.autor.autorId);
         setDatePublication(util.removeHoursDateTimeApi(data.dataPublicacao));
       })
       .catch((err) => {
         console.error(err);
-      });
-  }, [addToast, bookId]);
-
-  useEffect(() => {
-    api
-      .get('/autor')
-      .then(({ data }) => {
-        const authorFromApi: AuthorProps[] = data.map(
-          (author: AuthorApiProps) => {
-            const newAuthor: AuthorProps = {
-              authorId: author.autorId,
-              firstName: author.nome,
-              lastName: author.sobrenome,
-            };
-
-            return newAuthor;
+        addToast(
+          'Houve algum erro inesperado na busca pelos livros, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
           }
         );
-
-        setListAuthors(authorFromApi);
-      })
-      .catch((err) => {
-        console.error(err);
       });
-  }, [addToast]);
+  }, [addToast, bookId]);
 
   function handleUpdateBook() {
     api
@@ -73,7 +91,7 @@ const BookUpdate: React.FC = () => {
         Titulo: title,
         Subtitulo: subtitle,
         LinkLivro: link,
-        AutorId: 3,
+        AutorId: authorId,
         DataPublicacao: datePublication,
       })
       .then(({ status, data }) => {
@@ -89,11 +107,11 @@ const BookUpdate: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/teacher/book');
+        history.push('/book');
       })
-      .catch(({ response }) => {
-        const { data } = response;
-        addToast(data, {
+      .catch((err) => {
+        console.error(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
           appearance: 'error',
           autoDismiss: true,
         });
@@ -120,6 +138,10 @@ const BookUpdate: React.FC = () => {
       })
       .catch((err) => {
         console.error(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
       });
   }
 
@@ -151,14 +173,21 @@ const BookUpdate: React.FC = () => {
           }}
           type="url"
         />
-        <FormField
+        <Select
+          name="authorId"
+          label="Autor"
+          onChange={(e: any) => setAuthorId(e.value)}
+          value={String(authorId)}
+          options={listAuthorsOptions}
+        />
+        {/* <FormField
           label="Autor"
           name="author"
           value={'4'}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTitle(e.target.value);
           }}
-        />
+        /> */}
         <FormField
           label="Data de publicação"
           name="datePublication"

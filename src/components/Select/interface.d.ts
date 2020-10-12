@@ -1,8 +1,10 @@
+export interface ISelectOptions {
+  value: string;
+  label: string;
+}
+
 export interface SelectProps {
-  options: {
-    value: string;
-    label: string;
-  }[];
+  options: ISelectOptions[];
   label: string;
   name: string;
   value: string;

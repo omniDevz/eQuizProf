@@ -13,7 +13,7 @@ const List: React.FC<ListProps> = ({ list }) => {
         list.map(({ authorId, lastName, firstName }) => (
           <ItemAuthor key={authorId}>
             <Link
-              to={`/teacher/author/update/${authorId}`}
+              to={`/author/update/${authorId}`}
               title={`Editar dados de ${firstName} ${lastName}`}
             >
               <HeaderAuthor>

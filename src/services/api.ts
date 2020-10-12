@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { MdDesktopWindows } from 'react-icons/md';
-import { useHistory } from 'react-router';
 
 import config from '../config';
 import storage from '../utils/storage';
-import util from '../utils/util';
 
 export const apiViaCep = axios.create({
   baseURL: config.URL_API_VIACEP,
