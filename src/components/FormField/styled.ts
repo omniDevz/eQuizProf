@@ -106,8 +106,7 @@ export const Input = styled.input<InputProps>`
       left: 1.6rem;
       top: 0;
       font-weight: normal;
-      transform: scale(0.8) translateY(-1.5rem);
-      padding-top: 0.8rem;
+      transform: scale(0.8) translateY(-2rem);
 
       &:before {
         transform: scaleX(1);
@@ -123,8 +122,7 @@ export const Input = styled.input<InputProps>`
         left: 0;
         top: 0;
         font-weight: normal;
-        transform: scale(0.8) translateY(-1.5rem);
-        padding-top: 0.8rem;
+        transform: scale(0.8) translateY(-2rem);
 
         &:before {
           transform: scaleX(1);

@@ -121,11 +121,7 @@ const Book: React.FC = () => {
             ))}
       </ListBooks>
       <ButtonWrapper>
-        <Button
-          color="primary-outline"
-          to="/teacher/book/new"
-          title="Cadastrar livro"
-        >
+        <Button color="primary-outline" to="/book/new" title="Cadastrar livro">
           Cadastrar livro
         </Button>
       </ButtonWrapper>

@@ -8,6 +8,15 @@ export const Form = styled.form`
 export const ListBooks = styled.ul`
   flex: 1;
   padding: 3.2rem 24px;
+  max-height: calc(100vh - 32rem);
+  overflow-y: auto;
+  margin-bottom: 2.4rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ItemBook = styled.li`

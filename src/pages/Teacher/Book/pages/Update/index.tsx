@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { FiUserPlus, FiUsers } from 'react-icons/fi';
 import { useToasts } from 'react-toast-notifications';
 
 import Select from '../../../../../components/Select';
@@ -11,10 +12,9 @@ import util from '../../../../../utils/util';
 
 import api from '../../../../../services/api';
 
+import { Form, ButtonsWrapper, InputAndButton } from './styled';
+
 import { ParamsProps } from './interface';
-
-import { Form, ButtonsWrapper } from './styled';
-
 import { AuthorApiProps } from '../../../Author/interface';
 import { ISelectOptions } from '../../../../../components/Select/interface';
 
@@ -24,9 +24,12 @@ const BookUpdate: React.FC = () => {
   const [link, setLink] = useState('');
   const [datePublication, setDatePublication] = useState('');
   const [authorId, setAuthorId] = useState(0);
+  const [firstNameAuthor, setFirstNameAuthor] = useState('');
+  const [lastNameAuthor, setLastNameAuthor] = useState('');
   const [listAuthorsOptions, setListAuthorsOptions] = useState<
     ISelectOptions[]
   >([]);
+  const [addAuthor, setAddAuthor] = useState(false);
 
   const history = useHistory();
   const { addToast } = useToasts();
@@ -87,12 +90,18 @@ const BookUpdate: React.FC = () => {
   function handleUpdateBook() {
     api
       .put('/livro', {
-        LivroId: bookId,
-        Titulo: title,
-        Subtitulo: subtitle,
-        LinkLivro: link,
-        AutorId: authorId,
-        DataPublicacao: datePublication,
+        livroId: bookId,
+        titulo: title,
+        subtitulo: subtitle,
+        linkLivro: link,
+        autorId: authorId,
+        autor: addAuthor
+          ? {
+              nome: firstNameAuthor,
+              sobrenome: lastNameAuthor,
+            }
+          : null,
+        dataPublicacao: datePublication,
       })
       .then(({ status, data }) => {
         if (status === 206) {
@@ -173,21 +182,40 @@ const BookUpdate: React.FC = () => {
           }}
           type="url"
         />
-        <Select
-          name="authorId"
-          label="Autor"
-          onChange={(e: any) => setAuthorId(e.value)}
-          value={String(authorId)}
-          options={listAuthorsOptions}
-        />
-        {/* <FormField
-          label="Autor"
-          name="author"
-          value={'4'}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setTitle(e.target.value);
-          }}
-        /> */}
+        <InputAndButton>
+          {addAuthor ? (
+            <FormField
+              label="Nome Autor"
+              name="firstNameAuthor"
+              value={firstNameAuthor}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setFirstNameAuthor(e.target.value);
+              }}
+            />
+          ) : (
+            <Select
+              name="authorId"
+              label="Autor"
+              onChange={(e: any) => setAuthorId(e.value)}
+              value={String(authorId)}
+              options={listAuthorsOptions}
+            />
+          )}
+
+          <Button color="primary" onClick={() => setAddAuthor(!addAuthor)}>
+            {addAuthor ? <FiUserPlus /> : <FiUsers />}
+          </Button>
+        </InputAndButton>
+        {addAuthor && (
+          <FormField
+            label="Sobrenome Autor"
+            name="lastNameAuthor"
+            value={lastNameAuthor}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setLastNameAuthor(e.target.value);
+            }}
+          />
+        )}
         <FormField
           label="Data de publicação"
           name="datePublication"
