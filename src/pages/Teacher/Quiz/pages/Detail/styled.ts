@@ -15,8 +15,16 @@ export const Text = styled.label`
   text-shadow: var(--text-shadow);
 `;
 
+export const Infos = styled.div`
+  align-items: flex-start;
+`;
+
 export const Name = styled(Text)`
   font-size: 3.2rem;
+`;
+
+export const Description = styled(Text)`
+  font-size: 1.8rem;
 `;
 
 export const IconEdit = styled(FiEdit)`

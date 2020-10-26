@@ -9,7 +9,15 @@ import Slide from '../../components/Slide';
 
 import api from '../../../../../services/api';
 
-import { ButtonsWrapper, IconEdit, ListQuiz, Header, Name } from './styled';
+import {
+  ButtonsWrapper,
+  Description,
+  IconEdit,
+  ListQuiz,
+  Header,
+  Infos,
+  Name,
+} from './styled';
 
 import { IQuizById, IQuizByIdFromApi, ParamsProps } from './interface';
 import { IQuiz, IQuizApi } from '../../interface';
@@ -115,7 +123,10 @@ const QuizDetail: React.FC = () => {
   return (
     <PageTeacher type="back" text="Quiz">
       <Header>
-        <Name>{quiz.name}</Name>
+        <Infos>
+          <Name>{quiz.name}</Name>
+          <Description>{quiz.description}</Description>
+        </Infos>
         <Link to={`/quiz/${1}/update`}>
           <IconEdit />
         </Link>

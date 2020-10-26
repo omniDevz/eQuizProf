@@ -9,6 +9,10 @@ import FieldRadioButton from '../../../components/FieldRadioButton';
 import useForm from '../../../../../../hooks/useForm';
 
 import { Form, ButtonWrapper } from './styled';
+import { useHistory, useParams } from 'react-router';
+import { IQuizNewQuestionParams } from './interface';
+import api from '../../../../../../services/api';
+import { useToasts } from 'react-toast-notifications';
 
 const QuestionNew: React.FC = () => {
   const valuesInitials = {
@@ -19,10 +23,67 @@ const QuestionNew: React.FC = () => {
     alternativeC: '',
     alternativeD: '',
     timeInSeconds: '',
+    orderByQuestion: '',
     alternativeRight: 'A',
   };
 
   const { handleChange, values } = useForm(valuesInitials);
+  const { addToast } = useToasts();
+  const history = useHistory();
+
+  const { quizId } = useParams<IQuizNewQuestionParams>();
+
+  function handleSubmitNewQuestionInQuiz() {
+    api
+      .post('perguntaQuiz', {
+        quizId,
+        numeroPergunta: values.orderByQuestion,
+        enunciado: values.question,
+        alternativaCorreta: values.alternativeRight,
+        tempoSegundos: values.timeInSeconds,
+        pesoPergunta: values.level,
+        alternativas: [
+          {
+            letraAlternativa: 'A',
+            enunciado: values.alternativeA,
+          },
+          {
+            letraAlternativa: 'B',
+            enunciado: values.alternativeB,
+          },
+          {
+            letraAlternativa: 'C',
+            enunciado: values.alternativeC,
+          },
+          {
+            letraAlternativa: 'D',
+            enunciado: values.alternativeD,
+          },
+        ],
+      })
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Pergunta cadastrada com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+        history.push(`/quiz/${quizId}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      });
+  }
 
   return (
     <PageTeacher type="back" text="Nova pergunta">
@@ -82,6 +143,14 @@ const QuestionNew: React.FC = () => {
           name="timeInSeconds"
           value={values.timeInSeconds}
           onChange={handleChange}
+          type="number"
+        />
+        <FormField
+          label="Ordem da pergunta"
+          name="orderByQuestion"
+          value={values.orderByQuestion}
+          onChange={handleChange}
+          type="number"
         />
         <RadioButton
           options={[
@@ -104,7 +173,9 @@ const QuestionNew: React.FC = () => {
         />
       </Form>
       <ButtonWrapper>
-        <Button color="primary">Salvar</Button>
+        <Button color="primary" onClick={handleSubmitNewQuestionInQuiz}>
+          Salvar
+        </Button>
       </ButtonWrapper>
     </PageTeacher>
   );
