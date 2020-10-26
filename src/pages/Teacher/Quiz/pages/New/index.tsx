@@ -20,7 +20,7 @@ const QuizNew: React.FC = () => {
 
   const handleSubmitQuiz = () => {
     api
-      .post('/quiz', {
+      .post('quiz', {
         professorId: user?.teacherId,
         descricao: description,
         nome: name,

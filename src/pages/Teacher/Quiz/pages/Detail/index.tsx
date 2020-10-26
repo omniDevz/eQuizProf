@@ -18,6 +18,7 @@ import {
   IAlternativeQuizFromApi,
 } from '../../components/Question/interface';
 import { FiPlus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const QuizDetail: React.FC = () => {
   const [quiz, setQuiz] = useState<IQuiz>({} as IQuiz);
@@ -115,7 +116,9 @@ const QuizDetail: React.FC = () => {
     <PageTeacher type="back" text="Quiz">
       <Header>
         <Name>{quiz.name}</Name>
-        <IconEdit />
+        <Link to={`/quiz/${1}/update`}>
+          <IconEdit />
+        </Link>
       </Header>
       <ListQuiz>
         {listQuiz.length > 0 &&

@@ -146,7 +146,7 @@ const Account: React.FC = () => {
     if (country !== 'Brasil') return;
 
     apiLocations
-      .get('/estados')
+      .get('estados')
       .then(({ data }) => {
         const optionsStates = data.map((state: AllStatesProps) => {
           const optionsNameStates = {
@@ -170,7 +170,7 @@ const Account: React.FC = () => {
     if (country !== 'Brasil') return;
 
     apiLocations
-      .get(`/estados/${state}/municipios`)
+      .get(`estados/${state}/municipios`)
       .then(({ data }) => {
         const optionsCities = data.map((city: AllCitiesProps) => {
           const optionsNameCity = {

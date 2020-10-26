@@ -26,7 +26,7 @@ const Quiz: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/quiz/professorId/${user?.teacherId}`)
+      .get(`quiz/professorId/${user?.teacherId}`)
       .then(({ data }) => {
         const quizzersFromApi: IQuiz[] = data.map((quizApi: IQuizApi) => {
           const newQuiz = {

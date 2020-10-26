@@ -25,16 +25,16 @@ const QuizRoutes = [
     component: QuestionUpdate,
   },
   {
-    path: '/quiz/:quizId',
-    component: Detail,
-  },
-  {
-    path: '/quiz/update',
+    path: '/quiz/:quizId/update',
     component: Update,
   },
   {
     path: '/quiz/new',
     component: New,
+  },
+  {
+    path: '/quiz/:quizId',
+    component: Detail,
   },
   {
     path: '/quiz',
