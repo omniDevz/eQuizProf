@@ -33,17 +33,6 @@ export const Number = styled(TextHeader)`
   text-align: left;
 `;
 
-export const Timer = styled(TextHeader)`
-  grid-area: timer;
-  padding: 1rem;
-  padding-right: 1.12rem;
-  padding-bottom: 0.8rem;
-  text-align: right;
-  background: url(${logoSVG});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center right;
-`;
 
 export const SlideText = styled(TextHeader)`
   grid-area: slide;

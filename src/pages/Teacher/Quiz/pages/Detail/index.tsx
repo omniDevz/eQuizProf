@@ -146,7 +146,38 @@ const QuizDetail: React.FC = () => {
       .catch((err) => {
         console.error(err);
         addToast(
-          'Houve algum erro inesperado na remoção, tente novamente mais tarde',
+          'Houve algum erro inesperado na remoção da pergunta, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
+  function handleDeleteSlide(slideId: number) {
+    api
+      .delete(`slideQuiz/${slideId}`)
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Slide removido com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+
+        handleGetListQuiz();
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado na remoção do slide, tente novamente mais tarde',
           {
             appearance: 'error',
             autoDismiss: true,
@@ -172,7 +203,11 @@ const QuizDetail: React.FC = () => {
             .filter((quiz) => !!quiz.slideQuiz || !!quiz.questionQuiz)
             .map((quiz) =>
               !!quiz.slideQuiz ? (
-                <Slide key={quiz.orderByQuiz} slide={quiz.slideQuiz} />
+                <Slide
+                  key={quiz.orderByQuiz}
+                  onRemove={handleDeleteSlide}
+                  slide={quiz.slideQuiz}
+                />
               ) : (
                 <Question
                   key={quiz.orderByQuiz}

@@ -1,22 +1,119 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../../../../../components/Button';
-import CheckButton from '../../../../../../components/CheckButton';
 import FormField from '../../../../../../components/FormField';
 import PageTeacher from '../../../../../../components/PageTeacher';
 
-import useForm from '../../../../../../hooks/useForm';
+import api from '../../../../../../services/api';
 
 import { Form, ButtonsWrapper } from './styled';
 
-const SlideUpdate: React.FC = () => {
-  const valuesInitials = {
-    text: '',
-    timeInSeconds: '0',
-  };
+import { IQuizSlideUpdateParams, ISlideQuizApi } from './interface';
 
-  const [hasTime, setHasTime] = useState(false);
-  const { handleChange, values } = useForm(valuesInitials);
+const SlideUpdate: React.FC = () => {
+  const [text, setText] = useState('');
+  const [orderBySlide, setOrderBySlide] = useState('');
+  const [orderByObject, setOrderByObject] = useState('');
+
+  const { slideId, quizId } = useParams() as IQuizSlideUpdateParams;
+  const { addToast } = useToasts();
+  const history = useHistory();
+
+  useEffect(() => {
+    api
+      .get(`slideQuiz/${slideId}`)
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        const slideApi = data as ISlideQuizApi;
+
+        setText(slideApi.conteudoSlide);
+        setOrderBySlide(String(slideApi.numeroSlide));
+        setOrderByObject(String(slideApi.ordenacaoObjetoQuiz));
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado na busca deste slide, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }, []);
+
+  function handleUpdateSlideQuiz() {
+    api
+      .put('slideQuiz', {
+        quizId,
+        slideQuizId: slideId,
+        numeroSlide: orderBySlide,
+        conteudoSlide: text,
+        ordenacaoObjetoQuiz: orderByObject,
+      })
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Slide alterado com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+        history.push(`/quiz/${quizId}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      });
+  }
+
+  function handleDeleteSlideQuiz() {
+    api
+      .delete(`slideQuiz/${slideId}`)
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Slide removido com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+
+        history.push(`/quiz/${quizId}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado na remoção, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
 
   return (
     <PageTeacher type="back" text="Alterar slide">
@@ -24,28 +121,27 @@ const SlideUpdate: React.FC = () => {
         <FormField
           label="Frase"
           name="text"
-          value={values.text}
-          onChange={handleChange}
+          value={text}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setText(e.target.value);
+          }}
         />
-        <CheckButton
-          label="Slide com tempo"
-          name="hasTime"
-          value={hasTime}
-          setValue={setHasTime}
+        <FormField
+          label="Número do slide"
+          name="orderBySlide"
+          value={orderBySlide}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setOrderBySlide(e.target.value);
+          }}
         />
-        {hasTime && (
-          <FormField
-            label="Tempo em segundos"
-            name="timeInSeconds"
-            value={values.timeInSeconds}
-            onChange={handleChange}
-            type="number"
-          />
-        )}
       </Form>
       <ButtonsWrapper>
-        <Button color="primary-outline">Excluir</Button>
-        <Button color="primary">Salvar</Button>
+        <Button color="primary-outline" onClick={handleDeleteSlideQuiz}>
+          Excluir
+        </Button>
+        <Button color="primary" onClick={handleUpdateSlideQuiz}>
+          Salvar
+        </Button>
       </ButtonsWrapper>
     </PageTeacher>
   );

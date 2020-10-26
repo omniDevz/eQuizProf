@@ -8,12 +8,11 @@ import {
   IconTrash,
   IconEdit,
   Number,
-  Timer,
 } from './styled';
 
 import { ISlide } from './interface';
 
-const Slide: React.FC<ISlide> = ({ slide }) => {
+const Slide: React.FC<ISlide> = ({ slide, onRemove }) => {
   return (
     <SlideWrapper>
       <Number>
@@ -22,12 +21,15 @@ const Slide: React.FC<ISlide> = ({ slide }) => {
       <SlideText>{slide?.content}</SlideText>
       <ActionsWrapper>
         <Link
-          to={`/quiz/${slide?.slideQuizId}/slide/update`}
+          to={`/quiz/${slide?.quizId}/slide/update/${slide?.slideQuizId}`}
           title="Alterar dados do slide"
         >
           <IconEdit />
         </Link>
-        <IconTrash />
+        <IconTrash
+          onClick={() => onRemove(slide?.slideQuizId || 0)}
+          title="Remover o slide do quiz"
+        />
       </ActionsWrapper>
     </SlideWrapper>
   );

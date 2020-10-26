@@ -18,4 +18,5 @@ export interface ISlideQuiz {
 
 export interface ISlide {
   slide: ISlideQuiz | null;
+  onRemove: (slideId: number) => void;
 }

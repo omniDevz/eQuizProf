@@ -13,7 +13,7 @@ const QuizRoutes = [
     component: SlideNew,
   },
   {
-    path: '/quiz/:quizId/slide/update',
+    path: '/quiz/:quizId/slide/update/:slideId',
     component: SlideUpdate,
   },
   {
