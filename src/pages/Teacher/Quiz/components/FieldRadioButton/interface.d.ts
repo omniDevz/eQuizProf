@@ -7,5 +7,6 @@ export interface FieldRadioButtonProps {
     name: string;
     value: string;
     checked: string;
+    setAlternative?: FunctionComponentElement;
   };
 }

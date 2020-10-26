@@ -31,7 +31,7 @@ const Question: React.FC<IQuestion> = ({ question }) => {
       </ResponseWrapper>
       <ActionsWrapper>
         <Link
-          to={`/quiz/${question?.questionQuizId}/question/update`}
+          to={`/quiz/${question?.quizId}/question/update/${question?.questionQuizId}`}
           title="Alterar dados da pergunta"
         >
           <IconEdit />

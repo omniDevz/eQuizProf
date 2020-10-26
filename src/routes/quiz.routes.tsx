@@ -21,7 +21,7 @@ const QuizRoutes = [
     component: QuestionNew,
   },
   {
-    path: '/quiz/:quizId/question/update',
+    path: '/quiz/:quizId/question/update/:questionId',
     component: QuestionUpdate,
   },
   {

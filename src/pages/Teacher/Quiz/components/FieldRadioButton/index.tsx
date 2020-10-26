@@ -32,7 +32,7 @@ const FormRadioButton: React.FC<FieldRadioButtonProps> = ({
           value={check.value}
           checked={check.checked === check.value}
           name={check.name}
-          onChange={setValue}
+          onChange={check.setAlternative ? check.setAlternative : setValue}
         />
         <Label htmlFor={id}>
           <IconError />
