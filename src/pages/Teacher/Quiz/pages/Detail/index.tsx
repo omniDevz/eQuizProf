@@ -36,7 +36,7 @@ const QuizDetail: React.FC = () => {
 
   const { addToast } = useToasts();
 
-  useEffect(() => {
+  function handleGetDetailsQuiz() {
     api
       .get(`/quiz/${quizId}`)
       .then(({ data }) => {
@@ -55,9 +55,9 @@ const QuizDetail: React.FC = () => {
           autoDismiss: true,
         });
       });
-  }, [quizId, addToast]);
+  }
 
-  useEffect(() => {
+  function handleGetListQuiz() {
     api
       .get(`/MovQuizSlidePergunta/quizId/${quizId}`)
       .then(({ data }) => {
@@ -118,7 +118,42 @@ const QuizDetail: React.FC = () => {
           autoDismiss: true,
         });
       });
-  }, [quizId, addToast]);
+  }
+
+  useEffect(handleGetDetailsQuiz, [quizId, addToast]);
+
+  useEffect(handleGetListQuiz, [quizId, addToast]);
+
+  function handleDeleteQuestion(questionId: number) {
+    api
+      .delete(`perguntaQuiz/${questionId}`)
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Pergunta removida com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+
+        handleGetListQuiz();
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado na remoção, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
 
   return (
     <PageTeacher type="back" text="Quiz">
@@ -139,7 +174,11 @@ const QuizDetail: React.FC = () => {
               !!quiz.slideQuiz ? (
                 <Slide key={quiz.orderByQuiz} slide={quiz.slideQuiz} />
               ) : (
-                <Question key={quiz.orderByQuiz} question={quiz.questionQuiz} />
+                <Question
+                  key={quiz.orderByQuiz}
+                  onRemove={handleDeleteQuestion}
+                  question={quiz.questionQuiz}
+                />
               )
             )}
       </ListQuiz>

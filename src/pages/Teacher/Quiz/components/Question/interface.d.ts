@@ -38,4 +38,5 @@ export interface IQuestionQuiz {
 
 export interface IQuestion {
   question: IQuestionQuiz | null;
+  onRemove: (questionId: number) => void;
 }

@@ -164,6 +164,37 @@ const QuestionUpdate: React.FC = () => {
       });
   }
 
+  function handleDeleteQuestion() {
+    api
+      .delete(`perguntaQuiz/${questionId}`)
+      .then(({ data, status }) => {
+        if (status === 206) {
+          addToast(data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Pergunta removida com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+
+        history.push(`/quiz/${quizId}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado na remoção, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
   return (
     <PageTeacher type="back" text="Alterar pergunta">
       <Form>
@@ -277,7 +308,9 @@ const QuestionUpdate: React.FC = () => {
         />
       </Form>
       <ButtonsWrapper>
-        <Button color="primary-outline">Excluir</Button>
+        <Button color="primary-outline" onClick={handleDeleteQuestion}>
+          Excluir
+        </Button>
         <Button color="primary" onClick={handleSubmitUpdateQuestionInQuiz}>
           Salvar
         </Button>

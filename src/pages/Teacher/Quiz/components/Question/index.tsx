@@ -14,7 +14,7 @@ import {
 
 import { IQuestion } from './interface';
 
-const Question: React.FC<IQuestion> = ({ question }) => {
+const Question: React.FC<IQuestion> = ({ question, onRemove }) => {
   return (
     <QuestionWrapper>
       <Number>
@@ -36,7 +36,10 @@ const Question: React.FC<IQuestion> = ({ question }) => {
         >
           <IconEdit />
         </Link>
-        <IconTrash />
+        <IconTrash
+          onClick={() => onRemove(question?.questionQuizId || 0)}
+          title="Remover a pergunta"
+        />
       </ActionsWrapper>
     </QuestionWrapper>
   );
