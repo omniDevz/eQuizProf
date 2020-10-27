@@ -11,6 +11,8 @@ import {
   AwaitWrapper,
   ListStudents,
   SubTitle,
+  Header,
+  Reload,
 } from './styled';
 
 import {
@@ -66,7 +68,7 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
         setMovStudentQuiz(newQuizStudent);
       })
       .catch((err) => {
-        console.error(err.response);
+        console.error(err);
         addToast(
           'Houve algum erro inesperado ao obter alunos no quiz, tente novamente mais tarde',
           {
@@ -77,19 +79,16 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
       });
   }
 
-  const intervalGetStudentQuiz = setInterval(handleGetStudentsInQuiz, 5000);
-
-  if ((movStudentQuiz.movQuiz?.statusQuiz || 0) !== 0) {
-    clearInterval(intervalGetStudentQuiz);
-  }
-
   useEffect(handleGetStudentsInQuiz, []);
 
   return (
     <AwaitWrapper>
-      <SubTitle>
-        <b>{movStudentQuiz.student?.length || 0}</b> alunos online
-      </SubTitle>
+      <Header>
+        <SubTitle>
+          <b>{movStudentQuiz.student?.length || 0}</b> alunos online
+        </SubTitle>
+        <Reload onClick={handleGetStudentsInQuiz} />
+      </Header>
       <ListStudents>
         {movStudentQuiz.student &&
           movStudentQuiz.student.map(({ person, personId }) => {

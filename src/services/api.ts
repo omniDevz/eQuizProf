@@ -29,7 +29,7 @@ api.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (401 === error.response.status) {
+    if (401 === error?.response?.status) {
       tokenExpired();
     } else {
       return Promise.reject(error);
