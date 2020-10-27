@@ -11,7 +11,7 @@ import dark from './assets/styles/themes/dark';
 import DefaultStyles from './assets/styles/default';
 
 function App() {
-  const [theme] = usePersistedState<DefaultTheme>('theme', dark);
+  const [theme] = usePersistedState<DefaultTheme>('@EQD:theme', dark);
 
   return (
     <ThemeProvider theme={theme}>
