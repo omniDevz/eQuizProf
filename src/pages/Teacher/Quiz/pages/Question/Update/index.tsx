@@ -44,12 +44,16 @@ const QuestionUpdate: React.FC = () => {
     switch (charAlternative) {
       case 'A':
         setAlternativeA(alternative);
+        break;
       case 'B':
         setAlternativeB(alternative);
+        break;
       case 'C':
         setAlternativeC(alternative);
+        break;
       case 'D':
         setAlternativeD(alternative);
+        break;
     }
   }
 

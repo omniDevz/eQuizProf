@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 
-import logoSVG from '../../../../../assets/images/icons/iconTime.svg';
-
 export const SlideWrapper = styled.div`
   background: ${(props) => props.theme.colors.box};
   box-shadow: var(--box-shadow);

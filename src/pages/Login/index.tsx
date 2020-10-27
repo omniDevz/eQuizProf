@@ -33,7 +33,7 @@ const Login: React.FC = () => {
     });
 
     document.getElementById('id_username')?.focus();
-  }, []);
+  }, [addToast]);
 
   function loginTeacher() {
     signIn(values.username, values.password);

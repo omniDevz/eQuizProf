@@ -15,6 +15,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserProps | null>(null);
   const [loading, setLoading] = useState(true);
   const { addToast } = useToasts();
+  const teacherId = user?.teacherId;
 
   useEffect(() => {
     async function loadStoriedData() {
@@ -25,13 +26,13 @@ export const AuthProvider: React.FC = ({ children }) => {
         api.defaults.headers.Authorization = `Bearer ${storiedToken}`;
 
         setUser(JSON.parse(storiedUser));
-        api.defaults.headers.Logged = user?.teacherId;
+        api.defaults.headers.Logged = teacherId;
         // api.defaults.headers.Logged = `${user?.teacherId}-${user?.levelAccess}`;
       }
       setLoading(false);
     }
     loadStoriedData();
-  }, []);
+  }, [teacherId]);
 
   const notAuthorization = () => {
     addToast('Sua sessão foi expirada, efetue o login novamente', {

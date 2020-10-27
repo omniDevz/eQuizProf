@@ -49,7 +49,7 @@ const SlideUpdate: React.FC = () => {
           }
         );
       });
-  }, []);
+  }, [addToast, slideId]);
 
   function handleUpdateSlideQuiz() {
     api

@@ -3,13 +3,13 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import Home from '../pages/Teacher/Home';
 import Account from '../pages/Teacher/Account';
-import Play from '../pages/Teacher/Play';
 
 import Classes from './classes.routes';
 import Live from './live.routes';
 import Author from './author.routes';
 import Book from './book.routes';
 import Quiz from './quiz.routes';
+import Play from './play.routes';
 
 const AuthRoutes: React.FC = () => {
   const routes = [
@@ -21,11 +21,7 @@ const AuthRoutes: React.FC = () => {
       path: '/account',
       component: Account,
     },
-    {
-      path: '/play',
-      component: Play,
-    },
-  ].concat(Author, Classes, Book, Quiz, Live);
+  ].concat(Author, Classes, Book, Quiz, Live, Play);
 
   return (
     <BrowserRouter>
