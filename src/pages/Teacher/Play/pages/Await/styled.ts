@@ -36,4 +36,9 @@ export const WrappersButtons = styled.div`
   width: 100%;
   grid-gap: 1.6rem;
   margin-top: 3.2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
