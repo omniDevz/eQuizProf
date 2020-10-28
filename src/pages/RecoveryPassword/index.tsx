@@ -30,10 +30,9 @@ function RecoveryPassword() {
             name="recovery"
             value={values.recovery}
             onChange={handleChange}
+            maxLength={254}
           >
-            <Link to="/recoveryPassword/code">
-              <FiSend />
-            </Link>
+            <FiSend />
           </FormField>
         </FieldsWrapper>
       </Form>

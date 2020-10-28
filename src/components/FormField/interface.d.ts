@@ -26,4 +26,5 @@ export interface FormFieldProps {
   type?: 'textarea' | 'text' | 'number' | 'date' | 'password' | string;
   stroke?: string;
   prefix?: string;
+  maxLength?: number;
 }

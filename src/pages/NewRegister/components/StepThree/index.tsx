@@ -182,6 +182,7 @@ const StepThree: React.FC<StepThreeProps> = ({
             }
             onClick={handleCep}
             stroke="0.5"
+            maxLength={10}
           >
             <MdYoutubeSearchedFor />
           </FormField>
@@ -210,6 +211,7 @@ const StepThree: React.FC<StepThreeProps> = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setValues.setState(e.target.value)
               }
+              maxLength={2}
             />
           )}
         </TwoFields>
@@ -229,6 +231,7 @@ const StepThree: React.FC<StepThreeProps> = ({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setValues.setCity(e.target.value)
             }
+            maxLength={50}
           />
         )}
         <FormField
@@ -238,6 +241,7 @@ const StepThree: React.FC<StepThreeProps> = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setValues.setNeighborhood(e.target.value)
           }
+          maxLength={50}
         />
         <TwoFields>
           <FormField
@@ -247,6 +251,7 @@ const StepThree: React.FC<StepThreeProps> = ({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setValues.setAddress(e.target.value)
             }
+            maxLength={80}
           />
           <FormField
             label="Nº"
@@ -255,6 +260,7 @@ const StepThree: React.FC<StepThreeProps> = ({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setValues.setNumberAddress(e.target.value)
             }
+            maxLength={7}
           />
         </TwoFields>
       </Form>

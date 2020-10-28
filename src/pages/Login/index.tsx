@@ -51,12 +51,14 @@ const Login: React.FC = () => {
             name="username"
             value={values.username}
             onChange={handleChange}
+            maxLength={15}
           />
           <FormField
             label="Senha"
             name="password"
             value={values.password}
             onChange={handleChange}
+            maxLength={32}
           >
             <Link to="/recoveryPassword" title="Recuperar sua senha">
               <img src={iconRecovery} alt="Ícone para recuperação de senha" />

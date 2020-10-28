@@ -60,6 +60,7 @@ const QuizNew: React.FC = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setName(e.target.value);
           }}
+          maxLength={60}
         />
         <FormField
           label="Descrição"
@@ -68,6 +69,7 @@ const QuizNew: React.FC = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setDescription(e.target.value);
           }}
+          maxLength={200}
         />
       </Form>
       <ButtonWrapper>

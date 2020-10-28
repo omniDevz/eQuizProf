@@ -21,6 +21,7 @@ const FormField: React.FC<FormFieldProps> = ({
   type,
   stroke,
   prefix,
+  maxLength,
 }) => {
   const fieldId = `id_${name}`;
   const hasValue = value !== '';
@@ -43,6 +44,7 @@ const FormField: React.FC<FormFieldProps> = ({
             name={name}
             onChange={onChange}
             autoComplete="off"
+            maxLength={maxLength}
           />
         ) : (
           <Input
@@ -54,6 +56,7 @@ const FormField: React.FC<FormFieldProps> = ({
             onChange={onChange}
             type={typeInput}
             autoComplete="off"
+            maxLength={maxLength}
           />
         )}
 

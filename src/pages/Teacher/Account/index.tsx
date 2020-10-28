@@ -202,12 +202,14 @@ const Account: React.FC = () => {
                 name="firstName"
                 value={values.firstName}
                 onChange={handleChange}
+                maxLength={40}
               />
               <FormField
                 label="Sobrenome"
                 name="lastName"
                 value={values.lastName}
                 onChange={handleChange}
+                maxLength={40}
               />
             </TwoColumns>
             <TwoColumns>
@@ -216,6 +218,7 @@ const Account: React.FC = () => {
                 name="cpf"
                 value={values.cpf}
                 onChange={handleChange}
+                maxLength={14}
               />
               <FormField
                 label="Data Nascimento"
@@ -248,6 +251,7 @@ const Account: React.FC = () => {
               name="email"
               value={values.email}
               onChange={handleChange}
+              maxLength={254}
             />
           </Collapse>
         </Fieldset>
@@ -277,18 +281,21 @@ const Account: React.FC = () => {
                 value={values.codeCountry}
                 onChange={handleChange}
                 prefix="+"
+                maxLength={3}
               />
               <FormField
                 label="DDD"
                 name="ddd"
                 value={values.ddd}
                 onChange={handleChange}
+                maxLength={2}
               />
               <FormField
                 label="Número"
                 name="number"
                 value={values.number}
                 onChange={handleChange}
+                maxLength={9}
               />
             </ThreeColumns>
           </Collapse>
@@ -303,6 +310,7 @@ const Account: React.FC = () => {
                 setCep(e.target.value)
               }
               onClick={handleCep}
+              maxLength={10}
             >
               <FiSearch />
             </FormField>
@@ -330,6 +338,7 @@ const Account: React.FC = () => {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setState(e.target.value)
                   }
+                  maxLength={2}
                 />
               )}
             </TwoColumns>
@@ -349,6 +358,7 @@ const Account: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setCity(e.target.value)
                 }
+                maxLength={50}
               />
             )}
             <FormField
@@ -358,6 +368,7 @@ const Account: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setNeighborhood(e.target.value)
               }
+              maxLength={50}
             />
             <TwoColumns>
               <FormField
@@ -367,6 +378,7 @@ const Account: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setAddress(e.target.value)
                 }
+                maxLength={80}
               />
               <FormField
                 label="Número"
@@ -375,6 +387,7 @@ const Account: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setNumberAddress(e.target.value)
                 }
+                maxLength={7}
               />
             </TwoColumns>
           </Collapse>
@@ -386,6 +399,7 @@ const Account: React.FC = () => {
               name="username"
               value={values.username}
               onChange={handleChange}
+              maxLength={15}
             />
             <Button color="primary-outline">Alterar usuário</Button>
           </Collapse>
@@ -398,6 +412,7 @@ const Account: React.FC = () => {
               value={values.password}
               onChange={handleChange}
               type="password"
+              maxLength={32}
             />
             <FormField
               label="Nova senha"
@@ -405,6 +420,7 @@ const Account: React.FC = () => {
               value={values.passwordNew}
               onChange={handleChange}
               type="password"
+              maxLength={32}
             />
             <FormField
               label="Confirmar senha"
@@ -412,6 +428,7 @@ const Account: React.FC = () => {
               value={values.passwordNewConfirm}
               onChange={handleChange}
               type="password"
+              maxLength={32}
             />
             <Button color="primary-outline">Alterar senha</Button>
           </Collapse>

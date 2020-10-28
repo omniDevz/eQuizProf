@@ -62,12 +62,14 @@ const Live: React.FC = () => {
           name="description"
           value={values.description}
           onChange={handleChange}
+          maxLength={250}
         />
         <FormField
           label="Link"
           name="link"
           value={values.link}
           onChange={handleChange}
+          maxLength={2500}
         />
       </FormFieldWrapper>
       <ButtonWrapper>

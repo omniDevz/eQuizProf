@@ -101,6 +101,7 @@ const AuthorUpdate: React.FC = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFirstName(e.target.value)
           }
+          maxLength={50}
         />
         <FormField
           label="Sobrenome"
@@ -109,6 +110,7 @@ const AuthorUpdate: React.FC = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setLastName(e.target.value)
           }
+          maxLength={50}
         />
       </Form>
       <ButtonsWrapper>
