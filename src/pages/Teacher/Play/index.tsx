@@ -177,6 +177,35 @@ const Play: React.FC = () => {
   useEffect(handleGetListQuiz, [quiz, addToast]);
   useEffect(handleGetCurrentObject, [statusQuiz, addToast]);
 
+  function handleNextObjectInQuiz(nextObject: number) {
+    api
+      .put(`movQuiz/persistirQuiz`, {
+        movQuizId,
+        objetoAtual: nextObject,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        setCurrentObject(nextObject);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado trocar a pergunta, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
   function handleViewStatus() {
     switch (statusQuiz) {
       case 0:
@@ -193,6 +222,8 @@ const Play: React.FC = () => {
           (q) => q.orderByQuiz === currentObject
         );
 
+        console.log(listQuiz);
+
         return currentObjectQuiz?.slideQuiz !== null &&
           currentObjectQuiz?.slideQuiz !== undefined ? (
           <Slide
@@ -202,6 +233,7 @@ const Play: React.FC = () => {
         ) : (
           <Question
             question={currentObjectQuiz?.questionQuiz}
+            handleNextObjectInQuiz={handleNextObjectInQuiz}
             totalObject={totalObject}
           />
         );

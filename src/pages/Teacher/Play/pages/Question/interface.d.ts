@@ -25,4 +25,5 @@ export interface IQuestionQuiz {
 export interface IQuestionPage {
   question?: IQuestionQuiz | null;
   totalObject: number;
+  handleNextObjectInQuiz: (nextObject: number) => void;
 }

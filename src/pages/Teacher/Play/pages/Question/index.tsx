@@ -19,7 +19,11 @@ import {
 
 import { IQuestionPage } from './interface';
 
-const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
+const Question: React.FC<IQuestionPage> = ({
+  question,
+  totalObject,
+  handleNextObjectInQuiz,
+}) => {
   const [currentAlternativeSelect, setCurrentAlternativeSelect] = useState<
     1 | 2 | 3 | 4
   >(1);
@@ -47,6 +51,8 @@ const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
 
   useEffect(handleSetAlternative, [question]);
 
+  useEffect(() => setTime(question?.timeSeconds), [question]);
+
   function handleSetTime() {
     if (time === undefined) setTime(question?.timeSeconds);
 
@@ -55,10 +61,19 @@ const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
         setTime((c) => (c || 0) - 1);
       }, 1000);
       return () => clearInterval(timerInterval);
+    } else if (time === -1) {
+      setTime(undefined);
     }
   }
 
   useEffect(handleSetTime, [time, question]);
+
+  useEffect(() => {
+    if (time !== 0 || totalObject === question?.orderByQuiz) return;
+
+    setTime(-1);
+    handleNextObjectInQuiz((question?.orderByQuiz || 0) + 1);
+  }, [time]);
 
   return (
     <>
