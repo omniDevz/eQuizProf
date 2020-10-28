@@ -2,23 +2,23 @@ import { UserProps } from '../services/interface';
 
 const storage = {
   removeValuesJTW() {
-    localStorage.removeItem('@EQuiz:user');
-    localStorage.removeItem('@EQuiz:token');
-    localStorage.removeItem('@EQuiz:dateExpires');
+    localStorage.removeItem('@EQD:user');
+    localStorage.removeItem('@EQD:token');
+    localStorage.removeItem('@EQD:dateExpires');
   },
   setValuesJTW(user: UserProps) {
-    localStorage.setItem('@EQuiz:user', JSON.stringify(user));
-    localStorage.setItem('@EQuiz:token', user.token);
-    localStorage.setItem('@EQuiz:dateExpires', user.dateExpires);
+    localStorage.setItem('@EQD:user', JSON.stringify(user));
+    localStorage.setItem('@EQD:token', user.token);
+    localStorage.setItem('@EQD:dateExpires', user.dateExpires);
   },
   getUserJTW() {
-    return localStorage.getItem('@EQuiz:user');
+    return localStorage.getItem('@EQD:user');
   },
   getTokenJTW() {
-    return localStorage.getItem('@EQuiz:token');
+    return localStorage.getItem('@EQD:token');
   },
   getDateExpirationJTW() {
-    return new Date(localStorage.getItem('@EQuiz:dateExpires') || '');
+    return new Date(localStorage.getItem('@EQD:dateExpires') || '');
   },
   hasValuesJTW() {
     return storage.getUserJTW() && storage.getTokenJTW();

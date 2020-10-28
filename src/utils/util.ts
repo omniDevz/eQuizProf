@@ -23,8 +23,8 @@ const util = {
     return `${day}/${month}/${date.getFullYear()}`;
   },
   removeUserAndTokenFrom() {
-    localStorage.removeItem('@EQuiz:user');
-    localStorage.removeItem('@EQuiz:token');
+    localStorage.removeItem('@EQD:user');
+    localStorage.removeItem('@EQD:token');
   },
   getDateAndHoursNow() {
     const date = new Date(Date.now());
