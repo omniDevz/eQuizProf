@@ -29,6 +29,7 @@ function RecoveryPasswordNew() {
             value={values.newPassword}
             onChange={handleChange}
             type="password"
+            maxLength={32}
           />
           <FormField
             label="Confirmar senha"
@@ -36,6 +37,7 @@ function RecoveryPasswordNew() {
             value={values.confirmNewPassword}
             onChange={handleChange}
             type="password"
+            maxLength={32}
           />
         </FieldsWrapper>
         <Button color="primary">Salvar</Button>

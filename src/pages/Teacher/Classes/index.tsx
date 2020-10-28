@@ -86,6 +86,7 @@ const Classes: React.FC = () => {
           name="search"
           value={values.search}
           onChange={handleChange}
+          maxLength={100}
         >
           <FiSearch />
         </FormField>
