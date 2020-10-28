@@ -12,7 +12,11 @@ import {
 
 import { ISlidePage } from './interface';
 
-const Slide: React.FC<ISlidePage> = ({ slide, totalObject }) => {
+const Slide: React.FC<ISlidePage> = ({
+  slide,
+  totalObject,
+  handleNextObjectInQuiz,
+}) => {
   return (
     <SlideWrapper>
       <Header>
@@ -22,7 +26,12 @@ const Slide: React.FC<ISlidePage> = ({ slide, totalObject }) => {
       </Header>
       <SlideStyles>{slide?.content}</SlideStyles>
       <ButtonAction>
-        <Button color="primary-outline">Continuar</Button>
+        <Button
+          color="primary-outline"
+          onClick={() => handleNextObjectInQuiz((slide?.orderByQuiz || 0) + 1)}
+        >
+          Continuar
+        </Button>
       </ButtonAction>
     </SlideWrapper>
   );

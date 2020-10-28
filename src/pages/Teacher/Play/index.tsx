@@ -229,6 +229,7 @@ const Play: React.FC = () => {
           <Slide
             slide={currentObjectQuiz?.slideQuiz}
             totalObject={totalObject}
+            handleNextObjectInQuiz={handleNextObjectInQuiz}
           />
         ) : (
           <Question
