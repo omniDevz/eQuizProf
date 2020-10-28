@@ -26,6 +26,7 @@ const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
   const [alternativeIsRight, setAlternativeIsRight] = useState<1 | 2 | 3 | 4>(
     1
   );
+  const [time, setTime] = useState<number | undefined>(undefined);
 
   function handleSetAlternative() {
     switch (question?.letterAlternativeCorrect) {
@@ -45,6 +46,20 @@ const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
   }
 
   useEffect(handleSetAlternative, [question]);
+
+  function handleSetTime() {
+    if (time === undefined) setTime(question?.timeSeconds);
+
+    if ((time || 0) > 0) {
+      let timerInterval = setInterval(() => {
+        setTime((c) => (c || 0) - 1);
+      }, 1000);
+      return () => clearInterval(timerInterval);
+    }
+  }
+
+  useEffect(handleSetTime, [time, question]);
+
   return (
     <>
       <QuestionWrapper>
@@ -52,7 +67,7 @@ const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
           <Number>
             <sup>{question?.orderByQuiz || 0}</sup>/<sub>{totalObject}</sub>
           </Number>
-          <Timer>{question?.timeSeconds}</Timer>
+          <Timer>{time}</Timer>
         </Header>
         <QuestionStyles>{question?.text}</QuestionStyles>
         <ResponseWrapper>
