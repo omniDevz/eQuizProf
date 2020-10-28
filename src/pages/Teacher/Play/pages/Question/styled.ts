@@ -43,6 +43,7 @@ export const QuestionStyles = styled.p`
 
 export const ResponseWrapper = styled.div`
   grid-gap: 2.4rem;
+  width: 100%;
 `;
 
 export const Response = styled.p`
@@ -104,8 +105,6 @@ export const ButtonsWrapper = styled.div<ButtonsProps>`
   ${Button} {
     position: relative;
     &:nth-child(${(props) => props.active}) {
-      background: ${(props) => props.theme.colors.primary};
-      color: ${(props) => props.theme.colors.secondary};
 
       ${IconRight} {
         transform: translate(33%, -50%) scale(1);
@@ -114,6 +113,11 @@ export const ButtonsWrapper = styled.div<ButtonsProps>`
       ${IconError} {
         transform: translate(33%, -50%) scale(0);
       }
+    }
+
+    &:nth-child(${(props) => props.correct}) {
+      background: ${(props) => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.secondary};
     }
   }
 `;

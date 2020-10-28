@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import { FiX, FiCheck } from 'react-icons/fi';
 
 import logoSVG from '../../../../../assets/images/icons/iconTime.svg';
-
-import { ButtonsProps } from './interface';
 
 export const SlideWrapper = styled.div`
   padding: 2.4rem 24px 4rem;

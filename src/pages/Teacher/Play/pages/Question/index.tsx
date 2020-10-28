@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ButtonControl from '../../../../../components/Button';
 
@@ -17,33 +17,66 @@ import {
   Timer,
 } from './styled';
 
-const Question: React.FC = () => {
+import { IQuestionPage } from './interface';
+
+const Question: React.FC<IQuestionPage> = ({ question, totalObject }) => {
+  const [currentAlternativeSelect, setCurrentAlternativeSelect] = useState<
+    1 | 2 | 3 | 4
+  >(1);
+  const [alternativeIsRight, setAlternativeIsRight] = useState<1 | 2 | 3 | 4>(
+    1
+  );
+
+  function handleSetAlternative() {
+    switch (question?.letterAlternativeCorrect) {
+      case 'A':
+        setAlternativeIsRight(1);
+        break;
+      case 'B':
+        setAlternativeIsRight(2);
+        break;
+      case 'C':
+        setAlternativeIsRight(3);
+        break;
+      case 'D':
+        setAlternativeIsRight(4);
+        break;
+    }
+  }
+
+  useEffect(handleSetAlternative, [question]);
   return (
     <>
       <QuestionWrapper>
         <Header>
           <Number>
-            <sup>3</sup>/<sub>9</sub>
+            <sup>{question?.orderByQuiz || 0}</sup>/<sub>{totalObject}</sub>
           </Number>
-          <Timer>60</Timer>
+          <Timer>{question?.timeSeconds}</Timer>
         </Header>
-        <QuestionStyles>Aguarde o professor iniciar o Quiz</QuestionStyles>
+        <QuestionStyles>{question?.text}</QuestionStyles>
         <ResponseWrapper>
-          <Response>Acho que seja a resposta certo, acertei?!!</Response>
-          <ButtonsWrapper active={1}>
-            <Button>
+          <Response>
+            {question?.alternativeQuiz[currentAlternativeSelect - 1]?.text ||
+              ''}
+          </Response>
+          <ButtonsWrapper
+            active={alternativeIsRight}
+            correct={currentAlternativeSelect}
+          >
+            <Button onClick={() => setCurrentAlternativeSelect(1)}>
               A <IconError />
               <IconRight />
             </Button>
-            <Button>
+            <Button onClick={() => setCurrentAlternativeSelect(2)}>
               B <IconError />
               <IconRight />
             </Button>
-            <Button>
+            <Button onClick={() => setCurrentAlternativeSelect(3)}>
               C <IconError />
               <IconRight />
             </Button>
-            <Button>
+            <Button onClick={() => setCurrentAlternativeSelect(4)}>
               D <IconError />
               <IconRight />
             </Button>

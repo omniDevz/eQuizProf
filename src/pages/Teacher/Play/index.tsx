@@ -26,6 +26,7 @@ const Play: React.FC = () => {
   const [listQuiz, setListQuiz] = useState<IQuizById[]>([]);
   const [currentObject, setCurrentObject] = useState(0);
   const [statusQuiz, setStatusQuiz] = useState(0);
+  const [totalObject, setTotalObject] = useState(0);
 
   const { movQuizId } = useParams() as IPlayParams;
   const { addToast } = useToasts();
@@ -133,6 +134,7 @@ const Play: React.FC = () => {
         );
 
         setListQuiz(questionSlidesFromApi);
+        setTotalObject(questionSlidesFromApi.length);
       })
       .catch((err) => {
         console.error(err);
@@ -143,8 +145,37 @@ const Play: React.FC = () => {
       });
   }
 
+  function handleGetCurrentObject() {
+    if (statusQuiz === 2 || statusQuiz === 1) return;
+
+    api
+      .get(`movQuiz/objetoAtual/${movQuizId}`)
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'error',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        setCurrentObject(response.data.objetoAtual);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado ao obter pergunta/slide atual, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
   useEffect(handleGetMovQuiz, [movQuizId, addToast]);
   useEffect(handleGetListQuiz, [quiz, addToast]);
+  useEffect(handleGetCurrentObject, [quiz, addToast]);
 
   function handleViewStatus() {
     switch (statusQuiz) {
@@ -161,8 +192,17 @@ const Play: React.FC = () => {
         const currentObjectQuiz = listQuiz.find(
           (q) => q.orderByQuiz === currentObject
         );
+        console.log(currentObjectQuiz);
 
-        return !!currentObjectQuiz?.slideQuiz ? <Slide /> : <Question />;
+        return currentObjectQuiz?.slideQuiz !== null &&
+          currentObjectQuiz?.slideQuiz !== undefined ? (
+          <Slide />
+        ) : (
+          <Question
+            question={currentObjectQuiz?.questionQuiz}
+            totalObject={totalObject}
+          />
+        );
     }
   }
 
