@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiCoffee, FiUsers } from 'react-icons/fi';
 import Chart from 'chart.js';
 
@@ -18,40 +18,57 @@ import {
   Graph,
 } from './styled';
 
-const Home: React.FC = () => {
-  const { user } = useAuth();
+import {
+  ITeacherHomeQuestion,
+  ITeacherHomeApi,
+  ITeacherHome,
+} from './interface';
 
+const Home: React.FC = () => {
+  const [dash, setDash] = useState<ITeacherHome>({} as ITeacherHome);
+
+  const { user } = useAuth();
   const { addToast } = useToasts();
 
-  // useEffect(() => {
-  //   api
-  //     .get(`/movAlunoTurma/professorId/${user?.teacherId}`)
-  //     .then(({ data }) => {
-  //       const classFromApi: ClassProps[] = data.map((c: ClassApiProps) => {
-  //         const newClass: ClassProps = {
-  //           classId: c.turmaId,
-  //           name: c.nome,
-  //           description: c.descricao,
-  //           quizzes: 0,
-  //           students: 0,
-  //         };
+  useEffect(() => {
+    api
+      .get(`professor/home/${user?.teacherId}`)
+      .then((response) => {
+        const dashApi = response.data as ITeacherHomeApi;
 
-  //         return newClass;
-  //       });
+        const lastQuiz = dashApi.ultimoQuizRealizado.map((questionApi) => {
+          const question = {
+            numberQuestion: questionApi.numeroPergunta,
+            quantityRights: questionApi.quantidadeAcertos,
+          } as ITeacherHomeQuestion;
 
-  //       setListClasses(classFromApi);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }, [addToast]);
+          return question;
+        });
+
+        const newDash = {
+          quantityQuiz: dashApi.quantidadeQuizRealizados,
+          quantityStudent: dashApi.quantidadeAlunos,
+          lastQuiz,
+        } as ITeacherHome;
+
+        setDash(newDash);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ao obter dados da página inicial, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }, [user, addToast]);
 
   useEffect(() => {
-    let labelsChart = [];
+    if (!dash?.lastQuiz) return;
 
-    for (let i = 0; i < 10; i++) {
-      labelsChart.push(`Pergunta ${i}`);
-    }
+    let labelsChart = dash?.lastQuiz.map((q) => `Pergunta ${q.numberQuestion}`);
 
     const canvas = document.getElementById(
       'studentsChart'
@@ -63,8 +80,8 @@ const Home: React.FC = () => {
         labels: labelsChart,
         datasets: [
           {
-            label: 'Média de Acertos',
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            label: 'Total de acertos',
+            data: dash?.lastQuiz.map((q) => q.quantityRights),
 
             pointBackgroundColor: '#E01916',
             backgroundColor: 'rgba(242, 49, 49, .24)',
@@ -106,13 +123,13 @@ const Home: React.FC = () => {
         },
       },
     });
-  }, []);
+  }, [dash, addToast]);
 
   return (
     <PageTeacher type="icon">
       <Container>
         <Content>
-          <Number>0,000</Number>
+          <Number>{dash?.quantityQuiz || 0}</Number>
           <Description>Quizzers realizados</Description>
         </Content>
         <FiCoffee />
@@ -120,7 +137,7 @@ const Home: React.FC = () => {
 
       <Container>
         <Content>
-          <Number>0,000</Number>
+          <Number>{dash?.quantityStudent || 0}</Number>
           <Description>Alunos nas turmas</Description>
         </Content>
         <FiUsers />
