@@ -59,7 +59,7 @@ const QuizDetail: React.FC = () => {
 
   function handleGetListQuiz() {
     api
-      .get(`/MovQuizSlidePergunta/quizId/${quizId}`)
+      .get(`movQuizSlidePergunta/quizId/${quizId}`)
       .then(({ data }) => {
         const questionSlidesFromApi: IQuizById[] = data.map(
           (quiz: IQuizByIdFromApi) => {

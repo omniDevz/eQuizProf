@@ -40,7 +40,7 @@ const Item: React.FC<IQuizItem> = ({ quizId, name, description }) => {
         }
 
         addToast('Quiz iniciado com sucesso', {
-          appearance: 'warning',
+          appearance: 'info',
           autoDismiss: true,
         });
 

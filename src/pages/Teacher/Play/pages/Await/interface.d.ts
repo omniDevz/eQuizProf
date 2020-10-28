@@ -1,5 +1,9 @@
+import { IMovQuiz } from '../../interface';
+
 export interface IPlayAwaitParams {
   movQuizId: number;
+  setCurrentObject: React.Dispatch<React.SetStateAction<number>>;
+  setStatusQuiz: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface IPersonApi {
@@ -31,7 +35,7 @@ export interface IMovQuizApi {
   codigoAcesso: string;
 }
 
-export interface IMovQuiz {
+export interface IMovQuizAwait {
   statusQuiz: number;
   codeAccess: string;
 }
@@ -47,6 +51,6 @@ export interface IMovStudentQuizApi {
 export interface IMovStudentQuiz {
   movStudentQuizId: number;
   movQuizId: number;
-  movQuiz: IMovQuiz;
+  movQuiz: IMovQuizAwait;
   student: IStudent[];
 }

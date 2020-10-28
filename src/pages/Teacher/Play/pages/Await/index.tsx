@@ -22,9 +22,14 @@ import {
   IMovStudentQuiz,
   IStudent,
 } from './interface';
+
 import { useHistory } from 'react-router';
 
-const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
+const Await: React.FC<IPlayAwaitParams> = ({
+  movQuizId,
+  setCurrentObject,
+  setStatusQuiz,
+}) => {
   const [movStudentQuiz, setMovStudentQuiz] = useState<IMovStudentQuiz>(
     {} as IMovStudentQuiz
   );
@@ -85,7 +90,7 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
 
   useEffect(handleGetStudentsInQuiz, [movQuizId, addToast]);
 
-  function handleFinishQuiz() {
+  function handleCancelQuiz() {
     api
       .delete(`movQuiz/${movQuizId}`)
       .then((response) => {
@@ -107,7 +112,38 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
       .catch((err) => {
         console.error(err);
         addToast(
-          'Houve algum erro inesperado ao finalizar o quiz, tente novamente mais tarde',
+          'Houve algum erro inesperado ao cancelar o quiz, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
+  function handleStartQuiz() {
+    api
+      .put(`movQuiz/PersistirQuiz`, {
+        movQuizId,
+        objetoAtual: 1,
+        statusQuiz: 1,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        setStatusQuiz(1);
+        setCurrentObject(1);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ao iniciar o quiz, tente novamente mais tarde',
           {
             appearance: 'error',
             autoDismiss: true,
@@ -142,10 +178,12 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
           })}
       </ListStudents>
       <WrappersButtons>
-        <Button color="primary-outline" onClick={handleFinishQuiz}>
-          Finalizar
+        <Button color="primary-outline" onClick={handleCancelQuiz}>
+          Cancelar
         </Button>
-        <Button color="primary">Iniciar</Button>
+        <Button color="primary" onClick={handleStartQuiz}>
+          Iniciar
+        </Button>
       </WrappersButtons>
     </AwaitWrapper>
   );
