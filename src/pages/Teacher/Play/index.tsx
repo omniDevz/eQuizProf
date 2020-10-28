@@ -68,7 +68,7 @@ const Play: React.FC = () => {
       });
   };
 
-  useEffect(handleGetMovQuiz, [movQuiz, quiz, movQuizId, addToast]);
+  useEffect(handleGetMovQuiz, [movQuizId, addToast]);
 
   return <Await movQuizId={Number(movQuizId)} />;
 };

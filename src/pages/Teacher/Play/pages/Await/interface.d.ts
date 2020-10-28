@@ -28,10 +28,12 @@ export interface IStudent {
 
 export interface IMovQuizApi {
   statusQuiz: number;
+  codigoAcesso: string;
 }
 
 export interface IMovQuiz {
   statusQuiz: number;
+  codeAccess: string;
 }
 
 export interface IMovStudentQuizApi {

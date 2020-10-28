@@ -13,6 +13,7 @@ import {
   SubTitle,
   Header,
   Reload,
+  Code,
 } from './styled';
 
 import {
@@ -21,6 +22,7 @@ import {
   IMovStudentQuiz,
   IStudent,
 } from './interface';
+import { useHistory } from 'react-router';
 
 const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
   const [movStudentQuiz, setMovStudentQuiz] = useState<IMovStudentQuiz>(
@@ -28,6 +30,7 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
   );
 
   const { addToast } = useToasts();
+  const history = useHistory();
 
   function handleGetStudentsInQuiz() {
     api
@@ -62,6 +65,7 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
           student: students,
           movQuiz: {
             statusQuiz: movQuizStudentApi.movQuiz.statusQuiz,
+            codeAccess: movQuizStudentApi.movQuiz.codigoAcesso,
           },
         } as IMovStudentQuiz;
 
@@ -79,7 +83,38 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
       });
   }
 
-  useEffect(handleGetStudentsInQuiz, []);
+  useEffect(handleGetStudentsInQuiz, [movQuizId, addToast]);
+
+  function handleFinishQuiz() {
+    api
+      .delete(`movQuiz/${movQuizId}`)
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Quiz finalizado com sucesso', {
+          appearance: 'info',
+          autoDismiss: true,
+        });
+
+        history.push('/quiz');
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado ao finalizar o quiz, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
 
   return (
     <AwaitWrapper>
@@ -87,8 +122,14 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
         <SubTitle>
           <b>{movStudentQuiz.student?.length || 0}</b> alunos online
         </SubTitle>
+
         <Reload onClick={handleGetStudentsInQuiz} />
       </Header>
+      {movStudentQuiz.movQuiz?.codeAccess && (
+        <Code title="Código de acesso">
+          <b>#{movStudentQuiz.movQuiz.codeAccess}</b>
+        </Code>
+      )}
       <ListStudents>
         {movStudentQuiz.student &&
           movStudentQuiz.student.map(({ person, personId }) => {
@@ -101,7 +142,9 @@ const Await: React.FC<IPlayAwaitParams> = ({ movQuizId }) => {
           })}
       </ListStudents>
       <WrappersButtons>
-        <Button color="primary-outline">Cancelar</Button>
+        <Button color="primary-outline" onClick={handleFinishQuiz}>
+          Finalizar
+        </Button>
         <Button color="primary">Iniciar</Button>
       </WrappersButtons>
     </AwaitWrapper>

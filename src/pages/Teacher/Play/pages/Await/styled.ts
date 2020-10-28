@@ -66,3 +66,7 @@ export const WrappersButtons = styled.div`
     justify-content: center;
   }
 `;
+
+export const Code = styled.p`
+  font-size: 2.4rem;
+`;
