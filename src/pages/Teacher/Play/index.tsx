@@ -41,7 +41,7 @@ const Play: React.FC = () => {
           quizId: movQuizApi.quizId,
           statusQuiz: movQuizApi.statusQuiz,
           accessCode: movQuizApi.codigoAcesso,
-          currentQuestion: movQuizApi.perguntaAtual,
+          currentObject: movQuizApi.objetoAtual,
           dateTimeFinish: movQuizApi.dataHoraFim,
         } as IMovQuiz;
 

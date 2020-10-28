@@ -22,7 +22,7 @@ export interface IMovQuizApi {
   dataHoraInicio: string;
   dataHoraFim?: string | null;
   statusQuiz: number;
-  perguntaAtual?: number | null;
+  objetoAtual?: number | null;
 }
 
 export interface IMovQuiz {
@@ -33,5 +33,5 @@ export interface IMovQuiz {
   dateTimeStart: string;
   dateTimeFinish?: string | null;
   statusQuiz: number;
-  currentQuestion?: number | null;
+  currentObject?: number | null;
 }

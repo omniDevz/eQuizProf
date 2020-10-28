@@ -28,7 +28,7 @@ const Item: React.FC<IQuizItem> = ({ quizId, name, description }) => {
         quizId,
         dataHoraInicio: util.getDateAndHoursNow(),
         statusQuiz: 0,
-        perguntaAtual: 0,
+        objetoAtual: 0,
       })
       .then(({ data, status }) => {
         if (status === 206) {
