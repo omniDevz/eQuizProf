@@ -8,21 +8,21 @@ import {
   SlideStyles,
   Number,
   Header,
-  Timer,
 } from './styled';
 
-const Slide: React.FC = () => {
+import { ISlidePage } from './interface';
+
+const Slide: React.FC<ISlidePage> = ({ slide, totalObject }) => {
   return (
     <SlideWrapper>
       <Header>
         <Number>
-          <sup>4</sup>/<sub>9</sub>
+          <sup>{slide?.orderByQuiz}</sup>/<sub>{totalObject}</sub>
         </Number>
-        <Timer>60</Timer>
       </Header>
-      <SlideStyles>Aguarde o professor iniciar o Quiz</SlideStyles>
+      <SlideStyles>{slide?.content}</SlideStyles>
       <ButtonAction>
-        <Button color="primary-outline">Pausar</Button>
+        <Button color="primary-outline">Continuar</Button>
       </ButtonAction>
     </SlideWrapper>
   );

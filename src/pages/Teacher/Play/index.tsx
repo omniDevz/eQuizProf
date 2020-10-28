@@ -146,7 +146,7 @@ const Play: React.FC = () => {
   }
 
   function handleGetCurrentObject() {
-    if (statusQuiz === 2 || statusQuiz === 1) return;
+    if (statusQuiz !== 2 && statusQuiz !== 1) return;
 
     api
       .get(`movQuiz/objetoAtual/${movQuizId}`)
@@ -175,7 +175,7 @@ const Play: React.FC = () => {
 
   useEffect(handleGetMovQuiz, [movQuizId, addToast]);
   useEffect(handleGetListQuiz, [quiz, addToast]);
-  useEffect(handleGetCurrentObject, [quiz, addToast]);
+  useEffect(handleGetCurrentObject, [statusQuiz, addToast]);
 
   function handleViewStatus() {
     switch (statusQuiz) {
@@ -192,11 +192,13 @@ const Play: React.FC = () => {
         const currentObjectQuiz = listQuiz.find(
           (q) => q.orderByQuiz === currentObject
         );
-        console.log(currentObjectQuiz);
 
         return currentObjectQuiz?.slideQuiz !== null &&
           currentObjectQuiz?.slideQuiz !== undefined ? (
-          <Slide />
+          <Slide
+            slide={currentObjectQuiz?.slideQuiz}
+            totalObject={totalObject}
+          />
         ) : (
           <Question
             question={currentObjectQuiz?.questionQuiz}

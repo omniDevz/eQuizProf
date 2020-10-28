@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import logoSVG from '../../../../../assets/images/icons/iconTime.svg';
-
 export const SlideWrapper = styled.div`
   padding: 2.4rem 24px 4rem;
   align-items: flex-end;
@@ -18,15 +16,6 @@ export const Header = styled.div`
 
 export const Number = styled.p`
   font-size: 3.2rem;
-`;
-
-export const Timer = styled.p`
-  font-size: 3.2rem;
-  background: url(${logoSVG});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 2.4rem 1.6rem 2rem;
 `;
 
 export const SlideStyles = styled.p`
