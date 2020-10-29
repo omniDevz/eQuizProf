@@ -173,6 +173,35 @@ const Play: React.FC = () => {
       });
   }
 
+  function handleInitNewQuestion(questionQuizId: number) {
+    if (questionQuizId === 0 || questionQuizId === null) return;
+
+    api
+      .post('movQuizPergunta', {
+        movQuizId,
+        perguntaQuizId: questionQuizId,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'error',
+            autoDismiss: true,
+          });
+          return;
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        addToast(
+          'Houve algum erro inesperado ao enviar nova pergunta a base, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
   useEffect(handleGetMovQuiz, [movQuizId, addToast]);
   useEffect(handleGetListQuiz, [quiz, addToast]);
   useEffect(handleGetCurrentObject, [statusQuiz, addToast]);
@@ -222,8 +251,6 @@ const Play: React.FC = () => {
           (q) => q.orderByQuiz === currentObject
         );
 
-        console.log(listQuiz);
-
         return currentObjectQuiz?.slideQuiz !== null &&
           currentObjectQuiz?.slideQuiz !== undefined ? (
           <Slide
@@ -235,6 +262,7 @@ const Play: React.FC = () => {
           <Question
             question={currentObjectQuiz?.questionQuiz}
             handleNextObjectInQuiz={handleNextObjectInQuiz}
+            handleInitNewQuestion={handleInitNewQuestion}
             totalObject={totalObject}
           />
         );

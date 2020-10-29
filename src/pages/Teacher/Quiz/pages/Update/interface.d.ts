@@ -18,9 +18,11 @@ export interface IQuiz {
   quizId: number;
   name: string;
   description: string;
+  onlyStudentsLogged: boolean;
 }
 export interface IQuizApi {
   quizId: number;
   nome: string;
   descricao: string;
+  somenteAlunosCadastrados: boolean;
 }

@@ -22,6 +22,7 @@ import { IQuestionPage } from './interface';
 const Question: React.FC<IQuestionPage> = ({
   question,
   totalObject,
+  handleInitNewQuestion,
   handleNextObjectInQuiz,
 }) => {
   const [currentAlternativeSelect, setCurrentAlternativeSelect] = useState<
@@ -74,6 +75,10 @@ const Question: React.FC<IQuestionPage> = ({
     setTime(-1);
     handleNextObjectInQuiz((question?.orderByQuiz || 0) + 1);
   }, [time, handleNextObjectInQuiz, question, totalObject]);
+
+  useEffect(() => handleInitNewQuestion(question?.questionQuizId || 0), [
+    question,
+  ]);
 
   return (
     <>
