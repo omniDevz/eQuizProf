@@ -7,7 +7,6 @@ import PageDefault from '../../components/PageDefault';
 import useForm from '../../hooks/useForm';
 
 import { Title, Description, Form, FieldsWrapper, LinkLogin } from './styled';
-import { Link } from 'react-router-dom';
 
 function RecoveryPassword() {
   const valuesInitials = {

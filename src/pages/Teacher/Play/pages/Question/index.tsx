@@ -73,7 +73,7 @@ const Question: React.FC<IQuestionPage> = ({
 
     setTime(-1);
     handleNextObjectInQuiz((question?.orderByQuiz || 0) + 1);
-  }, [time]);
+  }, [time, handleNextObjectInQuiz, question, totalObject]);
 
   return (
     <>

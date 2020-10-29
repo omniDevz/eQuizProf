@@ -21,7 +21,7 @@ import {
 } from './interface';
 
 const Play: React.FC = () => {
-  const [movQuiz, setMovQuiz] = useState<IMovQuiz>({} as IMovQuiz);
+  const [, setMovQuiz] = useState<IMovQuiz>({} as IMovQuiz);
   const [quiz, setQuiz] = useState<IQuiz>({} as IQuiz);
   const [listQuiz, setListQuiz] = useState<IQuizById[]>([]);
   const [currentObject, setCurrentObject] = useState(0);
