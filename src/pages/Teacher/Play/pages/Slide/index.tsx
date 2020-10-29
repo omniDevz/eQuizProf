@@ -13,9 +13,9 @@ import {
 import { ISlidePage } from './interface';
 
 const Slide: React.FC<ISlidePage> = ({
-  slide,
-  totalObject,
   handleNextObjectInQuiz,
+  totalObject,
+  slide,
 }) => {
   return (
     <SlideWrapper>
