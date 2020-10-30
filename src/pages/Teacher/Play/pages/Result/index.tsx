@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../../../../components/Button';
@@ -19,6 +20,44 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
   const [resultStudents, setResultStudents] = useState<IResultStudent[]>([]);
 
   const { addToast } = useToasts();
+  const history = useHistory();
+
+  function handleResultStatusQuiz() {
+    api
+      .put(`movQuiz/persistirQuiz`, {
+        movQuizId,
+        objetoAtual: null,
+        statusQuiz: 4,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast(
+          'Quiz finalizado! Estamos ansiosos para sua próxima experiência',
+          {
+            appearance: 'info',
+            autoDismiss: true,
+          }
+        );
+        history.push('/');
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ir para tela de resultados, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
 
   function handleGetPointsStudents() {
     api
@@ -66,7 +105,7 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
     <ResultWrapper>
       <SubTitle>Resultado geral</SubTitle>
       <ListStudents>
-        {resultStudents.length &&
+        {!!resultStudents.length &&
           resultStudents.map((resultStudent, index) => (
             <Item
               key={resultStudent.studentId}
@@ -76,7 +115,9 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
           ))}
       </ListStudents>
       <WrappersButtons>
-        <Button color="primary-outline">Fechar</Button>
+        <Button color="primary-outline" onClick={handleResultStatusQuiz}>
+          Finalizar quiz
+        </Button>
       </WrappersButtons>
     </ResultWrapper>
   );

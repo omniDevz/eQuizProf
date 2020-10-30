@@ -80,7 +80,7 @@ div, section, article, footer, #root {
   flex-direction: row;
 
   div {
-    display: block;
+    height: 100%;
   }
 }
 
