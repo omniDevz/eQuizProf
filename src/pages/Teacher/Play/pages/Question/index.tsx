@@ -23,6 +23,7 @@ const Question: React.FC<IQuestionPage> = ({
   question,
   totalObject,
   handleInitNewQuestion,
+  handleResultStatusQuiz,
   handleNextObjectInQuiz,
 }) => {
   const [currentAlternativeSelect, setCurrentAlternativeSelect] = useState<
@@ -70,7 +71,9 @@ const Question: React.FC<IQuestionPage> = ({
   useEffect(handleSetTime, [time, question]);
 
   useEffect(() => {
-    if (time !== 0 || totalObject === question?.orderByQuiz) return;
+    if (time !== 0) return;
+
+    if (totalObject === question?.orderByQuiz) handleResultStatusQuiz(3);
 
     setTime(-1);
     handleNextObjectInQuiz((question?.orderByQuiz || 0) + 1);

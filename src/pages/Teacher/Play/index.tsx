@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
 
 import Question from './pages/Question';
+import Result from './pages/Result';
 import Await from './pages/Await';
 import Slide from './pages/Slide';
 
@@ -235,6 +236,36 @@ const Play: React.FC = () => {
       });
   }
 
+  function handleResultStatusQuiz(statusQuiz: number) {
+    api
+      .put(`movQuiz/persistirQuiz`, {
+        movQuizId,
+        objetoAtual: null,
+        statusQuiz,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        setStatusQuiz(statusQuiz);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ir para tela de resultados, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
   function handleViewStatus() {
     switch (statusQuiz) {
       case 0:
@@ -247,6 +278,7 @@ const Play: React.FC = () => {
         );
 
       case 1:
+      case 2:
         const currentObjectQuiz = listQuiz.find(
           (q) => q.orderByQuiz === currentObject
         );
@@ -257,15 +289,20 @@ const Play: React.FC = () => {
             slide={currentObjectQuiz?.slideQuiz}
             totalObject={totalObject}
             handleNextObjectInQuiz={handleNextObjectInQuiz}
+            handleResultStatusQuiz={handleResultStatusQuiz}
           />
         ) : (
           <Question
             question={currentObjectQuiz?.questionQuiz}
             handleNextObjectInQuiz={handleNextObjectInQuiz}
             handleInitNewQuestion={handleInitNewQuestion}
+            handleResultStatusQuiz={handleResultStatusQuiz}
             totalObject={totalObject}
           />
         );
+
+      case 3:
+        return <Result movQuizId={movQuizId} />;
     }
   }
 

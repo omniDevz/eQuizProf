@@ -27,4 +27,5 @@ export interface IQuestionPage {
   totalObject: number;
   handleNextObjectInQuiz: (nextObject: number) => void;
   handleInitNewQuestion: (questionQuizId: number) => void;
+  handleResultStatusQuiz: (statusQuiz: number) => void;
 }

@@ -13,20 +13,27 @@ import {
 
 import { ItemProps } from './interface';
 
-const Item: React.FC<ItemProps> = ({ name }) => {
+const Item: React.FC<ItemProps> = ({ student, index }) => {
+  function handleHasPlural(number: number) {
+    return number >= -1 && number <= 1 ? '' : 's';
+  }
+
   return (
     <ItemWrapper>
-      <Number>1º</Number>
+      <Number>{index + 1}º</Number>
       <IconUser />
       <Info>
-        <Name>{name}</Name>
+        <Name>{student.nameStudent}</Name>
         <Scores>
-          <Num>1,487</Num>
+          <Num>
+            {student.points} ponto{handleHasPlural(student.points)}
+          </Num>
           <Description>
-            <Num>8</Num> acertos
+            <Num>{student.correct}</Num> acerto
+            {handleHasPlural(student.correct)}
           </Description>
           <Description>
-            <Num>4</Num> erros
+            <Num>{student.error}</Num> erro{handleHasPlural(student.error)}
           </Description>
         </Scores>
       </Info>

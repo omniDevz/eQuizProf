@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
 import { useParams } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
 
@@ -25,8 +27,6 @@ import {
   IAlternativeQuiz,
   IAlternativeQuizFromApi,
 } from '../../components/Question/interface';
-import { FiPlus } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 
 const QuizDetail: React.FC = () => {
   const [quiz, setQuiz] = useState<IQuiz>({} as IQuiz);
@@ -193,7 +193,7 @@ const QuizDetail: React.FC = () => {
           <Name>{quiz.name}</Name>
           <Description>{quiz.description}</Description>
         </Infos>
-        <Link to={`/quiz/${1}/update`}>
+        <Link to={`/quiz/${quizId}/update`}>
           <IconEdit />
         </Link>
       </Header>
@@ -218,10 +218,10 @@ const QuizDetail: React.FC = () => {
             )}
       </ListQuiz>
       <ButtonsWrapper>
-        <Button color="primary-outline" to={`/quiz/${1}/slide/new`}>
+        <Button color="primary-outline" to={`/quiz/${quizId}/slide/new`}>
           <FiPlus /> Slide
         </Button>
-        <Button color="primary-outline" to={`/quiz/${1}/question/new`}>
+        <Button color="primary-outline" to={`/quiz/${quizId}/question/new`}>
           <FiPlus /> Pergunta
         </Button>
       </ButtonsWrapper>

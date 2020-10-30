@@ -1,3 +1,6 @@
+import { IResultStudent } from "../../interface";
+
 export interface ItemProps {
-  name: string;
+  student: IResultStudent;
+  index: number;
 }
