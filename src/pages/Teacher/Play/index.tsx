@@ -297,7 +297,10 @@ const Play: React.FC = () => {
             handleNextObjectInQuiz={handleNextObjectInQuiz}
             handleInitNewQuestion={handleInitNewQuestion}
             handleResultStatusQuiz={handleResultStatusQuiz}
+            statusQuiz={statusQuiz}
+            setStatusQuiz={setStatusQuiz}
             totalObject={totalObject}
+            movQuizId={movQuizId}
           />
         );
 

@@ -25,7 +25,10 @@ export interface IQuestionQuiz {
 export interface IQuestionPage {
   question?: IQuestionQuiz | null;
   totalObject: number;
+  movQuizId: string;
+  statusQuiz: number;
   handleNextObjectInQuiz: (nextObject: number) => void;
   handleInitNewQuestion: (questionQuizId: number) => void;
   handleResultStatusQuiz: (statusQuiz: number) => void;
+  setStatusQuiz: React.Dispatch<React.SetStateAction<number>>;
 }

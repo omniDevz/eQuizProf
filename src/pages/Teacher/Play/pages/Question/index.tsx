@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 
 import ButtonControl from '../../../../../components/Button';
+
+import api from '../../../../../services/api';
 
 import {
   QuestionWrapper,
@@ -21,7 +24,10 @@ import { IQuestionPage } from './interface';
 
 const Question: React.FC<IQuestionPage> = ({
   question,
+  movQuizId,
+  statusQuiz,
   totalObject,
+  setStatusQuiz,
   handleInitNewQuestion,
   handleResultStatusQuiz,
   handleNextObjectInQuiz,
@@ -33,6 +39,8 @@ const Question: React.FC<IQuestionPage> = ({
     1
   );
   const [time, setTime] = useState<number | undefined>(undefined);
+
+  const { addToast } = useToasts();
 
   function handleSetAlternative() {
     switch (question?.letterAlternativeCorrect) {
@@ -71,7 +79,7 @@ const Question: React.FC<IQuestionPage> = ({
   useEffect(handleSetTime, [time, question]);
 
   useEffect(() => {
-    if (time !== 0) return;
+    if (time !== 0 || statusQuiz === 2) return;
 
     if (totalObject === question?.orderByQuiz) handleResultStatusQuiz(3);
 
@@ -83,6 +91,82 @@ const Question: React.FC<IQuestionPage> = ({
     question,
   ]);
 
+  function handleContinueQuiz() {
+    api
+      .put(`movQuiz/PersistirQuiz`, {
+        movQuizId,
+        objetoAtual: null,
+        statusQuiz: 1,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Continuando quiz', {
+          appearance: 'info',
+          autoDismiss: true,
+        });
+        setStatusQuiz(1);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ao pausar o quiz, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
+  function handlePauseQuiz() {
+    api
+      .put(`movQuiz/PersistirQuiz`, {
+        movQuizId,
+        objetoAtual: null,
+        statusQuiz: 2,
+      })
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        addToast('Quiz será pausado no final do timer', {
+          appearance: 'info',
+          autoDismiss: true,
+        });
+        setStatusQuiz(2);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ao pausar o quiz, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
+  function handlePauseContinueQuiz() {
+    if (statusQuiz === 1 || (time || 0) > 0) {
+      handlePauseQuiz();
+    } else {
+      handleContinueQuiz();
+    }
+  }
+
   return (
     <>
       <QuestionWrapper>
@@ -90,7 +174,7 @@ const Question: React.FC<IQuestionPage> = ({
           <Number>
             <sup>{question?.orderByQuiz || 0}</sup>/<sub>{totalObject}</sub>
           </Number>
-          <Timer>{time}</Timer>
+          <Timer>{statusQuiz === 1 || (time || 0) > 0 ? time : '='}</Timer>
         </Header>
         <QuestionStyles>{question?.text}</QuestionStyles>
         <ResponseWrapper>
@@ -122,7 +206,12 @@ const Question: React.FC<IQuestionPage> = ({
         </ResponseWrapper>
       </QuestionWrapper>
       <ButtonAction>
-        <ButtonControl color="primary-outline">Pausar</ButtonControl>
+        <ButtonControl
+          color="primary-outline"
+          onClick={handlePauseContinueQuiz}
+        >
+          {statusQuiz === 1 || (time || 0) > 0 ? 'Pausar' : 'Continuar quiz'}
+        </ButtonControl>
       </ButtonAction>
     </>
   );
