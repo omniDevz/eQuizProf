@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 export const ItemWrapper = styled.div`
   background: ${(props) => props.theme.colors.box};
@@ -42,4 +43,20 @@ export const Num = styled.label`
 
 export const Description = styled.p`
   font-size: 1.8rem;
+`;
+
+export const DetailsResult = styled(Link)`
+  display: flex;
+  margin-left: auto;
+
+  svg {
+    width: 4rem;
+    height: 4rem;
+    transform: scale(1);
+    transition: all 320ms ease-in-out;
+
+    &:hover {
+      transform: scale(.9);
+    }
+  }
 `;

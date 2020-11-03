@@ -111,6 +111,7 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
               key={resultStudent.studentId}
               index={index}
               student={resultStudent}
+              movQuizId={movQuizId}
             />
           ))}
       </ListStudents>

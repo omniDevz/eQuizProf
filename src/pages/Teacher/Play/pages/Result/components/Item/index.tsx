@@ -1,6 +1,8 @@
 import React from 'react';
+import { FiTrello } from 'react-icons/fi';
 
 import {
+  DetailsResult,
   ItemWrapper,
   Description,
   IconUser,
@@ -13,7 +15,7 @@ import {
 
 import { ItemProps } from './interface';
 
-const Item: React.FC<ItemProps> = ({ student, index }) => {
+const Item: React.FC<ItemProps> = ({ student, index, movQuizId }) => {
   function handleHasPlural(number: number) {
     return number >= -1 && number <= 1 ? '' : 's';
   }
@@ -37,6 +39,9 @@ const Item: React.FC<ItemProps> = ({ student, index }) => {
           </Description>
         </Scores>
       </Info>
+      <DetailsResult to={`/play/${movQuizId}/student/${student.studentId}`}>
+        <FiTrello />
+      </DetailsResult>
     </ItemWrapper>
   );
 };
