@@ -81,7 +81,10 @@ const Question: React.FC<IQuestionPage> = ({
   useEffect(() => {
     if (time !== 0 || statusQuiz === 2) return;
 
-    if (totalObject === question?.orderByQuiz) handleResultStatusQuiz(3);
+    if (totalObject === question?.orderByQuiz) {
+      handleResultStatusQuiz(3);
+      return;
+    }
 
     setTime(-1);
     handleNextObjectInQuiz((question?.orderByQuiz || 0) + 1);

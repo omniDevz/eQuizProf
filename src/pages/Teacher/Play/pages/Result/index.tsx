@@ -88,7 +88,7 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
         setResultStudents(newResults);
       })
       .catch((err) => {
-        console.error(err.message);
+        console.error(err.response.data);
         addToast(
           'Houve algum erro inesperado ir para tela de resultados, tente novamente mais tarde',
           {
