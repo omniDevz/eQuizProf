@@ -290,6 +290,7 @@ const Play: React.FC = () => {
             totalObject={totalObject}
             handleNextObjectInQuiz={handleNextObjectInQuiz}
             handleResultStatusQuiz={handleResultStatusQuiz}
+            movQuizId={Number(movQuizId)}
           />
         ) : (
           <Question

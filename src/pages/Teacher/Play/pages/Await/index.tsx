@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../../../../components/Button';
+import Chat from '../../../../../components/Chat';
 import Item from './components/Item';
 
 import api from '../../../../../services/api';
@@ -10,6 +12,7 @@ import {
   WrappersButtons,
   AwaitWrapper,
   ListStudents,
+  ChatWrapper,
   SubTitle,
   Header,
   Reload,
@@ -22,8 +25,6 @@ import {
   IMovStudentQuiz,
   IStudent,
 } from './interface';
-
-import { useHistory } from 'react-router';
 
 const Await: React.FC<IPlayAwaitParams> = ({
   movQuizId,
@@ -177,6 +178,9 @@ const Await: React.FC<IPlayAwaitParams> = ({
             );
           })}
       </ListStudents>
+      <ChatWrapper>
+        <Chat movQuizId={movQuizId} />
+      </ChatWrapper>
       <WrappersButtons>
         <Button color="primary-outline" onClick={handleCancelQuiz}>
           Cancelar

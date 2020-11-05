@@ -2,6 +2,7 @@
 export interface ISlidePage {
   slide?: ISlideQuiz | null;
   totalObject: number;
+  movQuizId: number;
   handleNextObjectInQuiz: (nextObject: number) => void;
   handleResultStatusQuiz: (statusQuiz: number) => void;
 }

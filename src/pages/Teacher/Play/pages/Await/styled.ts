@@ -72,3 +72,7 @@ export const WrappersButtons = styled.div`
 export const Code = styled.p`
   font-size: 2.4rem;
 `;
+
+export const ChatWrapper = styled.div`
+  margin-left: auto;
+`;

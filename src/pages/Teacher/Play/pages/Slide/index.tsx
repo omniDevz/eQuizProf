@@ -11,11 +11,13 @@ import {
 } from './styled';
 
 import { ISlidePage } from './interface';
+import Chat from '../../../../../components/Chat';
 
 const Slide: React.FC<ISlidePage> = ({
   handleResultStatusQuiz,
   handleNextObjectInQuiz,
   totalObject,
+  movQuizId,
   slide,
 }) => {
   function handleNextQuiz() {
@@ -35,6 +37,7 @@ const Slide: React.FC<ISlidePage> = ({
         </Number>
       </Header>
       <SlideStyles dangerouslySetInnerHTML={{ __html: slide?.content || '' }} />
+      <Chat movQuizId={movQuizId} />
       <ButtonAction>
         <Button color="primary-outline" onClick={handleNextQuiz}>
           Continuar
