@@ -21,12 +21,18 @@ const Question: React.FC<IQuestion> = ({ question, onRemove }) => {
         <sup>{question?.orderByQuiz}</sup>/<sub>{question?.count}</sub>
       </Number>
       <Timer>{question?.timeSeconds}s</Timer>
-      <QuestionText>{question?.text}</QuestionText>
+      <QuestionText
+        dangerouslySetInnerHTML={{ __html: question?.text || '' }}
+      />
       <ResponseWrapper>
         {question?.alternativeQuiz.map((alternative) => (
-          <Response key={alternative.alternativeQuizId}>
-            {alternative.letterAlternative}: {alternative.text}
-          </Response>
+          <Response
+            key={alternative.alternativeQuizId}
+            dangerouslySetInnerHTML={{
+              __html:
+                `${alternative.letterAlternative}: ${alternative.text}` || '',
+            }}
+          />
         ))}
       </ResponseWrapper>
       <ActionsWrapper>

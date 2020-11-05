@@ -179,12 +179,17 @@ const Question: React.FC<IQuestionPage> = ({
           </Number>
           <Timer>{statusQuiz === 1 || (time || 0) > 0 ? time : '='}</Timer>
         </Header>
-        <QuestionStyles>{question?.text}</QuestionStyles>
+        <QuestionStyles
+          dangerouslySetInnerHTML={{ __html: question?.text || '' }}
+        />
         <ResponseWrapper>
-          <Response>
-            {question?.alternativeQuiz[currentAlternativeSelect - 1]?.text ||
-              ''}
-          </Response>
+          <Response
+            dangerouslySetInnerHTML={{
+              __html:
+                question?.alternativeQuiz[currentAlternativeSelect - 1]?.text ||
+                '',
+            }}
+          />
           <ButtonsWrapper
             active={alternativeIsRight}
             correct={currentAlternativeSelect}
