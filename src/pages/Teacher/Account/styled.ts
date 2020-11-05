@@ -67,6 +67,9 @@ export const ThreeColumns = styled.div`
 `;
 
 export const ButtonsWrapper = styled.div`
-  row-gap: 0.8rem;
-  margin-bottom: 2.4rem;
+  justify-content: center;
+  padding: 0 24px 2.4rem;
+  flex-direction: row;
+  column-gap: 0.8rem;
+  width: 100%;
 `;
