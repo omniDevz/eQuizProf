@@ -9,24 +9,24 @@ export const Menu = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 5vh;
-  z-index: 1;
+  right: 2vw;
+  bottom: 0;
+  z-index: 100000000;
   display: flex;
   flex-direction: column;
 
   width: 100%;
   padding: 0 24px;
   background: ${(props) => props.theme.colors.secondary};
-  border-radius: 0 0 40px 40px;
-  border-bottom: 3px solid ${(props) => props.theme.colors.primary};
+  border-radius: 0 4rem 4rem 0;
+  border-right: 3px solid ${(props) => props.theme.colors.primary};
   box-shadow: var(--box-shadow);
 
-  transform: translateY(-100%);
+  transform: translateX(-100%);
   transition: all 260ms ease-in-out;
 
   &.open {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
 `;
 
