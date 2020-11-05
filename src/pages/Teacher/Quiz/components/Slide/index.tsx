@@ -18,7 +18,7 @@ const Slide: React.FC<ISlide> = ({ slide, onRemove }) => {
       <Number>
         <sup>{slide?.orderByQuiz}</sup>/<sub>{slide?.count}</sub>
       </Number>
-      <SlideText>{slide?.content}</SlideText>
+      <SlideText dangerouslySetInnerHTML={{ __html: slide?.content || '' }} />
       <ActionsWrapper>
         <Link
           to={`/quiz/${slide?.quizId}/slide/update/${slide?.slideQuizId}`}

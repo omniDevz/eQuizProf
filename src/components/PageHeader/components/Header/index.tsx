@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
             <FiLogOut />
           </Button>
         ) : (
-          <Link to="/teacher/home" title="Ir para Home">
+          <Link to="/" title="Ir para Home">
             <Button>
               <Logo src={logoImg} alt="Logo English Quiz" />
             </Button>

@@ -34,7 +34,7 @@ const Slide: React.FC<ISlidePage> = ({
           <sup>{slide?.orderByQuiz}</sup>/<sub>{totalObject}</sub>
         </Number>
       </Header>
-      <SlideStyles>{slide?.content}</SlideStyles>
+      <SlideStyles dangerouslySetInnerHTML={{ __html: slide?.content || '' }} />
       <ButtonAction>
         <Button color="primary-outline" onClick={handleNextQuiz}>
           Continuar
