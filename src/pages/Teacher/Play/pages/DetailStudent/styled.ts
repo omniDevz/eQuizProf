@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const ResultWrapper = styled.div`
-  padding: 3.2rem 24px;
-  height: 100vh;
-  width: 100%;
-`;
-
 export const ResultsWrapper = styled.div`
   margin: 0 24px;
   flex-direction: row;

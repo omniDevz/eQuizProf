@@ -83,14 +83,6 @@ export const QuizMessage = styled(Message)`
   border-bottom-left-radius: 0;
 `;
 
-export const MyMessage = styled(Message)`
-  text-align: right;
-  margin-left: auto;
-  color: ${(props) => props.theme.colors.secondary};
-  background: ${(props) => props.theme.colors.primary};
-  border-bottom-right-radius: 0;
-`;
-
 export const Close = styled(FiX)`
   height: 4.8rem;
   width: 4.8rem;

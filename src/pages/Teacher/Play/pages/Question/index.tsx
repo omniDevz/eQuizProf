@@ -78,7 +78,7 @@ const Question: React.FC<IQuestionPage> = ({
 
   useEffect(handleSetTime, [time, question]);
 
-  useEffect(() => {
+  function handleIsNextQuestion() {
     if (time !== 0 || statusQuiz === 2) return;
 
     if (totalObject === question?.orderByQuiz) {
@@ -88,11 +88,20 @@ const Question: React.FC<IQuestionPage> = ({
 
     setTime(-1);
     handleNextObjectInQuiz((question?.orderByQuiz || 0) + 1);
-  }, [time, handleNextObjectInQuiz, question, totalObject]);
+  }
 
-  useEffect(() => handleInitNewQuestion(question?.questionQuizId || 0), [
+  useEffect(handleIsNextQuestion, [
+    handleNextObjectInQuiz,
+    totalObject,
     question,
+    time,
   ]);
+
+  function handleInitQuestion() {
+    handleInitNewQuestion(question?.questionQuizId || 0);
+  }
+
+  useEffect(handleInitQuestion, [question]);
 
   function handleContinueQuiz() {
     api

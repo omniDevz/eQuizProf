@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { FiMessageCircle, FiSend } from 'react-icons/fi';
+import { FiMessageCircle } from 'react-icons/fi';
 import { useToasts } from 'react-toast-notifications';
 
 import { useAuth } from '../../contexts/auth';
 import api from '../../services/api';
-import util from '../../utils/util';
-
-import FormField from '../FormField';
 
 import {
   ContainerMessage,
   ContainerIcon,
   ContainerChat,
   QuizMessage,
-  MyMessage,
   Close,
 } from './styled';
 
 import { IChatComponent, IChatMessageApi, IChatMessage } from './interface';
 
 const Chat: React.FC<IChatComponent> = ({ movQuizId }) => {
-  const [message, setMessage] = useState('');
   const [chatOpen, setChatOpen] = useState(false);
   const [listMessage, setListMessage] = useState<IChatMessage[]>([]);
 

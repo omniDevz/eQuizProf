@@ -12,7 +12,6 @@ import api from '../../../../../services/api';
 import {
   HistoryQuestions,
   ResultsWrapper,
-  ResultWrapper,
   AverageClass,
   SubTitle,
   Graph,
