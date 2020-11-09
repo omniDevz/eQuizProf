@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 
@@ -7,18 +7,26 @@ import Button from '../../../../../components/Button';
 
 import api from '../../../../../services/api';
 
-import { Stream, ButtonWrapper } from './styled';
+import { Live, Frame, Description, ButtonWrapper } from './styled';
 
-import { ParamsProps } from './interface';
+import {
+  ITransmissionNotificationApi,
+  ITransmissionNotification,
+  ParamsProps,
+} from './interface';
 
 const Streaming: React.FC = () => {
-  const { addToast } = useToasts();
+  const [live, setLive] = useState<ITransmissionNotification>(
+    {} as ITransmissionNotification
+  );
+
   const history = useHistory();
-  let { streamingId } = useParams<ParamsProps>();
+  const { addToast } = useToasts();
+  const { streamingId } = useParams() as ParamsProps;
 
   function handleExitStream() {
     api
-      .delete(`/notificacaoTransmissao/${streamingId}`)
+      .delete(`notificacaoTransmissao/${streamingId}`)
       .then(({ status, data }) => {
         if (status === 206) {
           addToast(data, {
@@ -32,19 +40,57 @@ const Streaming: React.FC = () => {
           appearance: 'success',
           autoDismiss: true,
         });
-        history.push('/teacher/live');
+        history.push('/live');
       })
-      .catch(({ response }) => {
-        const { data } = response;
-        console.error(data);
+      .catch((err) => {
+        console.log(err);
+        addToast('Houve algum erro inesperado, tente novamente mais tarde', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
       });
   }
 
+  function handleGetLive() {
+    api
+      .get(`notificacaoTransmissao/${streamingId}`)
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        const liveApi = response.data as ITransmissionNotificationApi;
+
+        setLive({
+          description: liveApi.descricao,
+          TransmissionNotificationId: liveApi.notificacaoTransmissaoId,
+          link: liveApi.link,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        addToast(
+          'Houve algum erro inesperado na busca por live, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
+  useEffect(handleGetLive, []);
+
   return (
     <PageTeacher type="back" text="Streaming">
-      <Stream>
-        <img src="https://source.unsplash.com/random/person" alt="" />
-      </Stream>
+      <Live>
+        <Description>{live.description}</Description>
+        <Frame src={live.link} />
+      </Live>
       <ButtonWrapper>
         <Button color="primary-outline" onClick={handleExitStream}>
           Encerrar

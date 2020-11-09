@@ -24,6 +24,7 @@ export async function signIn(
   const user: UserProps = {
     adminId: response.data.usuario.administradorId,
     teacherId: response.data.usuario.professorId,
+    personId: pessoa.pessoaId,
     firstName: pessoa.nome,
     lastName: pessoa.sobrenome,
     cpf: pessoa.cpf,
