@@ -36,9 +36,9 @@ const Book: React.FC = () => {
 
   const { addToast } = useToasts();
 
-  useEffect(() => {
+  function handleGetBooks() {
     api
-      .get('/livro')
+      .get('livro')
       .then(({ data }) => {
         const bookFromApi: BookProps[] = data.map((book: BookApiProps) => {
           const newBook: BookProps = {
@@ -66,7 +66,9 @@ const Book: React.FC = () => {
           autoDismiss: true,
         });
       });
-  }, [addToast]);
+  }
+
+  useEffect(handleGetBooks, [addToast]);
 
   function filterSearchOnBooks(book: BookProps) {
     return util.includesToArray(
@@ -85,11 +87,11 @@ const Book: React.FC = () => {
           onChange={handleChange}
           maxLength={100}
         >
-          <FiSearch />
+          <FiSearch onClick={handleGetBooks} />
         </FormField>
       </Form>
       <ListBooks>
-        {listBooks.length > 0 &&
+        {!!listBooks.length &&
           listBooks
             .filter((book) => filterSearchOnBooks(book))
             .map((book) => (

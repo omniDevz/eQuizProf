@@ -68,7 +68,7 @@ const BookNew: React.FC = () => {
 
   function handleRegisterBook() {
     api
-      .post('/livro', {
+      .post('livro', {
         Titulo: values.title,
         Subtitulo: values.description,
         LinkLivro: values.link,

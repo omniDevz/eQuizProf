@@ -89,7 +89,7 @@ const BookUpdate: React.FC = () => {
 
   function handleUpdateBook() {
     api
-      .put('/livro', {
+      .put('livro', {
         livroId: bookId,
         titulo: title,
         subtitulo: subtitle,
