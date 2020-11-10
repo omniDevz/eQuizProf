@@ -62,6 +62,7 @@ const Play: React.FC = () => {
           quizId: quizApi.quizId,
           name: quizApi.nome,
           description: quizApi.descricao,
+          onlyStudentsLogged: quizApi.somenteAlunosCadastrados,
         } as IQuiz;
 
         setMovQuiz(newMovQuiz);
@@ -274,6 +275,7 @@ const Play: React.FC = () => {
             movQuizId={Number(movQuizId)}
             setCurrentObject={setCurrentObject}
             setStatusQuiz={setStatusQuiz}
+            quiz={quiz}
           />
         );
 
@@ -291,6 +293,7 @@ const Play: React.FC = () => {
             handleNextObjectInQuiz={handleNextObjectInQuiz}
             handleResultStatusQuiz={handleResultStatusQuiz}
             movQuizId={Number(movQuizId)}
+            quiz={quiz}
           />
         ) : (
           <Question

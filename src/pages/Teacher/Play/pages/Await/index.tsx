@@ -27,6 +27,7 @@ import {
 } from './interface';
 
 const Await: React.FC<IPlayAwaitParams> = ({
+  quiz,
   movQuizId,
   setCurrentObject,
   setStatusQuiz,
@@ -178,9 +179,11 @@ const Await: React.FC<IPlayAwaitParams> = ({
             );
           })}
       </ListStudents>
-      <ChatWrapper>
-        <Chat movQuizId={movQuizId} />
-      </ChatWrapper>
+      {!!quiz.onlyStudentsLogged && (
+        <ChatWrapper>
+          <Chat movQuizId={movQuizId} />
+        </ChatWrapper>
+      )}
       <WrappersButtons>
         <Button color="primary-outline" onClick={handleCancelQuiz}>
           Cancelar

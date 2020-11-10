@@ -19,6 +19,7 @@ const Slide: React.FC<ISlidePage> = ({
   totalObject,
   movQuizId,
   slide,
+  quiz,
 }) => {
   function handleNextQuiz() {
     if (totalObject === slide?.orderByQuiz) {
@@ -37,7 +38,8 @@ const Slide: React.FC<ISlidePage> = ({
         </Number>
       </Header>
       <SlideStyles dangerouslySetInnerHTML={{ __html: slide?.content || '' }} />
-      <Chat movQuizId={movQuizId} />
+
+      {!!quiz.onlyStudentsLogged && <Chat movQuizId={movQuizId} />}
       <ButtonAction>
         <Button color="primary-outline" onClick={handleNextQuiz}>
           Continuar

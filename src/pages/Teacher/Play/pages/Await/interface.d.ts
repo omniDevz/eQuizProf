@@ -1,6 +1,7 @@
-import { IMovQuiz } from '../../interface';
+import { IMovQuiz, IQuiz } from '../../interface';
 
 export interface IPlayAwaitParams {
+  quiz: IQuiz;
   movQuizId: number;
   setCurrentObject: React.Dispatch<React.SetStateAction<number>>;
   setStatusQuiz: React.Dispatch<React.SetStateAction<number>>;

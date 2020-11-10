@@ -1,6 +1,8 @@
+import { IQuiz } from "../../interface";
 
 export interface ISlidePage {
   slide?: ISlideQuiz | null;
+  quiz: IQuiz;
   totalObject: number;
   movQuizId: number;
   handleNextObjectInQuiz: (nextObject: number) => void;

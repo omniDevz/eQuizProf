@@ -6,12 +6,14 @@ export interface IQuizApi {
   quizId: number;
   nome: string;
   descricao?: string | null;
+  somenteAlunosCadastrados: boolean;
 }
 
 export interface IQuiz {
   quizId: number;
   name: string;
   description?: string | null;
+  onlyStudentsLogged: boolean;
 }
 
 export interface IMovQuizApi {
