@@ -34,7 +34,8 @@ export const ContainerChat = styled.div<ChatProps>`
   overflow: hidden;
   transform: scale(0);
   transition: all 260ms ease-in-out;
-  overflow: hidden;
+  overflow: auto;
+  max-height: 46vh;
 
   ${FormFieldWrapper} {
     background: ${(props) => props.theme.colors.primary};

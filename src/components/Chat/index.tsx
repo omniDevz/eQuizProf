@@ -65,7 +65,7 @@ const Chat: React.FC<IChatComponent> = ({ movQuizId }) => {
   }
 
   function handleIntervalGetMessageByMovQuiz() {
-    let intervalGetMessageQuiz = setInterval(handleGetMessageByMovQuiz, 5500);
+    let intervalGetMessageQuiz = setInterval(handleGetMessageByMovQuiz, 3500);
     return () => clearInterval(intervalGetMessageQuiz);
   }
 
