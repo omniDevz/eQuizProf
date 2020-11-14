@@ -26,7 +26,7 @@ export interface IResultStudent {
 }
 
 export interface IResponseStudentApi {
-  numeroPergunta: number;
+  ordenacaoObjetoQuiz: number;
   enunciado: string;
   descricaoAlternativaCorreta: string;
   descricaoAlternativaSelecionada: string;

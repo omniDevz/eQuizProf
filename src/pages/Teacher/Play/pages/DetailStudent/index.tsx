@@ -133,7 +133,7 @@ const Result: React.FC = () => {
             descriptionCorrect: student.descricaoAlternativaCorreta,
             descriptionSelection: student.descricaoAlternativaSelecionada,
             nivel: student.ePesoPergunta,
-            numberQuestion: student.numeroPergunta,
+            numberQuestion: student.ordenacaoObjetoQuiz,
             points: student.pontuacao,
           } as IResponseStudent;
 
