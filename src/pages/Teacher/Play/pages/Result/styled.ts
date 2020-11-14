@@ -27,6 +27,12 @@ export const ListStudents = styled.ul`
   }
 `;
 
+export const Title = styled.h1`
+  height: calc(100vh - 24rem);
+  display: flex;
+  align-items: center;
+`;
+
 export const WrappersButtons = styled.div`
   width: 100%;
   grid-gap: 1.6rem;

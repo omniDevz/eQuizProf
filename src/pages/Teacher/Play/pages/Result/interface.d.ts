@@ -1,5 +1,6 @@
 export interface IResultPage {
   movQuizId: string;
+  onlyStudentsLogged: boolean;
 }
 
 export interface IResultStudentApi {

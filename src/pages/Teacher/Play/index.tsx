@@ -309,7 +309,12 @@ const Play: React.FC = () => {
         );
 
       case 3:
-        return <Result movQuizId={movQuizId} />;
+        return (
+          <Result
+            movQuizId={movQuizId}
+            onlyStudentsLogged={quiz.onlyStudentsLogged}
+          />
+        );
     }
   }
 

@@ -12,11 +12,12 @@ import {
   ResultWrapper,
   ListStudents,
   SubTitle,
+  Title,
 } from './styled';
 
 import { IResultStudentApi, IResultStudent, IResultPage } from './interface';
 
-const Result: React.FC<IResultPage> = ({ movQuizId }) => {
+const Result: React.FC<IResultPage> = ({ movQuizId, onlyStudentsLogged }) => {
   const [resultStudents, setResultStudents] = useState<IResultStudent[]>([]);
 
   const { addToast } = useToasts();
@@ -104,9 +105,9 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
   return (
     <ResultWrapper>
       <SubTitle>Resultado geral</SubTitle>
-      <ListStudents>
-        {!!resultStudents.length &&
-          resultStudents.map((resultStudent, index) => (
+      {!!resultStudents.length && (
+        <ListStudents>
+          {resultStudents.map((resultStudent, index) => (
             <Item
               key={resultStudent.studentId}
               index={index}
@@ -114,7 +115,9 @@ const Result: React.FC<IResultPage> = ({ movQuizId }) => {
               movQuizId={movQuizId}
             />
           ))}
-      </ListStudents>
+        </ListStudents>
+      )}
+      {!onlyStudentsLogged && <Title>Resultados apenas para os alunos</Title>}
       <WrappersButtons>
         <Button color="primary-outline" onClick={handleResultStatusQuiz}>
           Finalizar quiz
