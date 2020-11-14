@@ -65,7 +65,11 @@ export const ContainerMessage = styled.div`
   margin: 0 48px -2px;
   grid-gap: 0.8rem;
   max-height: 47vh;
-  overflow-y: all;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Message = styled.label`
@@ -74,6 +78,9 @@ export const Message = styled.label`
   border-radius: 3.2rem;
   box-shadow: var(--box-shadow);
   font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: .8rem;
 `;
 
 export const QuizMessage = styled(Message)`
@@ -82,6 +89,15 @@ export const QuizMessage = styled(Message)`
   background: ${(props) => props.theme.colors.box};
   border: 2px solid ${(props) => props.theme.colors.primary};
   border-bottom-left-radius: 0;
+`;
+
+export const NameStudent = styled.label`
+  color: ${(props) => props.theme.colors.primary};
+  border: 2px solid ${(props) => props.theme.colors.primary};
+  border-radius: 3.2rem;
+  padding: .4rem .8rem;
+  background: ${(props) => props.theme.colors.box};
+  font-weight: 500;
 `;
 
 export const Close = styled(FiX)`
