@@ -92,6 +92,15 @@ const Await: React.FC<IPlayAwaitParams> = ({
 
   useEffect(handleGetStudentsInQuiz, [movQuizId, addToast]);
 
+  function handleIntervalGetStudentsInQuiz() {
+    let intervalStudentsInQuiz = setInterval(handleGetStudentsInQuiz, 3200);
+    return () => clearInterval(intervalStudentsInQuiz);
+  }
+  useEffect(handleIntervalGetStudentsInQuiz, [
+    movQuizId,
+    handleGetStudentsInQuiz,
+  ]);
+
   function handleCancelQuiz() {
     api
       .delete(`movQuiz/${movQuizId}`)
