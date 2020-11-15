@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiUser } from 'react-icons/fi';
+import { FiTrash, FiUser } from 'react-icons/fi';
 
 export const ItemWrapper = styled.div`
   background: ${(props) => props.theme.colors.box};
@@ -19,4 +19,18 @@ export const IconUser = styled(FiUser)`
 
 export const Name = styled.label`
   font-size: 2.4rem;
+`;
+
+
+export const Trash = styled(FiTrash)`
+  height: 3.2rem;
+  width: 3.2rem;
+  color: ${(props) => props.theme.colors.primary};
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 260ms ease-in-out;
+
+  &:hover {
+    transform: scale(.92);
+  }
 `;

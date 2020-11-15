@@ -154,6 +154,38 @@ const Await: React.FC<IPlayAwaitParams> = ({
       });
   }
 
+  function handleRemoveStudentInQuiz(studentId: number) {
+    if (!studentId || !movQuizId) return;
+
+    api
+      .delete(`movQuizAluno/movQuizId=${movQuizId}&AlunoId=${studentId}`)
+      .then((response) => {
+        if (response.status === 206) {
+          addToast(response.data, {
+            appearance: 'warning',
+            autoDismiss: true,
+          });
+          return;
+        }
+
+        handleGetStudentsInQuiz();
+        addToast('Aluno removido do quiz', {
+          appearance: 'info',
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.error(err.message);
+        addToast(
+          'Houve algum erro inesperado ao iniciar o quiz, tente novamente mais tarde',
+          {
+            appearance: 'error',
+            autoDismiss: true,
+          }
+        );
+      });
+  }
+
   return (
     <AwaitWrapper>
       <Header>
@@ -170,11 +202,12 @@ const Await: React.FC<IPlayAwaitParams> = ({
       )}
       <ListStudents>
         {movStudentQuiz.student &&
-          movStudentQuiz.student.map(({ person, personId }) => {
+          movStudentQuiz.student.map(({ person, personId, studentId }) => {
             return (
               <Item
                 key={personId}
                 name={`${person.firstName} ${person.lastName}`}
+                removeStudent={() => handleRemoveStudentInQuiz(studentId)}
               />
             );
           })}
